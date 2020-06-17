@@ -1,0 +1,665 @@
+<?php
+/*
+ *  Author: Todd Motto | @toddmotto
+ *  URL: blkcanvas.com | @blkcanvas
+ *  Custom functions, support, custom post types and more.
+ */
+
+/*------------------------------------*\
+	External Modules/Files
+\*------------------------------------*/
+
+// Load any external files you have here
+require_once get_template_directory() . '/includes/admin/admin.php';
+/*------------------------------------*\
+	Theme Support
+\*------------------------------------*/
+
+if (!isset($content_width))
+{
+    $content_width = 900;
+}
+
+if (function_exists('add_theme_support'))
+{
+    // Add Menu Support
+    add_theme_support('menus');
+
+    // Adding Custom Logo support to your Theme
+    $defaults = array(
+        'height'      => 100,
+        'width'       => 400,
+        'flex-height' => true,
+        'flex-width'  => true,
+        'header-text' => array( 'site-title', 'site-description' ),
+    );
+    add_theme_support( 'custom-logo', $defaults );
+
+    // Add Thumbnail Theme Support
+    add_theme_support('post-thumbnails');
+    add_image_size('thumbnail', 700, '', true); // Large Thumbnail
+    add_image_size('medium', 250, '', true); // Medium Thumbnail
+    add_image_size('large', 120, '', true); // Small Thumbnail
+
+    // Register support for Gutenberg wide images in your theme
+    add_theme_support( 'align-wide' );
+    // Enables post and comment RSS feed links to head
+    add_theme_support('automatic-feed-links');
+
+    add_theme_support( 'woocommerce' );
+    // Localisation Support
+    load_theme_textdomain('blkcanvas', get_template_directory() . '/languages');
+}
+
+/*------------------------------------*\
+	Functions
+\*------------------------------------*/
+
+// HTML5 Blank navigation
+function blkcanvas_nav()
+{
+	wp_nav_menu(
+	array(
+		'theme_location'  => 'header-menu',
+		'menu'            => '',
+		'container'       => 'div',
+		'container_class' => 'menu-{menu slug}-container',
+		'container_id'    => '',
+		'menu_class'      => 'menu',
+		'menu_id'         => '',
+		'echo'            => true,
+		'fallback_cb'     => 'wp_page_menu',
+		'before'          => '',
+		'after'           => '',
+		'link_before'     => '',
+		'link_after'      => '',
+		'items_wrap'      => '<ul>%3$s</ul>',
+		'depth'           => 0,
+		'walker'          => ''
+		)
+	);
+}
+
+function blkcanvas_pre_nav()
+{
+	wp_nav_menu(
+	array(
+		'theme_location'  => 'pre-header-menu',
+		'menu'            => '',
+		'container'       => 'div',
+		'container_class' => 'menu-{menu slug}-container',
+		'container_id'    => '',
+		'menu_class'      => 'menu',
+		'menu_id'         => '',
+		'echo'            => true,
+		'fallback_cb'     => 'wp_page_menu',
+		'before'          => '',
+		'after'           => '',
+		'link_before'     => '',
+		'link_after'      => '',
+		'items_wrap'      => '<ul>%3$s</ul>',
+		'depth'           => 0,
+		'walker'          => ''
+		)
+	);
+}
+
+// Load HTML5 Blank scripts (header.php)
+function blkcanvas_header_scripts()
+{
+    if ($GLOBALS['pagenow'] != 'wp-login.php' && !is_admin()) {
+
+    	wp_register_script('conditionizr', get_template_directory_uri() . '/js/lib/conditionizr-4.3.0.min.js', array(), '4.3.0'); // Conditionizr
+        wp_enqueue_script('conditionizr'); // Enqueue it!
+
+        wp_register_script('modernizr', get_template_directory_uri() . '/js/lib/modernizr-2.7.1.min.js', array(), '2.7.1'); // Modernizr
+        wp_enqueue_script('modernizr'); // Enqueue it!
+
+        wp_register_script('blkcanvasscripts', get_template_directory_uri() . '/js/scripts.js', array('jquery'), '1.0.0'); // Custom scripts
+        wp_enqueue_script('blkcanvasscripts'); // Enqueue it!
+    }
+}
+
+// Load HTML5 Blank conditional scripts
+function blkcanvas_conditional_scripts()
+{
+    if (is_page('pagenamehere')) {
+        wp_register_script('scriptname', get_template_directory_uri() . '/js/scriptname.js', array('jquery'), '1.0.0'); // Conditional script(s)
+        wp_enqueue_script('scriptname'); // Enqueue it!
+    }
+}
+
+// Load HTML5 Blank styles
+function blkcanvas_styles()
+{
+    
+    wp_register_style('google-fonts','https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;900&family=Roboto&display=swap', array(), '1.0', 'all');
+    wp_enqueue_style('google-fonts'); // Enqueue i
+
+    wp_register_style('normalize', get_template_directory_uri() . '/normalize.css', array(), wp_get_theme()->get( 'Version' ), 'all');
+    wp_enqueue_style('normalize'); // Enqueue it!
+
+    wp_register_style('blkcanvas', get_template_directory_uri() . '/style.css', array(), rand(0,999), 'all');
+    wp_enqueue_style('blkcanvas'); // Enqueue it!
+}
+
+// Register HTML5 Blank Navigation
+function register_blkcanvas_menu()
+{
+    register_nav_menus(array( // Using array to specify more menus if needed
+        'pre-header-menu' => __('Pre Header Menu', 'blkcanvas'), // Main Navigation
+        'header-menu' => __('Header Menu', 'blkcanvas'), // Main Navigation
+        'sidebar-menu' => __('Sidebar Menu', 'blkcanvas'), // Sidebar Navigation
+        'extra-menu' => __('Extra Menu', 'blkcanvas') // Extra Navigation if needed (duplicate as many as you need!)
+    ));
+}
+
+// Remove the <div> surrounding the dynamic navigation to cleanup markup
+function my_wp_nav_menu_args($args = '')
+{
+    $args['container'] = false;
+    return $args;
+}
+
+// Remove Injected classes, ID's and Page ID's from Navigation <li> items
+function my_css_attributes_filter($var)
+{
+    return is_array($var) ? array() : '';
+}
+
+// Remove invalid rel attribute values in the categorylist
+function remove_category_rel_from_category_list($thelist)
+{
+    return str_replace('rel="category tag"', 'rel="tag"', $thelist);
+}
+
+// Add page slug to body class, love this - Credit: Starkers Wordpress Theme
+function add_slug_to_body_class($classes)
+{
+    global $post;
+    if (is_home()) {
+        $key = array_search('blog', $classes);
+        if ($key > -1) {
+            unset($classes[$key]);
+        }
+    } elseif (is_page()) {
+        $classes[] = sanitize_html_class($post->post_name);
+    } elseif (is_singular()) {
+        $classes[] = sanitize_html_class($post->post_name);
+    }
+
+    return $classes;
+}
+
+// If Dynamic Sidebar Exists
+if (function_exists('register_sidebar'))
+{
+    // Define Sidebar Widget Area 1
+    register_sidebar(array(
+        'name' => __('Widget Area 1', 'blkcanvas'),
+        'description' => __('Description for this widget-area...', 'blkcanvas'),
+        'id' => 'widget-area-1',
+        'before_widget' => '<div id="%1$s" class="%2$s">',
+        'after_widget' => '</div>',
+        'before_title' => '<h3>',
+        'after_title' => '</h3>'
+    ));
+
+    // Define Sidebar Widget Area 2
+    register_sidebar(array(
+        'name' => __('Widget Area 2', 'blkcanvas'),
+        'description' => __('Description for this widget-area...', 'blkcanvas'),
+        'id' => 'widget-area-2',
+        'before_widget' => '<div id="%1$s" class="%2$s">',
+        'after_widget' => '</div>',
+        'before_title' => '<h3>',
+        'after_title' => '</h3>'
+    ));
+}
+
+// Remove wp_head() injected Recent Comment styles
+function my_remove_recent_comments_style()
+{
+    global $wp_widget_factory;
+    remove_action('wp_head', array(
+        $wp_widget_factory->widgets['WP_Widget_Recent_Comments'],
+        'recent_comments_style'
+    ));
+}
+
+// Pagination for paged posts, Page 1, Page 2, Page 3, with Next and Previous Links, No plugin
+function blkcanvas_pagination()
+{
+    global $wp_query;
+    $big = 999999999;
+    echo paginate_links(array(
+        'base' => str_replace($big, '%#%', get_pagenum_link($big)),
+        'format' => '?paged=%#%',
+        'current' => max(1, get_query_var('paged')),
+        'total' => $wp_query->max_num_pages
+    ));
+}
+
+// Custom Excerpts
+function blkcanvas_index($length) // Create 20 Word Callback for Index page Excerpts, call using blkcanvas_excerpt('blkcanvas_index');
+{
+    return 20;
+}
+
+// Create 40 Word Callback for Custom Post Excerpts, call using blkcanvas_excerpt('blkcanvas_custom_post');
+function blkcanvas_custom_post($length)
+{
+    return 40;
+}
+
+// Create the Custom Excerpts callback
+function blkcanvas_excerpt($length_callback = '', $more_callback = '')
+{
+    global $post;
+    if (function_exists($length_callback)) {
+        add_filter('excerpt_length', $length_callback);
+    }
+    if (function_exists($more_callback)) {
+        add_filter('excerpt_more', $more_callback);
+    }
+    $output = get_the_excerpt();
+    $output = apply_filters('wptexturize', $output);
+    $output = apply_filters('convert_chars', $output);
+    $output = '<p>' . $output . '</p>';
+    echo $output;
+}
+
+// Custom View Article link to Post
+function blkcanvas_blank_view_article($more)
+{
+    global $post;
+    return '... <a class="view-article" href="' . get_permalink($post->ID) . '">' . __('View Article', 'blkcanvas') . '</a>';
+}
+
+// Remove Admin bar
+function remove_admin_bar()
+{
+    return false;
+}
+
+// Remove 'text/css' from our enqueued stylesheet
+function blkcanvas_style_remove($tag)
+{
+    return preg_replace('~\s+type=["\'][^"\']++["\']~', '', $tag);
+}
+
+// Remove thumbnail width and height dimensions that prevent fluid images in the_thumbnail
+function remove_thumbnail_dimensions( $html )
+{
+    $html = preg_replace('/(width|height)=\"\d*\"\s/', "", $html);
+    return $html;
+}
+
+// Custom Gravatar in Settings > Discussion
+function blkcanvasgravatar ($avatar_defaults)
+{
+    $myavatar = get_template_directory_uri() . '/img/gravatar.jpg';
+    $avatar_defaults[$myavatar] = "Custom Gravatar";
+    return $avatar_defaults;
+}
+
+// Threaded Comments
+function enable_threaded_comments()
+{
+    if (!is_admin()) {
+        if (is_singular() AND comments_open() AND (get_option('thread_comments') == 1)) {
+            wp_enqueue_script('comment-reply');
+        }
+    }
+}
+
+// Custom Comments Callback
+function blkcanvascomments($comment, $args, $depth)
+{
+	$GLOBALS['comment'] = $comment;
+	extract($args, EXTR_SKIP);
+
+	if ( 'div' == $args['style'] ) {
+		$tag = 'div';
+		$add_below = 'comment';
+	} else {
+		$tag = 'li';
+		$add_below = 'div-comment';
+	}
+?>
+    <!-- heads up: starting < for the html tag (li or div) in the next line: -->
+    <<?php echo $tag ?> <?php comment_class(empty( $args['has_children'] ) ? '' : 'parent') ?> id="comment-<?php comment_ID() ?>">
+	<?php if ( 'div' != $args['style'] ) : ?>
+	<div id="div-comment-<?php comment_ID() ?>" class="comment-body">
+	<?php endif; ?>
+	<div class="comment-author vcard">
+	<?php if ($args['avatar_size'] != 0) echo get_avatar( $comment, $args['180'] ); ?>
+	<?php printf(__('<cite class="fn">%s</cite> <span class="says">says:</span>'), get_comment_author_link()) ?>
+	</div>
+<?php if ($comment->comment_approved == '0') : ?>
+	<em class="comment-awaiting-moderation"><?php _e('Your comment is awaiting moderation.') ?></em>
+	<br />
+<?php endif; ?>
+
+	<div class="comment-meta commentmetadata"><a href="<?php echo htmlspecialchars( get_comment_link( $comment->comment_ID ) ) ?>">
+		<?php
+			printf( __('%1$s at %2$s'), get_comment_date(),  get_comment_time()) ?></a><?php edit_comment_link(__('(Edit)'),'  ','' );
+		?>
+	</div>
+
+	<?php comment_text() ?>
+
+	<div class="reply">
+	<?php comment_reply_link(array_merge( $args, array('add_below' => $add_below, 'depth' => $depth, 'max_depth' => $args['max_depth']))) ?>
+	</div>
+	<?php if ( 'div' != $args['style'] ) : ?>
+	</div>
+	<?php endif; ?>
+<?php }
+function blkcanvas_logo()
+{
+    if ( function_exists( 'the_custom_logo' ) ) {
+        if( has_custom_logo() ){
+            the_custom_logo();
+            return;
+        }
+    }
+    ?>
+    <a href=<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><h1 class="site-title"><?php echo bloginfo('name'); ?></h1></a>
+    <?php $description = get_bloginfo('description', 'display');
+    if ($description || is_customize_preview()):?>
+        <p class="site-description"><span><?php echo $description; ?></span></p>
+    <?php endif;
+
+}
+/*------------------------------------*\
+	Actions + Filters + ShortCodes
+\*------------------------------------*/
+
+// Add Actions
+add_action('init', 'blkcanvas_header_scripts'); // Add Custom Scripts to wp_head
+add_action('wp_print_scripts', 'blkcanvas_conditional_scripts'); // Add Conditional Page Scripts
+add_action('get_header', 'enable_threaded_comments'); // Enable Threaded Comments
+add_action('wp_enqueue_scripts', 'blkcanvas_styles'); // Add Theme Stylesheet
+add_action('init', 'register_blkcanvas_menu'); // Add HTML5 Blank Menu
+add_action('init', 'create_post_type_blkcanvas'); // Add our HTML5 Blank Custom Post Type
+add_action('widgets_init', 'my_remove_recent_comments_style'); // Remove inline Recent Comment Styles from wp_head()
+add_action('init', 'blkcanvas_pagination'); // Add our HTML5 Pagination
+
+// Remove Actions
+remove_action('wp_head', 'feed_links_extra', 3); // Display the links to the extra feeds such as category feeds
+remove_action('wp_head', 'feed_links', 2); // Display the links to the general feeds: Post and Comment Feed
+remove_action('wp_head', 'rsd_link'); // Display the link to the Really Simple Discovery service endpoint, EditURI link
+remove_action('wp_head', 'wlwmanifest_link'); // Display the link to the Windows Live Writer manifest file.
+remove_action('wp_head', 'index_rel_link'); // Index link
+remove_action('wp_head', 'parent_post_rel_link', 10, 0); // Prev link
+remove_action('wp_head', 'start_post_rel_link', 10, 0); // Start link
+remove_action('wp_head', 'adjacent_posts_rel_link', 10, 0); // Display relational links for the posts adjacent to the current post.
+remove_action('wp_head', 'wp_generator'); // Display the XHTML generator that is generated on the wp_head hook, WP version
+remove_action('wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0);
+remove_action('wp_head', 'rel_canonical');
+remove_action('wp_head', 'wp_shortlink_wp_head', 10, 0);
+
+// Add Filters
+add_filter('avatar_defaults', 'blkcanvasgravatar'); // Custom Gravatar in Settings > Discussion
+add_filter('body_class', 'add_slug_to_body_class'); // Add slug to body class (Starkers build)
+add_filter('widget_text', 'do_shortcode'); // Allow shortcodes in Dynamic Sidebar
+add_filter('widget_text', 'shortcode_unautop'); // Remove <p> tags in Dynamic Sidebars (better!)
+add_filter('wp_nav_menu_args', 'my_wp_nav_menu_args'); // Remove surrounding <div> from WP Navigation
+// add_filter('nav_menu_css_class', 'my_css_attributes_filter', 100, 1); // Remove Navigation <li> injected classes (Commented out by default)
+// add_filter('nav_menu_item_id', 'my_css_attributes_filter', 100, 1); // Remove Navigation <li> injected ID (Commented out by default)
+// add_filter('page_css_class', 'my_css_attributes_filter', 100, 1); // Remove Navigation <li> Page ID's (Commented out by default)
+add_filter('the_category', 'remove_category_rel_from_category_list'); // Remove invalid rel attribute
+add_filter('the_excerpt', 'shortcode_unautop'); // Remove auto <p> tags in Excerpt (Manual Excerpts only)
+add_filter('the_excerpt', 'do_shortcode'); // Allows Shortcodes to be executed in Excerpt (Manual Excerpts only)
+add_filter('excerpt_more', 'blkcanvas_blank_view_article'); // Add 'View Article' button instead of [...] for Excerpts
+add_filter('show_admin_bar', 'remove_admin_bar'); // Remove Admin bar
+add_filter('style_loader_tag', 'blkcanvas_style_remove'); // Remove 'text/css' from enqueued stylesheet
+add_filter('post_thumbnail_html', 'remove_thumbnail_dimensions', 10); // Remove width and height dynamic attributes to thumbnails
+add_filter('image_send_to_editor', 'remove_thumbnail_dimensions', 10); // Remove width and height dynamic attributes to post images
+
+// Remove Filters
+remove_filter('the_excerpt', 'wpautop'); // Remove <p> tags from Excerpt altogether
+
+// Shortcodes
+add_shortcode('blkcanvas_shortcode_demo', 'blkcanvas_shortcode_demo'); // You can place [blkcanvas_shortcode_demo] in Pages, Posts now.
+add_shortcode('blkcanvas_shortcode_demo_2', 'blkcanvas_shortcode_demo_2'); // Place [blkcanvas_shortcode_demo_2] in Pages, Posts now.
+
+// Shortcodes above would be nested like this -
+// [blkcanvas_shortcode_demo] [blkcanvas_shortcode_demo_2] Here's the page title! [/blkcanvas_shortcode_demo_2] [/blkcanvas_shortcode_demo]
+
+/*------------------------------------*\
+	Custom Post Types
+\*------------------------------------*/
+
+// Create 1 Custom Post type for a Demo, called HTML5-Blank
+function create_post_type_blkcanvas()
+{
+    register_taxonomy_for_object_type('category', 'blkcanvas-blank'); // Register Taxonomies for Category
+    register_taxonomy_for_object_type('post_tag', 'blkcanvas-blank');
+    register_post_type('blkcanvas-blank', // Register Custom Post Type
+        array(
+        'labels' => array(
+            'name' => __('HTML5 Blank Custom Post', 'blkcanvas'), // Rename these to suit
+            'singular_name' => __('HTML5 Blank Custom Post', 'blkcanvas'),
+            'add_new' => __('Add New', 'blkcanvas'),
+            'add_new_item' => __('Add New HTML5 Blank Custom Post', 'blkcanvas'),
+            'edit' => __('Edit', 'blkcanvas'),
+            'edit_item' => __('Edit HTML5 Blank Custom Post', 'blkcanvas'),
+            'new_item' => __('New HTML5 Blank Custom Post', 'blkcanvas'),
+            'view' => __('View HTML5 Blank Custom Post', 'blkcanvas'),
+            'view_item' => __('View HTML5 Blank Custom Post', 'blkcanvas'),
+            'search_items' => __('Search HTML5 Blank Custom Post', 'blkcanvas'),
+            'not_found' => __('No HTML5 Blank Custom Posts found', 'blkcanvas'),
+            'not_found_in_trash' => __('No HTML5 Blank Custom Posts found in Trash', 'blkcanvas')
+        ),
+        'public' => true,
+        'hierarchical' => true, // Allows your posts to behave like Hierarchy Pages
+        'has_archive' => true,
+        'supports' => array(
+            'title',
+            'editor',
+            'excerpt',
+            'thumbnail'
+        ), // Go to Dashboard Custom HTML5 Blank post for supports
+        'can_export' => true, // Allows export in Tools > Export
+        'taxonomies' => array(
+            'post_tag',
+            'category'
+        ) // Add Category and Post Tags support
+    ));
+}
+
+/*------------------------------------*\
+	ShortCode Functions
+\*------------------------------------*/
+
+// Shortcode Demo with Nested Capability
+function blkcanvas_shortcode_demo($atts, $content = null)
+{
+    return '<div class="shortcode-demo">' . do_shortcode($content) . '</div>'; // do_shortcode allows for nested Shortcodes
+}
+
+// Shortcode Demo with simple <h2> tag
+function blkcanvas_shortcode_demo_2($atts, $content = null) // Demo Heading H2 shortcode, allows for nesting within above element. Fully expandable.
+{
+    return '<h2>' . $content . '</h2>';
+}
+
+add_filter('acf/fields/google_map/api', 'my_acf_google_map_api');
+// Method 1: Filter.
+function my_acf_google_map_api( $api ){
+    $api['key'] = 'AIzaSyCeuCpPx-pU6Ku-dE_n12R3sAUFsJORO68';
+    return $api;
+}
+function blkcanvas_parse_placeholder_text( $string )
+{
+    $site_name = get_bloginfo( 'name' );
+    $description = get_bloginfo( 'description' );
+
+    $find = array( '{copyright}', '{year}', '{sitename}', '{description}' );
+    $replace = array( "&copy;", date('Y'), $site_name, $description );
+    return str_replace($find,$replace,$string);
+}
+
+/*------------------------------------*\
+	WooCommerce Filters
+\*------------------------------------*/
+add_action( 'woocommerce_before_account_navigation', 'woocommerce_account_content_title' );
+function woocommerce_account_content_title()
+{
+    if(wp_get_current_user()){
+        echo '<h1>My Account</h1>';
+    }
+    
+}
+add_action('woocommerce_before_add_to_cart_form','blkcanvas_show_product_custom_fields');
+function blkcanvas_show_product_custom_fields()
+{
+    $start_date = get_post_meta(get_the_ID(), 'start_date', true);
+    $end_date = get_post_meta(get_the_ID(), 'end_date', true);
+    $location = get_post_meta(get_the_ID(), 'location', true);
+    ?>
+    <div class="product-custom-fields">
+        <?php if($start_date): ?>
+            <p><strong>Start Date/Time:</strong> <?php echo $start_date; ?></p>
+        <?php endif; ?>
+        <?php if($end_date): ?>
+            <p><strong>End Date/Time:</strong> <?php echo $end_date; ?></p>
+        <?php endif; ?>
+        <?php if($location): ?>
+            <p><strong>Location:</strong> <?php echo $location['address']; ?></p>
+        <?php endif; ?>
+    </div>
+    <?php
+}
+
+/**
+ * Get additional account fields.
+ *
+ * @see https://iconicwp.com/blog/the-ultimate-guide-to-adding-custom-woocommerce-user-account-fields/
+ *
+ * @return array
+ */
+function blkcanvas_get_account_fields() {
+
+    $fields = array(
+
+
+        'billing_first_name' => array(
+
+
+            'type'        => 'text',
+
+
+            'label'       => __( 'First name', 'blkcanvas' ),
+
+
+            'placeholder' => __( '', 'blkcanvas' ),
+
+
+            'required'    => true,
+
+            'class' => array('form-row-first')
+
+
+        ),
+        'billing_last_name' => array(
+
+
+            'type'        => 'text',
+
+
+            'label'       => __( 'Last name', 'blkcanvas' ),
+
+
+            'placeholder' => __( '', 'blkcanvas' ),
+
+
+            'required'    => true,
+
+            'class' => array('form-row-last')
+
+        ),
+
+
+    );
+    return apply_filters( 'blkcanvas_account_fields', $fields );
+
+}
+/**
+ * Add fields to registration form and account area.
+ *
+ * @see https://iconicwp.com/blog/the-ultimate-guide-to-adding-custom-woocommerce-user-account-fields/
+ */
+
+add_action( 'woocommerce_register_form_start', 'blkcanvas_print_user_frontend_fields', 10 ); // register form
+function blkcanvas_print_user_frontend_fields() {
+
+
+    $fields = blkcanvas_get_account_fields();
+
+    foreach ( $fields as $key => $field_args ) {
+
+        woocommerce_form_field( $key, $field_args );
+
+    }
+
+}
+add_shortcode( 'blkcanvas_registration_form', 'blkcanvas_render_registration_form' );
+function blkcanvas_render_registration_form() {
+   if ( is_admin() ) return;
+   if ( is_user_logged_in() ) return;
+   ob_start();
+ 
+   // NOTE: THE FOLLOWING <FORM></FORM> IS COPIED FROM woocommerce\templates\myaccount\form-login.php
+   // IF WOOCOMMERCE RELEASES AN UPDATE TO THAT TEMPLATE, YOU MUST CHANGE THIS ACCORDINGLY
+ 
+   do_action( 'woocommerce_before_customer_login_form' ); ?>
+		<form method="post" class="woocommerce-form woocommerce-form-register register" <?php do_action( 'woocommerce_register_form_tag' ); ?> >
+
+            <?php do_action( 'woocommerce_register_form_start' ); ?>
+
+            <?php if ( 'no' === get_option( 'woocommerce_registration_generate_username' ) ) : ?>
+
+                <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+                    <label for="reg_username"><?php esc_html_e( 'Username', 'woocommerce' ); ?>&nbsp;<span class="required">*</span></label>
+                    <input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="username" id="reg_username" autocomplete="username" value="<?php echo ( ! empty( $_POST['username'] ) ) ? esc_attr( wp_unslash( $_POST['username'] ) ) : ''; ?>" /><?php // @codingStandardsIgnoreLine ?>
+                </p>
+
+            <?php endif; ?>
+
+            <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+                <label for="reg_email"><?php esc_html_e( 'Email address', 'woocommerce' ); ?>&nbsp;<span class="required">*</span></label>
+                <input type="email" class="woocommerce-Input woocommerce-Input--text input-text" name="email" id="reg_email" autocomplete="email" value="<?php echo ( ! empty( $_POST['email'] ) ) ? esc_attr( wp_unslash( $_POST['email'] ) ) : ''; ?>" /><?php // @codingStandardsIgnoreLine ?>
+            </p>
+
+            <?php if ( 'no' === get_option( 'woocommerce_registration_generate_password' ) ) : ?>
+
+                <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+                    <label for="reg_password"><?php esc_html_e( 'Password', 'woocommerce' ); ?>&nbsp;<span class="required">*</span></label>
+                    <input type="password" class="woocommerce-Input woocommerce-Input--text input-text" name="password" id="reg_password" autocomplete="new-password" />
+                </p>
+
+            <?php else : ?>
+
+                <p><?php esc_html_e( 'A password will be sent to your email address.', 'woocommerce' ); ?></p>
+
+            <?php endif; ?>
+
+            <?php do_action( 'woocommerce_register_form' ); ?>
+
+            <p class="woocommerce-form-row form-row">
+                <?php wp_nonce_field( 'woocommerce-register', 'woocommerce-register-nonce' ); ?>
+                <button type="submit" class="woocommerce-Button woocommerce-button button woocommerce-form-register__submit" name="register" value="<?php esc_attr_e( 'Register', 'woocommerce' ); ?>"><?php esc_html_e( 'Register', 'woocommerce' ); ?></button>
+            </p>
+
+            <?php do_action( 'woocommerce_register_form_end' ); ?>
+
+        </form>
+ 
+    <?php do_action( 'woocommerce_after_customer_login_form' );
+     
+   return ob_get_clean();
+}
+?>

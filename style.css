@@ -1,0 +1,676 @@
+/*
+	Theme Name: Blkcanvas
+	Theme URI: http://blkcanvas.com
+	Description: Blkcanvas WordPress Theme
+	Version: 1.0.0
+	Author: Henzly Meghie (@henzlym)
+	Author URI: http://blkcanvas.com
+	Tags: Blank, HTML5, CSS3
+
+	License: MIT
+	License URI: http://opensource.org/licenses/mit-license.php
+*/
+
+/*------------------------------------*\
+    MAIN
+\*------------------------------------*/
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;900&family=Roboto&display=swap');
+
+/* global box-sizing */
+*,
+*:after,
+*:before {
+	-moz-box-sizing:border-box;
+	box-sizing:border-box;
+	-webkit-font-smoothing:antialiased;
+	font-smoothing:antialiased;
+	text-rendering:optimizeLegibility;
+}
+
+/* html element 62.5% font-size for REM use */
+html {
+	font-size:62.5%;
+}
+body {
+	font-weight:500;
+	font-size: 16px;
+	font-family:'Roboto', Helvetica, Arial, sans-serif;
+	color:#444;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family: Poppins;
+    line-height: 34px;
+    font-weight: 700;
+    font-style: normal;
+    color: #222;
+}
+/* clear */
+.clear:before,
+.clear:after {
+    content:' ';
+    display:table;
+}
+
+.clear:after {
+    clear:both;
+}
+.clear {
+    *zoom:1;
+}
+img {
+	max-width:100%;
+	vertical-align:bottom;
+}
+a {
+	color:#444;
+	text-decoration:none;
+}
+a:hover {
+	color:#444;
+}
+a:focus {
+	outline:0;
+}
+a:hover,
+a:active {
+	outline:0;
+}
+input:focus {
+	outline:0;
+	border:1px solid #04A4CC;
+}
+input[type=text],
+input[type=search],
+input[type=email],
+input[type=url],
+input[type=tel],
+input[type=password] {
+	width: 100%;
+	padding: 7px 6px;
+	margin: 8px 0;
+	box-sizing: border-box;
+}
+input[type="submit"],
+button[type="submit"]{
+	border: none;
+	box-shadow: none;
+	color: inherit;
+	cursor: pointer;
+	display: inline-block;
+	margin: 0;
+	padding: 6px 15px;
+	text-align: center;
+	text-decoration: none;
+	overflow-wrap: break-word;
+}
+textarea {
+	width: 100%;
+	height: 150px;
+	padding: 7px 6px;
+	box-sizing: border-box;
+	border: 2px solid #ccc;
+	border-radius: 4px;
+	resize: none;
+}
+select {
+	width: 100%;
+	padding: 16px 20px;
+	border: none;
+	border-radius: 4px;
+}
+/*------------------------------------*\
+    STRUCTURE
+\*------------------------------------*/
+
+/* wrapper */
+.wrapper {
+	max-width:1280px;
+	width:95%;
+	margin:0 auto;
+	position:relative;
+}
+/* header */
+header.header{
+	position: relative;
+	box-shadow: 0 6px 30px -20px rgba(0,0,0,0.1);
+	padding: 15px;
+	z-index: 9;
+}
+header.active {
+    position: fixed;
+    height: 100%;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    z-index: 999;
+}
+header.active .container {
+    flex-direction: column;
+	align-items: flex-start;
+}
+header .container{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+header.active nav{
+	display: block;
+}
+header nav {
+	display: none;
+	width: 100%;
+}
+ul.sub-menu {
+	display: none;
+    padding-left: 15px;
+}
+li.menu-item a{
+	position: relative;
+}
+li.menu-item-has-children > a::before {
+	content: "";
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 10px solid #555;
+    transform: translateY(-50%);
+}
+li.menu-item-has-children.active > ul.sub-menu,
+li.menu-item-has-children:hover > ul.sub-menu{
+	display: block;
+}
+header nav ul li a {
+	display: inherit;
+    padding: 10px 0;
+	font-family: Poppins;
+	font-weight: 700;
+	font-style: normal;
+	text-transform: uppercase;
+}
+
+.hamburger{
+	display: block;
+	width: 33px;
+	-webkit-font-smoothing: antialiased;
+	/* to stop flickering of text in safari */
+}
+.hamburger > div {
+	background-color: #222;
+	height: 4px;
+	width: 100%;
+	margin-bottom:5px;
+	border-radius: 1px;
+}
+.hamburger > div:last-child{
+	margin-bottom:0;
+}
+.hamburger.active {
+    position: fixed;
+	right: 15px;
+	transform: translateY(50%);
+}
+.hamburger.active > div.bar-1{
+	transform: rotate(-45deg) translate(-9px, 5px) ;
+}
+.hamburger.active > div.bar-2{
+	opacity: 0;
+	transform: rotate(0deg) scale(0.2, 0.2);
+}
+.hamburger.active > div.bar-3{
+	transform: rotate(45deg) translate(-8px, -4px) ;
+}
+@media screen and (min-width:1024px){
+	header.header{
+		padding: 0;
+	}
+	header .container{
+		align-items: inherit;
+		justify-content: initial;
+		padding-left: 15px;
+		padding-right:15px;
+	}
+	header nav {
+		display: inherit;
+	}
+	header nav ul {
+		display: inherit;
+		padding-left: 15px;
+		margin-top:0;
+		margin-bottom: 0;
+	}
+	header nav ul > li {
+		display: flex;
+		align-items: center;
+		position: relative;
+	}
+	header nav ul.children{
+		position: absolute;
+		flex-direction: column;
+	}
+	header nav ul li a{
+		padding-left: 15px;
+		padding-right: 15px;
+	}
+	ul.sub-menu {
+		position: absolute;
+		top: 100%;
+		width: 250px;
+		background-color: #fff;
+		box-shadow: 0 6px 30px -20px rgba(0,0,0,0.1);
+	}
+	ul.sub-menu ul.sub-menu{
+		left: 100%;
+		top: 0;
+	}
+	li.menu-item-has-children > a::before{
+		right: -7px;
+		border-left: 5px solid transparent;
+		border-right: 5px solid transparent;
+		border-top: 5px solid #555;
+	}
+	.logo{
+		margin-top: 15px;
+    	margin-bottom: 15px;
+	}
+	.hamburger{
+		display: none;
+	}
+}
+.pre-header{
+	padding: 5px 15px;
+	background-color: #88C545;
+}
+.pre-header ul{
+	margin-top:0;
+	margin-bottom:0;
+	text-align: right;
+}
+.pre-header ul li{
+	display: inline-block;
+	margin-right: 10px;
+}
+.pre-header ul li:last-child{
+	margin-right: 0;
+}
+.pre-header a,
+.pre-header a:hover{
+	color: #FFF;
+	font-weight: 600;
+}
+/* logo */
+.logo img{
+	max-height: 50px;
+	width: auto;
+}
+.logo-img {
+
+}
+/* nav */
+nav ul{
+	padding-left: 0;
+}
+nav ul li{
+	list-style: none;
+}
+/* sidebar */
+.sidebar {
+	padding-left: 15px;
+	padding-right: 15px;
+}
+/* footer */
+footer {
+	padding:30px 15px;
+	margin-top: 35px;
+}
+
+main,
+.pre-header > *,
+header .container,
+.alignfull .wp-block-cover__inner-container,
+footer > *{
+	max-width: 1200px;
+	margin-left: auto;
+	margin-right: auto;
+	word-break: break-word;
+}
+/*------------------------------------*\
+    PAGES
+\*------------------------------------*/
+
+body main{
+	width:100%;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+@media screen and (min-width:1025px){
+	body.single main{
+		display: grid;
+		grid-template-columns: 75% 25%;
+		grid-gap: 15px;
+		margin-top: 35px;
+	}
+	body.woocommerce,
+	body.page:not(.page-template-full-width){
+		display: grid;
+		grid-template-columns: 75% 25%;
+		max-width: 1200px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	body.woocommerce > nav,
+	body.woocommerce > header,
+	body.woocommerce > footer,
+	body.page:not(.page-template-full-width) > nav,
+	body.page:not(.page-template-full-width) > header,
+	body.page:not(.page-template-full-width) > footer{
+		grid-column: 1 / 3;
+		margin-left: calc(600px - 50vw);
+		margin-right: calc(600px - 50vw);
+		
+	}
+	body.woocommerce main,
+	body.page:not(.page-template-full-width) main{
+		grid-column: 1 / 2;
+	}
+	body.woocommerce aside,
+	body.page:not(.page-template-full-width) aside{
+		grid-column: 2 / 3;
+		margin-top: 35px;
+	}
+}
+body.page-template-full-width .alignfull{
+	width:100vw;
+	margin-left:-15px;
+	margin-right:-15px;
+}
+@media all and (min-width: 1200px) {
+	body.page-template-full-width .alignfull{
+		width:100vw;
+		margin-left: calc(585px - 50vw);
+		margin-right: calc(585px - 50vw);
+	}
+}
+/*------------------------------------*\
+    WOOCOMMERCE
+\*------------------------------------*/
+body.single-product main{
+	margin-top:35px;
+}
+
+body.woocommerce-account,
+body.woocommerce-checkout{
+	background-color: #eee;
+}
+.woocommerce button.button.alt{
+	background-color: #88C545;
+}
+#order_review,
+.woocommerce-order,
+#customer_details > div,
+.woocommerce form.login, .woocommerce form.register,
+.woocommerce-account .woocommerce-MyAccount-content,
+.woocommerce-account .woocommerce-MyAccount-navigation {
+    background-color: #fff;
+    box-shadow: 0 6px 30px -20px rgba(0,0,0,0.1);
+}
+li.woocommerce-MyAccount-navigation-link{
+	position: relative;
+}
+li.woocommerce-MyAccount-navigation-link.is-active::before{
+	content:"";
+	display: block;
+	position: absolute;
+	right: 0;
+	height: 100%;
+	width: 3px;
+	background-color: #88C545;
+}
+.woocommerce-MyAccount-navigation ul li a {
+    display: block;
+    padding: 15px;
+    font-weight: 600;
+}
+#order_review,
+#customer_details > div,
+.woocommerce-order,
+.woocommerce form.login, .woocommerce form.register,
+.woocommerce-MyAccount-content{
+    padding: 15px;
+}
+.woocommerce form.login, .woocommerce form.register{
+	border:none;
+	border-radius: 0;
+}
+.woocommerce-MyAccount-content header {
+	margin-bottom:15px;
+}
+.woocommerce .woocommerce-breadcrumb{
+	margin-top: 2em;
+}
+@media screen and (min-width:980px){
+	p#billing_first_name_field,
+	p#billing_last_name_field {
+		display: inline-block;
+		width: 50%;
+	}
+	.form-row-first{
+		padding-right:15px;
+	}
+}
+/*------------------------------------*\
+    IMAGES
+\*------------------------------------*/
+
+
+
+/*------------------------------------*\
+	TYPOGRAPHY
+\*------------------------------------*/
+
+
+/*------------------------------------*\
+    RESPONSIVE
+\*------------------------------------*/
+
+@media only screen and (min-width:320px) {
+
+}
+@media only screen and (min-width:480px) {
+
+}
+@media only screen and (min-width:768px) {
+
+}
+@media only screen and (min-width:1024px) {
+
+}
+@media only screen and (min-width:1140px) {
+
+}
+@media only screen and (min-width:1280px) {
+
+}
+@media only screen and (-webkit-min-device-pixel-ratio:1.5),
+	   only screen and (min-resolution:144dpi) {
+
+}
+
+/*------------------------------------*\
+    MISC
+\*------------------------------------*/
+
+::selection {
+	background:#04A4CC;
+	color:#FFF;
+	text-shadow:none;
+}
+::-webkit-selection {
+	background:#04A4CC;
+	color:#FFF;
+	text-shadow:none;
+}
+::-moz-selection {
+	background:#04A4CC;
+	color:#FFF;
+	text-shadow:none;
+}
+
+/*------------------------------------*\
+    WORDPRESS CORE
+\*------------------------------------*/
+
+.alignnone {
+	margin:5px 20px 20px 0;
+}
+.aligncenter,
+div.aligncenter {
+	display:block;
+	margin:5px auto 5px auto;
+}
+.alignright {
+	float:right;
+	margin:5px 0 20px 20px;
+}
+.alignleft {
+	float:left;
+	margin:5px 20px 20px 0;
+}
+a img.alignright {
+	float:right;
+	margin:5px 0 20px 20px;
+}
+a img.alignnone {
+	margin:5px 20px 20px 0;
+}
+a img.alignleft {
+	float:left;
+	margin:5px 20px 20px 0;
+}
+a img.aligncenter {
+	display:block;
+	margin-left:auto;
+	margin-right:auto;
+}
+.wp-caption {
+	background:#FFF;
+	border:1px solid #F0F0F0;
+	max-width:96%;
+	padding:5px 3px 10px;
+	text-align:center;
+}
+.wp-caption.alignnone {
+	margin:5px 20px 20px 0;
+}
+.wp-caption.alignleft {
+	margin:5px 20px 20px 0;
+}
+.wp-caption.alignright {
+	margin:5px 0 20px 20px;
+}
+.wp-caption img {
+	border:0 none;
+	height:auto;
+	margin:0;
+	max-width:98.5%;
+	padding:0;
+	width:auto;
+}
+.wp-caption .wp-caption-text,
+.gallery-caption {
+	font-size:11px;
+	line-height:17px;
+	margin:0;
+	padding:0 4px 5px;
+}
+
+.wp-block-button__link{
+	padding: 7px 24px;
+}
+.wp-block-social-links.is-style-logos-only,
+.wp-social-link svg{
+	color: #fff !important;
+}
+.sticky {
+
+}
+.bypostauthor {
+
+}
+a.post-edit-link{
+	position: fixed;
+	bottom:100px;
+	right:25px;
+	font-weight: 700;
+}
+/*------------------------------------*\
+    PRINT
+\*------------------------------------*/
+
+@media print {
+	* {
+		background:transparent !important;
+		color:#000 !important;
+		box-shadow:none !important;
+		text-shadow:none !important;
+	}
+	a,
+	a:visited {
+		text-decoration:underline;
+	}
+	a[href]:after {
+		content:" (" attr(href) ")";
+	}
+	abbr[title]:after {
+		content:" (" attr(title) ")";
+	}
+	.ir a:after,
+	a[href^="javascript:"]:after,
+	a[href^="#"]:after {
+		content:"";
+	}
+	pre,blockquote {
+		border:1px solid #999;
+		page-break-inside:avoid;
+	}
+	thead {
+		display:table-header-group;
+	}
+	tr,img {
+		page-break-inside:avoid;
+	}
+	img {
+		max-width:100% !important;
+	}
+	@page {
+		margin:0.5cm;
+	}
+	p,
+	h2,
+	h3 {
+		orphans:3;
+		widows:3;
+	}
+	h2,
+	h3 {
+		page-break-after:avoid;
+	}
+}
+
+#wpforms-126{
+	max-width: 800px;
+	margin: auto;
+}
+div.wpforms-container-full .wpforms-form button[type=submit]{
+	background-color: #000;
+	color: #fff;
+	font-weight: bold;
+}
+
+div.wpforms-container-full .wpforms-form input{
+	border: 1px solid #000 !important;
+}
