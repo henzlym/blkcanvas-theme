@@ -58,6 +58,10 @@ class BlkCanvas_Admin {
                 'id'    => 'footer',
                 'title' => __( 'Footer', 'blkcanvas' )
             ),
+            array(
+                'id'    => 'plugins',
+                'title' => __( 'Plugins', 'blkcanvas' )
+            ),
         );
         return $sections;
     }
@@ -348,6 +352,20 @@ class BlkCanvas_Admin {
                     'default' =>  '{copyright} {year} Copyright {sitename}.',
                 ),
             ),
+            'plugins' => array(
+                array(
+                    'name'    => 'blkcanvas_plugins_woocommerce_registration_form',
+                    'label'   => __( 'Enable Woocommerce Registration Form', 'blkcanvas' ),
+                    'desc'    => __( '', 'blkcanvas' ),
+                    'type'    => 'checkbox',
+                    'default' =>  '',
+                    'customizer_settings' => array(
+                        'setting' => array(
+                            'transport' => 'refresh'
+                        )
+                    )
+                ),
+            )
         );
 
         return $settings_fields;
