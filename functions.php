@@ -11,6 +11,7 @@
 
 // Load any external files you have here
 require_once get_template_directory() . '/includes/admin/admin.php';
+require_once get_template_directory() . '/includes/plugins/init.php';
 /*------------------------------------*\
 	Theme Support
 \*------------------------------------*/
@@ -533,133 +534,66 @@ function blkcanvas_show_product_custom_fields()
     </div>
     <?php
 }
-
 /**
- * Get additional account fields.
+
+ * Redirect to shop after login.
+
  *
- * @see https://iconicwp.com/blog/the-ultimate-guide-to-adding-custom-woocommerce-user-account-fields/
+
+ * @param $redirect
+
+ * @param $user
+
  *
- * @return array
- */
-function blkcanvas_get_account_fields() {
 
-    $fields = array(
+ * @return false|string
 
-
-        'billing_first_name' => array(
-
-
-            'type'        => 'text',
-
-
-            'label'       => __( 'First name', 'blkcanvas' ),
-
-
-            'placeholder' => __( '', 'blkcanvas' ),
-
-
-            'required'    => true,
-
-            'class' => array('form-row-first')
-
-
-        ),
-        'billing_last_name' => array(
-
-
-            'type'        => 'text',
-
-
-            'label'       => __( 'Last name', 'blkcanvas' ),
-
-
-            'placeholder' => __( '', 'blkcanvas' ),
-
-
-            'required'    => true,
-
-            'class' => array('form-row-last')
-
-        ),
-
-
-    );
-    return apply_filters( 'blkcanvas_account_fields', $fields );
-
-}
-/**
- * Add fields to registration form and account area.
- *
- * @see https://iconicwp.com/blog/the-ultimate-guide-to-adding-custom-woocommerce-user-account-fields/
  */
 
-add_action( 'woocommerce_register_form_start', 'blkcanvas_print_user_frontend_fields', 10 ); // register form
-function blkcanvas_print_user_frontend_fields() {
+
+function blkcanvas_woocommerce_login_redirect( $redirect, $user ) {
 
 
-    $fields = blkcanvas_get_account_fields();
+    $redirect_page_id = url_to_postid( $redirect );
 
-    foreach ( $fields as $key => $field_args ) {
 
-        woocommerce_form_field( $key, $field_args );
+    $checkout_page_id = wc_get_page_id( 'checkout' );
+
+    
+    if( $redirect_page_id == $checkout_page_id ) {
+
+
+        return $redirect;
+
 
     }
 
+    return wc_get_page_permalink( 'myaccount' );
+
 }
-add_shortcode( 'blkcanvas_registration_form', 'blkcanvas_render_registration_form' );
-function blkcanvas_render_registration_form() {
-   if ( is_admin() ) return;
-   if ( is_user_logged_in() ) return;
-   ob_start();
- 
-   // NOTE: THE FOLLOWING <FORM></FORM> IS COPIED FROM woocommerce\templates\myaccount\form-login.php
-   // IF WOOCOMMERCE RELEASES AN UPDATE TO THAT TEMPLATE, YOU MUST CHANGE THIS ACCORDINGLY
- 
-   do_action( 'woocommerce_before_customer_login_form' ); ?>
-		<form method="post" class="woocommerce-form woocommerce-form-register register" <?php do_action( 'woocommerce_register_form_tag' ); ?> >
+add_filter( 'woocommerce_login_redirect', 'blkcanvas_woocommerce_login_redirect', 10, 2 );
 
-            <?php do_action( 'woocommerce_register_form_start' ); ?>
+/**
 
-            <?php if ( 'no' === get_option( 'woocommerce_registration_generate_username' ) ) : ?>
+ * Redirect after registration.
 
-                <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-                    <label for="reg_username"><?php esc_html_e( 'Username', 'woocommerce' ); ?>&nbsp;<span class="required">*</span></label>
-                    <input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="username" id="reg_username" autocomplete="username" value="<?php echo ( ! empty( $_POST['username'] ) ) ? esc_attr( wp_unslash( $_POST['username'] ) ) : ''; ?>" /><?php // @codingStandardsIgnoreLine ?>
-                </p>
+ *
 
-            <?php endif; ?>
+ * @param $redirect
 
-            <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-                <label for="reg_email"><?php esc_html_e( 'Email address', 'woocommerce' ); ?>&nbsp;<span class="required">*</span></label>
-                <input type="email" class="woocommerce-Input woocommerce-Input--text input-text" name="email" id="reg_email" autocomplete="email" value="<?php echo ( ! empty( $_POST['email'] ) ) ? esc_attr( wp_unslash( $_POST['email'] ) ) : ''; ?>" /><?php // @codingStandardsIgnoreLine ?>
-            </p>
+ *
 
-            <?php if ( 'no' === get_option( 'woocommerce_registration_generate_password' ) ) : ?>
+ * @return string
 
-                <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-                    <label for="reg_password"><?php esc_html_e( 'Password', 'woocommerce' ); ?>&nbsp;<span class="required">*</span></label>
-                    <input type="password" class="woocommerce-Input woocommerce-Input--text input-text" name="password" id="reg_password" autocomplete="new-password" />
-                </p>
+ */
 
-            <?php else : ?>
 
-                <p><?php esc_html_e( 'A password will be sent to your email address.', 'woocommerce' ); ?></p>
+function blkcanvas_woocommerce_register_redirect( $redirect ) {
 
-            <?php endif; ?>
 
-            <?php do_action( 'woocommerce_register_form' ); ?>
+    return wc_get_page_permalink( 'myaccount' );
 
-            <p class="woocommerce-form-row form-row">
-                <?php wp_nonce_field( 'woocommerce-register', 'woocommerce-register-nonce' ); ?>
-                <button type="submit" class="woocommerce-Button woocommerce-button button woocommerce-form-register__submit" name="register" value="<?php esc_attr_e( 'Register', 'woocommerce' ); ?>"><?php esc_html_e( 'Register', 'woocommerce' ); ?></button>
-            </p>
-
-            <?php do_action( 'woocommerce_register_form_end' ); ?>
-
-        </form>
- 
-    <?php do_action( 'woocommerce_after_customer_login_form' );
-     
-   return ob_get_clean();
 }
+
+add_filter( 'woocommerce_registration_redirect', 'blkcanvas_woocommerce_register_redirect' );
 ?>
