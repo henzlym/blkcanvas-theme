@@ -1,73 +1,45 @@
-# [HTML5 Blank](http://blkcanvas.com)
+**Edit a file, create a new file, and clone from Bitbucket in under 2 minutes**
 
-Powerful shell for rapidly deploying your WordPress projects.
+When you're done, you can delete the content in this README and update the file with details for others getting started with your repository.
 
-* Project: [github.com/toddmotto/blkcanvas](https://github.com/toddmotto/blkcanvas)
-* Website: [blkcanvas.com](http://blkcanvas.com)
-* Twitter: [@blkcanvas](http://twitter.com/blkcanvas)
-* Author : [Todd Motto](http://toddmotto.com) // [@toddmotto](http://twitter.com/toddmotto)
+*We recommend that you open this README in another tab as you perform the tasks below. You can [watch our video](https://youtu.be/0ocf7u76WSo) for a full demo of all the steps in this tutorial. Open the video in a new tab to avoid leaving Bitbucket.*
 
-## Contributors (in order of pull request)
-[David Munn](https://github.com/Munnday), [Patrick Zeinert](https://github.com/CoeusCC), [J-Rabe](https://github.com/J-Rabe), [Steve Steiner](https://github.com/ssteinerx), [Kyle Hudson](https://github.com/diskhub), [chrisdl](https://github.com/chrisdl), [Marcel Miranda](https://github.com/reaktivo), [Fx Bénard](https://github.com/fxbenard), Ioan Virag, [Mohamed Elkebir](https://github.com/elkebirmed), [lregla](https://github.com/lregla), Carlos Pinar, [Joshua Lyman](https://github.com/jlyman), [Kevin Plattret](https://github.com/kevinplattret), [Wesllei Henrique](https://github.com/wesllei), [Stacey Cordoni](https://github.com/staceycordoni).
+---
 
-## Getting Started with HTML5 Blank
+## Edit a file
 
-Download the latest version from [blkcanvas.com](http://blkcanvas.com)
+You’ll start by editing this README file to learn how to edit a file in Bitbucket.
 
-## Get involved! Make HTML5 Blank better
+1. Click **Source** on the left side.
+2. Click the README.md link from the list of files.
+3. Click the **Edit** button.
+4. Delete the following text: *Delete this line to make a change to the README from Bitbucket.*
+5. After making your change, click **Commit** and then **Commit** again in the dialog. The commit page will open and you’ll see the change you just made.
+6. Go back to the **Source** page.
 
-There are a few ways to get involved, submit a Pull Request, or submit a comment on the website - [blkcanvas.com](http://blkcanvas.com)
+---
 
-## Features
+## Create a file
 
-### HTML5
-* Basic Semantic HTML5 Markup
-* W3C Valid Code Foundations
-* Responsive Ready, ViewPort meta data
-* HTML Class support for IE7, IE8, IE9 Conditionals (HTML5 Boilerplate)
-* Clean, neatly organised code, with PHP annotations
+Next, you’ll add a new file to this repository.
 
-### jQuery + JavaScript
-* Replaced built-in WordPress enqueue with Google CDN
-* Protocol relative jQuery if Google CDN offline (HTML5 Boilerplate)
-* Conditionizr for cross-platform/device detects and enhancements
-* Modernizr feature detection, HTML5 element support for legacy, progressive enhancement (HTML5 Boilerplate)
-* DOM Ready JavaScript file setup (scripts.js) for instant JavaScript development
-* JavaScript files enqueued using WordPress functions into wp_head
+1. Click the **New file** button at the top of the **Source** page.
+2. Give the file a filename of **contributors.txt**.
+3. Enter your name in the empty file space.
+4. Click **Commit** and then **Commit** again in the dialog.
+5. Go back to the **Source** page.
 
-### CSS3
-* HTML5 Boilerplate reset
-* Media Queries framework for instant development using @media
-* @font-face empty framework with Fonts folder setup ready for new custom fonts
-* CSS3 custom selection styles
-* Inline print styles (HTML5 Boilerplate)
-* Body element config, including Optimize Legibility for kerning and font-smoothing
-* Replaced focus styles to avoid blue blur in field elements, replaced with border
-* Stylesheet enqueued using WordPress functions into wp_head
+Before you move on, go ahead and explore the repository. You've already seen the **Source** page, but check out the **Commits**, **Branches**, and **Settings** pages.
 
-### Preloaded Functions (functions.php)
-* Enqueue Scripts functions setup
-* Enqueue Styles functions setup
-* Dynamic WordPress Menu Navigation Support, preloaded with 3 Dynamic menus
-* Cleaned up dynamic nav output (Remove outer 'div')
-* Remove all injected classes from nav items, ID's, Page ID's
-* Custom Post Type x1 preloaded for demonstration, supporting: Category, Tags, Post Thumbnails, Excerpts
-* Dynamic Sidebar with x2 Widget Areas, and sidebar.php setup
-* WordPress Thumbnail Support, no Plugin image cropping, custom Arrays and Thumbnail settings
-* Custom Excerpt callbacks, with changeable callback numbers
-* Replaced 'Read More' button for custom Excerpt callbacks
-* Demo Shortcodes included, with Nested Shortcode capability
-* Add Slug to body class (Starkers Theme credit)
-* wp_head functions stripped right down, remove excess injected junk
-* All functions annotated, categorised into sections, filters, actions, shortcodes etc.
-* Space for development, neatly organised code with Modules/External files
+---
 
-### Theme Files and Functionality
-* Built in Pagination, no plugins (strips out prev + next post and gives page numbers)
-* Optimised Google Analytics in footer (HTML5 Boilerplate)
-* Widget Area Sidebar support, functions in place to get developing
-* Custom Search Form included (searchform.php) - fully editable
-* Tags support for showing Post Tags
-* Category support for showing the Category of post
-* Author support showing the author
-* Demo Custom Page Template for expansion
+## Clone a repository
+
+Use these steps to clone from SourceTree, our client for using the repository command-line free. Cloning allows you to work on your files locally. If you don't yet have SourceTree, [download and install first](https://www.sourcetreeapp.com/). If you prefer to clone from the command line, see [Clone a repository](https://confluence.atlassian.com/x/4whODQ).
+
+1. You’ll see the clone button under the **Source** heading. Click that button.
+2. Now click **Check out in SourceTree**. You may need to create a SourceTree account or log in.
+3. When you see the **Clone New** dialog in SourceTree, update the destination path and name if you’d like to and then click **Clone**.
+4. Open the directory you just created to see your repository’s files.
+
+Now that you're more familiar with your Bitbucket repository, go ahead and add a new file locally. You can [push your change back to Bitbucket with SourceTree](https://confluence.atlassian.com/x/iqyBMg), or you can [add, commit,](https://confluence.atlassian.com/x/8QhODQ) and [push from the command line](https://confluence.atlassian.com/x/NQ0zDQ).

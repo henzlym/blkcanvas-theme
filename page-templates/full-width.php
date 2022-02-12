@@ -1,43 +1,32 @@
-<?php /* Template Name: Full Width */ ?>
+<?php 
+/**
+ * Template Name: Fullwidth
+ * Template Post Type: post, page, projects
+ * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#single-post
+ *
+ * @package blkcanvas
+ */
 
-<?php get_header(); ?>
+get_header(); ?>
 
-<main role="main">
-    <!-- section -->
-    <section>
+<main id="primary" class="site-main">
 
-    <?php if (have_posts()): while (have_posts()) : the_post(); ?>
+<?php
+while ( have_posts() ) :
+    the_post();
 
-        <!-- article -->
-        <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+    get_template_part( 'template-parts/content', get_post_type() );
 
-            <?php the_content(); ?>
+    the_post_navigation(
+        array(
+            'prev_text' => '<span class="nav-subtitle">' . esc_html__( 'Previous:', 'blkcanvas' ) . '</span> <span class="nav-title">%title</span>',
+            'next_text' => '<span class="nav-subtitle">' . esc_html__( 'Next:', 'blkcanvas' ) . '</span> <span class="nav-title">%title</span>',
+        )
+    );
 
-            <?php comments_template( '', true ); // Remove if you don't want comments ?>
+endwhile; // End of the loop.
+?>
 
-            <br class="clear">
-
-            <?php edit_post_link(); ?>
-
-        </article>
-        <!-- /article -->
-
-    <?php endwhile; ?>
-
-    <?php else: ?>
-
-        <!-- article -->
-        <article>
-
-            <h2><?php _e( 'Sorry, nothing to display.', 'tpd' ); ?></h2>
-
-        </article>
-        <!-- /article -->
-
-    <?php endif; ?>
-
-    </section>
-    <!-- /section -->
-</main>
+</main><!-- #main -->
 
 <?php get_footer(); ?>
