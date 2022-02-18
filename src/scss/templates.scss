@@ -1,0 +1,107 @@
+/* ===== FEATURED TEMPLATES ===== */
+[class*="blkcanvas-template-"]{
+    padding-bottom:35px;
+}
+.blkcanvas-template-1{
+    display: flex;
+    flex-direction: column;
+}
+.blkcanvas-template-2{
+    border-bottom: 1px solid;
+}
+.blkcanvas-template_archive .entry-title,
+.archive-body .entry-title{
+    font-size: 16px;
+}
+.archive-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.blkcanvas-template_archive .card.horizontal .entry-header,
+.archive-body .card.horizontal .entry-header{
+    margin-top:0;
+}
+.blkcanvas-template_archive .card.horizontal .entry-header > p,
+.archive-body .card.horizontal .entry-header > p{
+    display: none;
+}
+.blkcanvas-template_archive article,
+.archive-body article,
+.archive article,
+.search article,
+.blkcanvas-template_archive.columns > div{
+    margin-bottom:15px;
+}
+.blkcanvas-template_archive article:last-child,
+.archive-body article:last-child,
+.blkcanvas-template_archive.columns > div:last-child{
+    margin-bottom:0;
+}
+.main-card > .card{
+    display: block;
+}
+@media screen and (min-width:768px) {
+    .site{
+        margin-top: 35px;
+    }
+    .archive-body{
+        display: flex;
+        flex-direction: column;
+    }
+    .blkcanvas-template_archive{
+        display: flex;
+        padding-top:55px;
+    }
+    .main-card > .card{
+        display: flex;
+        align-items: center;
+    }
+    .blkcanvas-template_archive.columns > div{
+        flex-direction: column;
+        flex: 1 1 50%;
+        max-width: 50%;
+        padding-left: 0;
+    }
+    .blkcanvas-template_archive.columns > div:last-child{
+        padding-left: 35px;
+    }
+    .blkcanvas-template_archive .card.horizontal .entry-thumbnail,
+    .archive-body .card.horizontal .entry-thumbnail{
+        flex: 1 1 40%;
+    }
+    .blkcanvas-template_archive .card.horizontal .entry-header,
+    .archive-body .card.horizontal .entry-header{
+        flex: 1 1 60%;
+    }
+    .blkcanvas-template_archive .entry-title,
+    .archive-body .entry-title{
+        font-size: 20px;
+    }
+    .blkcanvas-template_archive .card.horizontal .entry-header > p,
+    .archive-body .card.horizontal .entry-header > p{
+        display: block;
+    }
+    .blkcanvas-template_archive .entry-categories,
+    .archive-body .entry-categories{
+        font-size: 10px;
+    }
+    .card.horizontal .entry-header{
+        padding-left: 15px;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+    .feature-card .entry-title{
+        font-size: 26px;
+    }
+    .feature-card .entry-content{
+        font-size: 14px;
+    }
+    .feature-card.card.horizontal .entry-header{
+        padding-left: 35px;
+    }
+    .blkcanvas-template-3 .blkcanvas-template_archive article{
+        margin:0;
+    }
+
+}

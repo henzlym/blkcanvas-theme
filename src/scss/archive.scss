@@ -1,0 +1,18 @@
+/* ===== ARCHIVE ===== */
+.archive .page-title{
+    border-bottom:1px solid rgba(0, 0, 0, 0.15);
+}
+@media screen and (min-width:768px){
+    .archive article{
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom:15px;
+    }
+    .archive article > *{
+        flex: 1 1 calc( 50% - 5px);
+        max-width: calc( 50% - 5px);
+    }
+    .archive .post-thumbnail{
+        margin-right: 10px;
+    }
+}
