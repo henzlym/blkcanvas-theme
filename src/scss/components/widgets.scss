@@ -1,0 +1,16 @@
+/* ===== WIDGETS ===== */
+.widget {
+    h2{
+        font-size: 20px;
+    }
+    ul {
+        padding-left: 0;
+        li {
+            list-style: none;
+            margin-bottom: 7px;
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+}

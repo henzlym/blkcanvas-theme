@@ -1,0 +1,61 @@
+/* ===== MISC ===== */
+.sticky{
+    position: sticky;
+    top: 0;
+}
+/* Position child elements relative to this element */
+.aspect-ratio {
+    position: relative;
+    display: block;
+    content: "";
+    height: 0;
+    overflow: hidden;
+    /* 16:9 aspect ratio */
+    padding-top: 56.25%;
+}
+
+.aspect-ratio._1_1 {
+    /* 16:9 aspect ratio */
+    padding-top: 100% !important;
+}
+
+/* Image is positioned absolutely relative to the parent element */
+.aspect-ratio img {
+    /* Image should match parent box size */
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* WP embed shortcode */
+.blkcanvas-embed-responsive {
+    position: relative;
+    iframe {
+        max-width: 100%;
+    }
+}
+
+.entry-content {
+    .alignwide {
+        margin-left  : -80px;
+        margin-right : -80px;
+    }
+    .alignfull {
+        margin-left  : calc( -100vw / 2 + 100% / 2 );
+        margin-right : calc( -100vw / 2 + 100% / 2 );
+        max-width : 100vw;
+        width: 100vw;
+        .wp-block-group__inner-container{
+            margin-left: auto;
+            margin-right: auto;
+        }
+        &.is-position-top-left{
+            .wp-block-cover__inner-container{
+                width: auto;
+            }
+        }
+    }
+}

@@ -1,0 +1,13 @@
+{
+    "version": 1,
+    "settings": {
+        "spacing": {
+            "blockGap": true
+        }
+    },
+    "styles": {
+        "spacing": {
+            "blockGap": "1.5rem"
+        }
+    }
+}

@@ -9,15 +9,52 @@ require_once get_template_directory() . '/includes/init.php';
  * Enqueue scripts and styles.
  */
 function blkcanvas_scripts() {
-	wp_enqueue_style( 'blkcanvas-style', get_stylesheet_uri(), array(), _S_VERSION );
+	wp_enqueue_style( 'blkcanvas-style', get_stylesheet_directory_uri() . '/dist/style.min.css', array(), _S_VERSION );
 	wp_style_add_data( 'blkcanvas-style', 'rtl', 'replace' );
 
 	wp_enqueue_script( 'blkcanvas-navigation', get_template_directory_uri() . '/js/scripts.js', array(), _S_VERSION, true );
 
 }
-add_action( 'wp_enqueue_scripts', 'blkcanvas_scripts' );
+add_action( 'get_footer', 'blkcanvas_scripts' );
 
+function blkcanvas_critical_css()
+{
+	?>
+	<!-- BLKCANVAS CRITICAL CSS -->
+	<?php
+	blkcanvas_get_critical_css( 'base' );
 
+	if(is_singular() && !is_front_page()){
+		if( is_single() || is_page() && get_page_template_slug() == '' ){
+			blkcanvas_get_critical_css( 'single' );
+		}
+	}
+	
+	if(is_archive()){
+		blkcanvas_get_critical_css( 'archive' );
+	}
+
+	?>
+	<!-- / BLKCANVAS CRITICAL CSS -->
+	<?php
+}
+add_action( 'wp_head', 'blkcanvas_critical_css', 20 );
+
+function blkcanvas_get_critical_css( $template )
+{
+	$file = get_template_directory() . '/dist/critical/'.$template.'.min.css';	
+	
+	if( file_exists( $file ) ):
+		
+		$template_css = file_get_contents( $file );
+		$template_css = apply_filters( 'blkcanvas_critical_css', $template_css, $template );
+
+		?>
+		<style id="blkcanvas-critical-<?php echo $template; ?>-css"><?php echo $template_css; ?></style>
+		<?php
+	endif;
+	
+}
 /**
  * Sets up theme defaults and registers support for various WordPress features.
  *
@@ -112,6 +149,17 @@ function blkcanvas_theme_setup() {
 			'flex-height' => true,
 		)
 	);
+
+		
+	add_theme_support( 'wp-block-styles' );
+
+	add_theme_support( 'align-wide' );
+	
+	add_theme_support( 'custom-line-height' );
+
+	add_theme_support( 'responsive-embeds' );
+	
+	add_theme_support( 'custom-spacing' );
 }
 
 add_action( 'after_setup_theme', 'blkcanvas_theme_setup' );
@@ -134,7 +182,7 @@ add_action( 'after_switch_theme', 'tpd_override_media_settings' );
  * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
  */
 function blkcanvas_widgets_init() {
-	register_sidebar(
+	$side_bars = array(
 		array(
 			'name'          => esc_html__( 'Sidebar', 'blkcanvas' ),
 			'id'            => 'sidebar-1',
@@ -143,8 +191,48 @@ function blkcanvas_widgets_init() {
 			'after_widget'  => '</section>',
 			'before_title'  => '<h2 class="widget-title">',
 			'after_title'   => '</h2>',
+		),
+		array(
+			'name'          => esc_html__( 'Footer', 'blkcanvas' ),
+			'id'            => 'footer',
+			'description'   => esc_html__( 'Add widgets here.', 'blkcanvas' ),
+			'before_widget' => '<section id="%1$s" class="widget %2$s">',
+			'after_widget'  => '</section>',
+			'before_title'  => '<h2 class="widget-title">',
+			'after_title'   => '</h2>',
+		),
+		array(
+			'name'          => esc_html__( 'Footer Left', 'blkcanvas' ),
+			'id'            => 'footer-1',
+			'description'   => esc_html__( 'Add widgets here.', 'blkcanvas' ),
+			'before_widget' => '<section id="%1$s" class="widget %2$s">',
+			'after_widget'  => '</section>',
+			'before_title'  => '<h2 class="widget-title">',
+			'after_title'   => '</h2>',
+		),
+		array(
+			'name'          => esc_html__( 'Footer Middle', 'blkcanvas' ),
+			'id'            => 'footer-2',
+			'description'   => esc_html__( 'Add widgets here.', 'blkcanvas' ),
+			'before_widget' => '<section id="%1$s" class="widget %2$s">',
+			'after_widget'  => '</section>',
+			'before_title'  => '<h2 class="widget-title">',
+			'after_title'   => '</h2>',
+		),
+		array(
+			'name'          => esc_html__( 'Footer Right', 'blkcanvas' ),
+			'id'            => 'footer-3',
+			'description'   => esc_html__( 'Add widgets here.', 'blkcanvas' ),
+			'before_widget' => '<section id="%1$s" class="widget %2$s">',
+			'after_widget'  => '</section>',
+			'before_title'  => '<h2 class="widget-title">',
+			'after_title'   => '</h2>',
 		)
 	);
+	foreach ($side_bars as $key => $side_bar) {
+		register_sidebar( $side_bar );
+	}
+	
 }
 
 add_action( 'widgets_init', 'blkcanvas_widgets_init' );
@@ -198,7 +286,16 @@ if ( ! function_exists( 'blkcanvas_post_thumbnail' ) ) :
 	}
 endif;
 
+function blkcanvs_post_thumbnail_html( $html )
+{
+	if( is_admin() ) return;
 
+	if( is_singular() && !is_front_page() ){
+		return '<!-- .entry-image --><div class="entry-image">'.$html.'</div><!-- /.entry-image -->';
+	}
+	return $html;
+}
+add_filter( 'post_thumbnail_html', 'blkcanvs_post_thumbnail_html' );
 function blkcanvas_has_post_thumbnail__false( $has_thumbnail )
 {
 	return false;
@@ -417,7 +514,7 @@ function blkcanvas_load_fonts()
 	// -    although this is a render-blocking request, it can still make use of the
 	// -    preconnect which makes it marginally faster than the default.
 
-	$link = 'https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&Heebo:wght@700;900&family=Inter:wght@700;900&family=Lexend:wght@400;500;600;700&Open+Sans:wght@300;400;700&display=swap';
+	$link = 'https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@400;500;600;700;800;900&family=Cormorant+Garamond:wght@400;500;600;700&family=Frank+Ruhl+Libre:wght@400;500;700;900&family=Hind:wght@300;400;500;600;700&family=Nunito+Sans:wght@400;600;700;800;900&family=Open+Sans:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;700;900&family=Source+Sans+Pro:wght@400;600;700;900&display=swap';
 	?>
 	<!-- [1] -->
 	<link rel="preconnect"
@@ -471,3 +568,81 @@ function blkcanvas_head_scripts()
 	</script>
 	<?php
 }
+  
+function blkcanvas_embed_defaults() {
+
+
+	$width = blkcanvas_get_content_width() - (300 + 16 );
+	$height = ( $width / 4 ) * 3;
+    return array(
+        'width'  => $width, 
+        'height' => $height
+    );
+}
+add_filter( 'embed_defaults', 'blkcanvas_embed_defaults' );
+
+function blkcanvas_get_content_width()
+{
+	$theme_settings = blkcanvas_get_theme_settings();
+	$site_width = get_theme_mod('container_width', $theme_settings['settings']['container_width']['default']);
+	return str_replace('px', '', $site_width);
+}
+
+function blkcanvas_register_block_styles()
+{
+	register_block_style(
+		'core/gallery',
+		array(
+			'name'         => 'no-margin',
+			'label'        => __( 'No margin', 'blkcanvas' ),
+			'inline_style' => '.wp-block-gallery.is-style-no-margin .wp-block-image {margin-bottom:0!important;} .wp-block-gallery.is-style-no-margin .wp-block-image { margin-right: 0 !important; }',
+		)
+	);
+
+	register_block_style(
+		'core/columns',
+		array(
+			'name'         => 'no-margin',
+			'label'        => __( 'No margin', 'blkcanvas' ),
+			'inline_style' => '.wp-block-columns.is-style-no-margin{margin-bottom:0!important} .wp-block-columns.is-style-no-margin .wp-block-column:not(:first-child) { margin-left: 0 !important; }',
+		)
+	);
+
+	register_block_style(
+		'core/cover',
+		array(
+			'name'         => 'shadow',
+			'label'        => __( 'Shadow', 'blkcanvas' ),
+			'inline_style' => '.wp-block-cover.is-style-shadow{box-shadow:0 0 20px 5px rgba(0,0,0,0.3)}',
+		)
+	);
+
+	register_block_style(
+		'core/image',
+		array(
+			'name'         => 'shadow',
+			'label'        => __( 'Shadow', 'blkcanvas' ),
+			'inline_style' => '.wp-block-image.is-style-shadow{box-shadow:0 5px 20px -5px rgba(0,0,0,0.3)}',
+		)
+	);
+
+	register_block_style(
+		'core/heading',
+		array(
+			'name'         => 'seperator-top',
+			'label'        => __( 'With seperator', 'blkcanvas' ),
+			'inline_style' => '.is-style-seperator-top{position:relative;} .is-style-seperator-top::before{content: \'\';position: relative;height: 2px;width: 100px;background-color: #000;margin-bottom: 15px;display: block;}',
+		)
+	);
+
+	register_block_style(
+		'core/heading',
+		array(
+			'name'         => 'no-margin-bottom',
+			'label'        => __( 'No Margin - Bottom', 'blkcanvas' ),
+			'inline_style' => '.is-style-no-margin-bottom{margin-bottom:0;}',
+		)
+	);
+}
+
+add_action('init', 'blkcanvas_register_block_styles');

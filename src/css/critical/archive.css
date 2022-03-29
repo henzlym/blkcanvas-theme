@@ -1,0 +1,37 @@
+/* ===== ARCHIVE ===== */
+.archive .page-title {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+@media screen and (min-width: 768px) {
+  .archive article {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+  }
+
+  .archive article > * {
+    flex: 1 1 calc(50% - 5px);
+    max-width: calc(50% - 5px);
+  }
+
+  .archive .post-thumbnail {
+    margin-right: 10px;
+  }
+}
+/* ===== WIDGETS ===== */
+.widget h2 {
+  font-size: 20px;
+}
+.widget ul {
+  padding-left: 0;
+}
+.widget ul li {
+  list-style: none;
+  margin-bottom: 7px;
+}
+.widget ul li:last-child {
+  margin-bottom: 0;
+}
+
+/*# sourceMappingURL=archive.css.map */

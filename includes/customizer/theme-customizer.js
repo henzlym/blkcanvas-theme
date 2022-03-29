@@ -21,5 +21,17 @@
 		} );
 	} );
 
+	const keys = Object.keys(BLKCANVAS_CUSTOMIZER_SETTINGS);
+	keys.forEach((key, index) => {		
+		const selectors = Object.entries(BLKCANVAS_CUSTOMIZER_SETTINGS[key].selectors);
+		wp.customize( key, function( value ) {
+			value.bind( function( newval ) {
+				selectors.forEach(([k, v]) => {
+					$( k ).css( v, newval );
+				});
+			} );
+		} );
+	});
+
 	
 } )( jQuery );

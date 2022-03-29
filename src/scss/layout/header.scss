@@ -1,29 +1,26 @@
 /* ===== SITE HEADER ===== */
 .site-header{
-    font-family: 'Lexend', sans-serif;
-    font-weight: 600;
     position: relative;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    background-color: var( --header-bg-color );
+    padding-top: 15px;
+    padding-bottom: 15px;
     text-transform: uppercase;
     z-index: 999;
+    img.custom-logo{
+        max-height: 45px;
+        width: auto;
+    }
 }
 .site-header-container{
     display: flex;
     justify-content: center;
     flex-direction: column;
-    padding-left: 16px;
-    padding-right: 16px;
 }
 .main-navigation{
     display: none;
-    padding: 16px;
     position: fixed;
     left: 0;
     height: 100%;
     width: 100%;
-    background-color: var( --header-bg-color );
 }
 .main-navigation.active{
     display: block;
@@ -37,19 +34,16 @@ body.admin-bar .main-navigation.active{
 .main-navigation ul.menu{
     padding-left: 0;
 }
-ul.menu li{
-    list-style: none;
-}
-ul.menu a{
-    text-decoration: none;
-}
-.site-header ul.menu a{
-    color: var( --header-text-color );
-    font-size: 16px;
-    font-weight: 500;
-}
-.site-header ul.menu li{
-    margin-bottom: 15px;
+ul.menu {
+    li{
+        margin-bottom: 15px;
+        list-style: none;
+    }
+    a{
+        font-size: 16px;
+        font-weight: 500;
+        text-decoration: none;
+    }
 }
 .site-branding{
     display: flex;
@@ -74,10 +68,6 @@ p.site-description {
     display: inline-flex;
     margin-right: auto;
 }
-img.custom-logo{
-    max-height: 45px;
-    width: auto;
-}
 .blkcanvas-search-icon{
     max-width: 20px;
 }
@@ -93,63 +83,74 @@ img.custom-logo{
     -ms-flex-pack: center;
     justify-content: center;
     width: 20px;
+    > div{
+        width: 100%;
+        height: 2px;
+        margin: 0 0 3px;
+    }
+    &.change {
+        .bar1 {
+            -webkit-transform: rotate(-45deg) translate(-2px,7px);
+            -ms-transform: rotate(-45deg) translate(-2px,7px);
+            transform: rotate(-45deg) translate(-2px,7px);
+        }
+        .bar2 {
+            opacity: 0;
+        }
+        .bar3 {
+            -webkit-transform: rotate(45deg) translate(0,-5px);
+            -ms-transform: rotate(45deg) translate(0,-5px);
+            transform: rotate(45deg) translate(0,-5px);
+        }
+    }
+
 }
-.hamburger > div{
-    width: 100%;
-    height: 2px;
-    margin: 0 0 3px;
-}
-.hamburger > div {
-    background-color: var( --header-text-color );
-}
-.hamburger.change .bar1 {
-    -webkit-transform: rotate(-45deg) translate(-2px,7px);
-    -ms-transform: rotate(-45deg) translate(-2px,7px);
-    transform: rotate(-45deg) translate(-2px,7px);
-}
-.hamburger.change .bar2 {
-    opacity: 0;
-}
-.hamburger.change .bar3 {
-    -webkit-transform: rotate(45deg) translate(0,-5px);
-    -ms-transform: rotate(45deg) translate(0,-5px);
-    transform: rotate(45deg) translate(0,-5px);
-}
-form.search {
-    display: none;
-    align-items: center;
-    margin-left: auto;
-    width: 100%;
+
+form{
+    &.search {
+        display: none;
+        align-items: center;
+        margin-left: auto;
+        button,
+        input.search-input{
+            padding: 3px 15px;
+            border-radius: 0;
+            border: 1px #cecfd7 solid;
+        }
+        @media screen and (min-width:980px){
+            display: flex;
+        }
+    }
+    button {
+        color: var( --header-text-color );
+        background-color: transparent;
+        border: 1px #cecfd7 solid;
+    }
+    svg{
+        height: 15px;
+        width: 15px;
+    }
 }
 .main-navigation.active form.search {
     display: flex;
 }
-form.search button,
-form.search input.search-input{
-    padding: 7px 15px;
-    border-radius: 0;
-}
-form.search input.search-input {
-    width: 100%;
-    border: 1px #cecfd7 solid;
-    border-right: none;
-}
-form button {
-    color: var( --header-text-color );
-    background-color: transparent;
-    border: 1px #cecfd7 solid;
-}
-form svg{
-    height: 15px;
-    width: 15px;
-}
+
 @media screen and (min-width:768px){
-    .admin-bar .site-header.sticky{
-        top: 32px;
+    .admin-bar {
+        .site-header.sticky{
+            position: sticky;
+            top: 32px;
+        }
     }
     .site-header{
-        padding-top: 5px;
-        padding-bottom: 5px;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        img.custom-logo{
+            max-height: 70px;
+        }
+        ul.menu li{
+            margin-bottom: 0;
+        }
     }
     .site-header-container {
         display: flex;
@@ -174,15 +175,13 @@ form svg{
         display: flex;
         padding: 0;
         margin: 0;
-    }
-    ul.menu > li{
-        margin-right: 15px;
-    }
-    ul.menu > li:last-child{
-        margin-right: 0;
-    }
-    .site-header ul.menu li{
-        margin-bottom: 0;
+        > li{
+            margin-right: 15px;
+            &:last-child{
+                margin-right: 0;
+            }
+        }
+        
     }
     .blkcanvas-search-icon{
         display: none;
@@ -190,13 +189,5 @@ form svg{
     .hamburger{
         display: none;
     }
-    img.custom-logo{
-        max-height: 70px;
-    }
-}
-@media screen and (min-width:980px){
-    form.search{
-        display: flex;
-        max-width: 300px;
-    }
+    
 }

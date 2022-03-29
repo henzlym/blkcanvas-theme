@@ -4,6 +4,7 @@ if (!defined('WPINC')) {
     die;
 }
 
+require_once get_template_directory() . '/includes/customizer/fonts/init.php';
 require_once get_template_directory() . '/includes/customizer/settings.php';
 
 function blkcanvas_customize_register($wp_customize)
@@ -14,6 +15,33 @@ function blkcanvas_customize_register($wp_customize)
 
     $theme_settings = blkcanvas_get_theme_settings();
 
+    if (isset($theme_settings['panels']) && is_array($theme_settings['panels']) ) {
+        foreach ($theme_settings['panels'] as $key => $panel) {
+            // Panels
+            $panel_args = $panel;
+            unset($panel_args['id']);
+                    
+            if (isset($panel_args['priority'])) {
+                $panel_args['priority'] = $panel['priority'];
+            }
+    
+            $wp_customize->add_panel($panel['id'], $panel_args );
+        }
+    }
+
+    if (isset($theme_settings['sections']) && is_array($theme_settings['sections'])) {
+        foreach ($theme_settings['sections'] as $key => $section) {
+            // Sections
+            $secion_args = $section;
+            unset($secion_args['id']);
+    
+            if (isset($secion_args['priority'])) {
+                $secion_args['priority'] = $section['priority'];
+            }
+    
+            $wp_customize->add_section($section['id'], $secion_args );
+        }
+    }
 
     foreach ($theme_settings['settings'] as $key => $setting) {
         // Settings
@@ -24,25 +52,23 @@ function blkcanvas_customize_register($wp_customize)
 
         if (isset($setting['control']) && !empty($setting['control'])) {
             // Controls
+            $customizer_class = isset( $setting['control']['class'] ) ? $setting['control']['class'] : 'WP_Customize_Control';
+            $control_args = array(
+                'label'      => __($setting['control']['label'], 'blkcanvas'),
+                'section'    => $setting['section'],
+                'settings'   => $setting['setting'],
+            );
+
             $wp_customize->add_control(
-                new $setting['control']['class'](
+                new $customizer_class(
                     $wp_customize,
                     $setting['setting'],
-                    array(
-                        'label'      => __($setting['control']['label'], 'blkcanvas'),
-                        'section'    => $setting['section'],
-                        'settings'   => $setting['setting'],
-                    )
+                    $control_args
                 )
             );
         }
     }
 
-    // Sections
-    $wp_customize->add_section('blkcanvas_new_section_name', array(
-        'title'      => __('Visible Section Name', 'blkcanvas'),
-        'priority'   => 30,
-    ));
 }
 add_action('customize_register', 'blkcanvas_customize_register');
 

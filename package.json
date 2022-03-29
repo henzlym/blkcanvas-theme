@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "build": "grunt & wp-scripts build",
-    "build:custom": "wp-scripts build src/entry.js --output-path=custom",
     "check-engines": "wp-scripts check-engines",
     "check-licenses": "wp-scripts check-licenses",
     "format": "wp-scripts format",
@@ -16,7 +15,7 @@
     "lint:pkg-json": "wp-scripts lint-pkg-json",
     "packages-update": "wp-scripts packages-update",
     "plugin-zip": "wp-scripts plugin-zip",
-    "start": "wp-scripts start",
+    "start": "grunt watch & wp-scripts start",
     "test:e2e": "wp-scripts test-e2e",
     "test:unit": "wp-scripts test-unit-js"
   },
@@ -42,6 +41,11 @@
     "grunt-postcss": "^0.9.0",
     "grunt-sass": "^3.1.0",
     "grunt-svgstore": "^2.0.0",
-    "load-grunt-tasks": "^5.1.0"
+    "load-grunt-tasks": "^5.1.0",
+    "node-sass": "^7.0.1",
+    "node-sass-glob-importer": "^5.3.2"
+  },
+  "devDependencies": {
+    "grunt-contrib-sass": "^2.0.0"
   }
 }

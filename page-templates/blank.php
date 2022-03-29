@@ -7,7 +7,7 @@
 * @since Blkcanvas 1.0.0
 */
 
-get_header('blank'); ?>
+get_header(''); ?>
 
 <main id="primary" class="site-main">
 
@@ -15,11 +15,11 @@ get_header('blank'); ?>
 while ( have_posts() ) :
     the_post();
 
-    the_content();
+    get_template_part( 'template-parts/content', 'blank' );
 
 endwhile; // End of the loop.
 ?>
 
 </main><!-- #main -->
 
-<?php get_footer('blank'); ?>
+<?php get_footer(); ?>
