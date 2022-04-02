@@ -69,6 +69,10 @@ select {
   font: inherit;
 }
 
+a, button {
+  cursor: pointer;
+}
+
 html {
   font-size: 100%;
 }
@@ -121,6 +125,8 @@ small,
 /* ===== SITE HEADER ===== */
 .site-header {
   position: relative;
+  padding-left: var(--global-padding-x);
+  padding-right: var(--global-padding-x);
   padding-top: 15px;
   padding-bottom: 15px;
   text-transform: uppercase;
@@ -316,10 +322,6 @@ form svg {
     margin-right: 0;
   }
 
-  .blkcanvas-search-icon {
-    display: none;
-  }
-
   .hamburger {
     display: none;
   }
@@ -327,6 +329,7 @@ form svg {
 /* ===== SITE ===== */
 .site,
 .site-header-container,
+.page-header,
 .entry-content,
 .footer-container {
   margin-left: auto;
@@ -338,6 +341,19 @@ form svg {
   margin-top: 0;
 }
 
+.entry-header,
+.entry-content,
+aside.sidebar {
+  padding-left: var(--global-padding-x);
+  padding-right: var(--global-padding-x);
+}
+
+@media screen and (min-width: 768px) {
+  aside.sidebar {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
 /* ===== MISC ===== */
 .sticky {
   position: sticky;

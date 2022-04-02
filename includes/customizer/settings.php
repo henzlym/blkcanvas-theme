@@ -43,7 +43,7 @@ function blkcanvas_get_theme_settings()
                 ),
                 'default' => '1180px',
                 'selectors' => array(
-                    '.site,.site-header-container,.wp-block-cover__inner-container,.wp-block-group__inner-container,.footer-container' => 'max-width'
+                    '.site,.site-header-container,.page-header,.wp-block-cover__inner-container,.wp-block-group__inner-container,.footer-container' => 'max-width'
                 ),
                 'setting' => 'container_width',
                 'section' => 'templates_global',
@@ -60,6 +60,20 @@ function blkcanvas_get_theme_settings()
                     '.entry-content,.wp-block-cover__inner-container' => 'max-width'
                 ),
                 'setting' => 'content_width',
+                'section' => 'templates_global',
+                'transport' => 'refresh',
+            ),
+            'container_padding' => array(
+                'control' => array(
+                    'class' => 'WP_Customize_Control',
+                    'label' => __('Site content width', 'blkcanvas'),
+                    'type' => 'text',
+                ),
+                'default' => '16px',
+                'root_selectors' => array(
+                    ':root' => '--global-padding-x'
+                ),
+                'setting' => 'container_padding',
                 'section' => 'templates_global',
                 'transport' => 'refresh',
             ),
@@ -104,7 +118,7 @@ function blkcanvas_get_theme_settings()
                 ),
                 'setting' => 'font_select_body',
                 'section' => 'fonts_global',
-                'transport' => 'postMessage',
+                'transport' => 'refresh',
             ),
             'font_select_headers' => array(
                 'control' => array(
@@ -118,6 +132,20 @@ function blkcanvas_get_theme_settings()
                 ),
                 'setting' => 'font_select_headers',
                 'section' => 'fonts_global',
+                'transport' => 'refresh',
+            ),
+            'font_size_archive_headers' => array(
+                'control' => array(
+                    'class' => 'WP_Customize_Control',
+                    'label' => __('Archive header font size', 'blkcanvas'),
+                    'type' => 'text',
+                ),
+                'default' => '20px',
+                'selectors' => array(
+                    'body.archive .entry-title' => 'font-size'
+                ),
+                'setting' => 'font_size_archive_headers',
+                'section' => 'fonts_archive',
                 'transport' => 'postMessage',
             ),
             // Colors

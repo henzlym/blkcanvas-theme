@@ -1,6 +1,8 @@
 /* ===== SITE HEADER ===== */
 .site-header{
     position: relative;
+    padding-left: var( --global-padding-x );
+    padding-right: var( --global-padding-x );
     padding-top: 15px;
     padding-bottom: 15px;
     text-transform: uppercase;
@@ -182,9 +184,6 @@ form{
             }
         }
         
-    }
-    .blkcanvas-search-icon{
-        display: none;
     }
     .hamburger{
         display: none;

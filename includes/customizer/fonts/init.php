@@ -22,6 +22,10 @@ if (class_exists('WP_Customize_Control')) {
 
         public $fonts = array();
 
+        public function create_google_fonts_value( $family, $category, $weights )
+        {
+            return null;
+        }
         public function request($url, $method = 'GET', $body = array())
         {
 
@@ -83,9 +87,6 @@ if (class_exists('WP_Customize_Control')) {
          */
         public function render_content()
         {
-            $fonts = $this->get_fonts();
-            $system_fonts = $this->get_system_fonts();
-            error_log(print_r($fonts,true));
             // Render our control HTML here...
             require __DIR__ . '/search-select/index.php';
         }

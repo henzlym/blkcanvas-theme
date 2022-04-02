@@ -9,10 +9,10 @@ require_once get_template_directory() . '/includes/init.php';
  * Enqueue scripts and styles.
  */
 function blkcanvas_scripts() {
-	wp_enqueue_style( 'blkcanvas-style', get_stylesheet_directory_uri() . '/dist/style.min.css', array(), _S_VERSION );
+	// wp_enqueue_style( 'blkcanvas-style', get_stylesheet_directory_uri() . '/dist/style.min.css', array(), _S_VERSION );
 	wp_style_add_data( 'blkcanvas-style', 'rtl', 'replace' );
 
-	wp_enqueue_script( 'blkcanvas-navigation', get_template_directory_uri() . '/js/scripts.js', array(), _S_VERSION, true );
+	wp_enqueue_script( 'blkcanvas-navigation', get_template_directory_uri() . '/js/scripts.js', array('jquery'), _S_VERSION, true );
 
 }
 add_action( 'get_footer', 'blkcanvas_scripts' );
@@ -499,7 +499,7 @@ function blkcanvas_footer_submenu()
  * Google Fonts Async Snippet
  * @see https://csswizardry.com/2020/05/the-fastest-google-fonts/
  */
-function blkcanvas_load_fonts()
+function blkcanvas_load_fonts( $fonts = '' )
 {
 	// - 1. Preemptively warm up the fonts’ origin.
 	// -
@@ -514,7 +514,7 @@ function blkcanvas_load_fonts()
 	// -    although this is a render-blocking request, it can still make use of the
 	// -    preconnect which makes it marginally faster than the default.
 
-	$link = 'https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@400;500;600;700;800;900&family=Cormorant+Garamond:wght@400;500;600;700&family=Frank+Ruhl+Libre:wght@400;500;700;900&family=Hind:wght@300;400;500;600;700&family=Nunito+Sans:wght@400;600;700;800;900&family=Open+Sans:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;700;900&family=Source+Sans+Pro:wght@400;600;700;900&display=swap';
+	$link = 'https://fonts.googleapis.com/css2' . $fonts;
 	?>
 	<!-- [1] -->
 	<link rel="preconnect"
@@ -538,7 +538,6 @@ function blkcanvas_load_fonts()
 	</noscript>
 	<?php
 }
-add_action( 'wp_head', 'blkcanvas_load_fonts' );
 
 function blkcanvas_preloads()
 {

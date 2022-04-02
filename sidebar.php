@@ -7,6 +7,6 @@
  * @package blkcanvas
  */
 ?>
-<aside id="secondary" class="widget-area">
+<aside id="secondary" class="sidebar widget-area">
 	<?php dynamic_sidebar( 'sidebar-1' ); ?>
 </aside><!-- #secondary -->

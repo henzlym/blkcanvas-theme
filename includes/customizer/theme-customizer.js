@@ -22,7 +22,12 @@
 	} );
 
 	const keys = Object.keys(BLKCANVAS_CUSTOMIZER_SETTINGS);
-	keys.forEach((key, index) => {		
+	console.log(BLKCANVAS_CUSTOMIZER_SETTINGS);
+	
+	keys.forEach((key, index) => {
+		if (typeof BLKCANVAS_CUSTOMIZER_SETTINGS[key].selectors == 'undefined' ) {
+			return;
+		}
 		const selectors = Object.entries(BLKCANVAS_CUSTOMIZER_SETTINGS[key].selectors);
 		wp.customize( key, function( value ) {
 			value.bind( function( newval ) {
@@ -32,6 +37,7 @@
 			} );
 		} );
 	});
+	
 
 	
 } )( jQuery );
