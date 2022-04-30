@@ -1,19 +1,24 @@
 /* ===== SITE ===== */
 .site,
-.site-header-container,
+.blkcanvas-container,
 .page-header,
 .entry-content,
-.footer-container {
+.footer-container,
+.wp-block-cover__inner-container,
+.wp-block-group__inner-container {
     margin-left: auto;
     margin-right: auto;
     width: 100%;
+    max-width: var(--container-width);
 }
 .site{
     margin-top: 0;
 }
 .entry-header,
 .entry-content,
-aside.sidebar{
+aside.sidebar,
+.blkcanvas-container, 
+.site-navigation.active{
     padding-left: var( --global-padding-x );
     padding-right: var( --global-padding-x );
 }

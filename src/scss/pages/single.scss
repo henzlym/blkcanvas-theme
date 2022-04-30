@@ -1,7 +1,6 @@
 /* ===== SINGLE ===== */
 .single,
 .page-template-default{
-    
     .entry-header{
         margin-top:16px;
         margin-bottom:16px;
@@ -35,11 +34,6 @@
             display: grid;
             grid-template-columns: 1fr 300px;
             grid-column-gap: 16px;
-        }
-        .entry-header,
-        .entry-content{
-            padding-left: 0;
-            padding-right:0;
         }
         .post-navigation{
             padding-left: 0;

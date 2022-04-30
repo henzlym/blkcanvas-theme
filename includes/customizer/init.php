@@ -5,6 +5,7 @@ if (!defined('WPINC')) {
 }
 
 require_once get_template_directory() . '/includes/customizer/fonts/init.php';
+require_once get_template_directory() . '/includes/customizer/alignment/init.php';
 require_once get_template_directory() . '/includes/customizer/settings.php';
 
 function blkcanvas_customize_register($wp_customize)
@@ -59,6 +60,10 @@ function blkcanvas_customize_register($wp_customize)
                 'settings'   => $setting['setting'],
             );
 
+            if (isset($setting['control']['choices'])) {
+                $control_args['choices'] = $setting['control']['choices'];
+            }
+
             $wp_customize->add_control(
                 new $customizer_class(
                     $wp_customize,
@@ -76,7 +81,8 @@ function blkcanvas_get_font_value( $mod_name, $mod, $type = 'css' )
 {
     $font_settings = array(
         'font_select_headers',
-        'font_select_body'
+        'font_select_body',
+        'font_select_site_title'
     );
 
     if ( in_array( $mod_name, $font_settings ) ) {
@@ -99,7 +105,7 @@ function blkcanvas_get_font_value( $mod_name, $mod, $type = 'css' )
         if (is_array($font) && ( isset( $font[0] ) && isset( $font[1] ) ) ) {
             return '\'' . $font[0] . '\',' . $font[1];
         }
-        
+
     }
 
     return $mod;
@@ -141,7 +147,8 @@ function blkcanvas_customize_css()
 {
     $font_settings = array(
         'font_select_headers',
-        'font_select_body'
+        'font_select_body',
+        'font_select_site_title',
     );
     $css = '';
     $google_fonts = [];
@@ -149,28 +156,28 @@ function blkcanvas_customize_css()
     foreach( $theme_settings['settings'] as $key => $setting ){
         if (isset($setting['selectors'])) {
             foreach ($setting['selectors'] as $selector => $style ) {
-                
-                $css .= blkcanvas_generate_css( $selector, $style, $setting['setting'], $setting['default'] );
+                $selector_css = blkcanvas_generate_css( $selector, $style, $setting['setting'], $setting['default'] );
+                $css .= $selector_css;
                 
                 if ( in_array( $setting['setting'], $font_settings ) ) {
-                    $font = get_theme_mod($setting['setting'], $setting['default'] );
-                    $google_fonts[] = blkcanvas_get_font_value( $setting['setting'], $font,'link' );
+                    $mod = get_theme_mod($setting['setting'], $setting['default'] );
+                    $font = blkcanvas_get_font_value( $setting['setting'], $mod,'link' );
+                    if ($font && strpos($mod, 'google-font-select') !== false ) {
+                        $google_fonts[] = $font;
+                    }
                 }
             }
         }
-        if( isset($setting['root_selectors']) ){
-            foreach ($setting['root_selectors'] as $selector => $style ) {
-                $css .= blkcanvas_generate_css( ':root', $style, $setting['setting'], $setting['default'] );
-            }
-        }
+    }
+    if (!empty($google_fonts)) {
+        $query_args = array(
+            'family'  => rtrim( implode( '&family=', $google_fonts ), ';' ),
+            'display' => 'swap',
+        );
+        $fonts = add_query_arg( $query_args, null );
+        blkcanvas_load_fonts( $fonts );
     }
 
-    $query_args = array(
-        'family'  => implode( '&family=', $google_fonts ),
-        'display' => 'swap',
-    );
-    $fonts = add_query_arg( $query_args, null );
-    blkcanvas_load_fonts( $fonts );
 ?>
     <style id="blkcanvas-theme-settings-css" type="text/css">
         <?php echo $css; ?>

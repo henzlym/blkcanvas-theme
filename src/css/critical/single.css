@@ -42,13 +42,6 @@
     grid-template-columns: 1fr 300px;
     grid-column-gap: 16px;
   }
-  .single .entry-header,
-.single .entry-content,
-.page-template-default .entry-header,
-.page-template-default .entry-content {
-    padding-left: 0;
-    padding-right: 0;
-  }
   .single .post-navigation,
 .page-template-default .post-navigation {
     padding-left: 0;

@@ -14,7 +14,8 @@ module.exports = {
         // Add any overrides to the default here.
         entry:{
             ...defaultConfig.entry,
-            'search-select': path.resolve( 'includes', 'customizer', 'fonts', 'js', 'scripts.js' )
+            'search-select': path.resolve( 'includes', 'customizer', 'fonts', 'js', 'scripts.js' ),
+            'alignment': path.resolve( 'includes', 'customizer', 'alignment', 'index.js' )
         },
     }
 }

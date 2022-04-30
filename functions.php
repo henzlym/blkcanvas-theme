@@ -13,7 +13,9 @@ function blkcanvas_scripts() {
 	wp_style_add_data( 'blkcanvas-style', 'rtl', 'replace' );
 
 	wp_enqueue_script( 'blkcanvas-navigation', get_template_directory_uri() . '/js/scripts.js', array('jquery'), _S_VERSION, true );
-
+	wp_localize_script( 'blkcanvas-navigation', 'blkcanvasTheme', array(
+		'isAdminBarShowing' => is_admin_bar_showing()
+	));
 }
 add_action( 'get_footer', 'blkcanvas_scripts' );
 
@@ -160,6 +162,8 @@ function blkcanvas_theme_setup() {
 	add_theme_support( 'responsive-embeds' );
 	
 	add_theme_support( 'custom-spacing' );
+
+	add_editor_style( 'editor-style.css' );
 }
 
 add_action( 'after_setup_theme', 'blkcanvas_theme_setup' );
@@ -470,7 +474,17 @@ function blkcanvas_logo()
 	</div>
 	<?php
 }
-
+function blkcanvas_site_navigation()
+{
+	wp_nav_menu(
+		array(
+			'theme_location' => 'main-menu',
+			'menu_id'        => 'main-menu',
+			'container' => 'nav',
+			'container_class' => 'site-navigation'
+		)
+	);
+}
 function blkcanvas_footer_menu()
 {
 	wp_nav_menu(

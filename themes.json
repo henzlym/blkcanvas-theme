@@ -1,6 +1,19 @@
 {
-    "version": 1,
+    "version": 2,
     "settings": {
+        "appearanceTools": false,
+        "custom": {
+            "baseFont": 16,
+            "lineHeight": {
+                "small": 1.2,
+                "medium": 1.4,
+                "large": 1.8
+            }
+        },
+        "layout": {
+			"contentSize": "1080px",
+			"wideSize": "1200px"
+		},
         "spacing": {
             "blockGap": true
         }
@@ -8,6 +21,38 @@
     "styles": {
         "spacing": {
             "blockGap": "1.5rem"
+        },
+        "elements": {
+            "link": {
+                "border": {},
+                "color": {},
+                "spacing": {},
+                "typography": {}
+            },
+            "h1": {
+                "fontSize":"3.052rem"
+            },
+            "h2": {
+                "fontSize":"2.441rem"
+            },
+            "h3": {
+                "fontSize":"1.953rem"
+            },
+            "h4": {},
+            "h5": {},
+            "h6": {}
         }
-    }
+    },
+    "templateParts": [
+		{
+			"name": "header",
+			"title": "Header",
+			"area": "header"
+		},
+		{
+			"name": "footer",
+			"title": "Footer",
+			"area": "footer"
+		}
+	]
 }

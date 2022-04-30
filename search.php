@@ -11,7 +11,7 @@ get_header();
 ?>
 	<main id="primary" class="site-main">
 
-        <header class="page-header alignwide">
+        <header class="blkcanvas-container">
             <h1 class="page-title">
                 <?php
                 printf(

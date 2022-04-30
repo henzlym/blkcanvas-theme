@@ -29,7 +29,7 @@ $system_fonts = $this->get_system_fonts();
             <?php if (is_array($fonts)) : ?>
                 <optgroup label="Google Fonts">
                     <?php foreach ($fonts['items'] as $key => $font) : ?>
-                        <option value="<?php echo $font['family']; ?>|<?php echo $font['category']; ?>|<?php echo implode(';', $font['variants'] ); ?>"><?php echo $font['family']; ?></option>
+                        <option value="<?php echo $font['family']; ?>|<?php echo $font['category']; ?>|<?php echo implode(';', $font['variants'] ); ?>|google-font-select"><?php echo $font['family']; ?></option>
                     <?php endforeach; ?>
                 </optgroup>
             <?php endif; ?>

@@ -25,6 +25,13 @@ function blkcanvas_get_theme_settings()
                 'panel' => 'templates',
                 'priority' => 160,
             ),
+            'templates_header' => array(
+                'capability' => 'edit_theme_options',
+                'id' => 'templates_header',
+                'title' => 'Header',
+                'panel' => 'templates',
+                'priority' => 160,
+            ),
             'fonts_global' => array(
                 'capability' => 'edit_theme_options',
                 'id' => 'fonts_global',
@@ -38,12 +45,12 @@ function blkcanvas_get_theme_settings()
             'container_width' => array(
                 'control' => array(
                     'class' => 'WP_Customize_Control',
-                    'label' => __('Site container width', 'blkcanvas'),
+                    'label' => __('Container max-width', 'blkcanvas'),
                     'type' => 'text',
                 ),
                 'default' => '1180px',
                 'selectors' => array(
-                    '.site,.site-header-container,.page-header,.wp-block-cover__inner-container,.wp-block-group__inner-container,.footer-container' => 'max-width'
+                    'body' => '--container-width'
                 ),
                 'setting' => 'container_width',
                 'section' => 'templates_global',
@@ -52,7 +59,7 @@ function blkcanvas_get_theme_settings()
             'content_width' => array(
                 'control' => array(
                     'class' => 'WP_Customize_Control',
-                    'label' => __('Site content width', 'blkcanvas'),
+                    'label' => __('Content max-width', 'blkcanvas'),
                     'type' => 'text',
                 ),
                 'default' => '1180px',
@@ -66,7 +73,7 @@ function blkcanvas_get_theme_settings()
             'container_padding' => array(
                 'control' => array(
                     'class' => 'WP_Customize_Control',
-                    'label' => __('Site content width', 'blkcanvas'),
+                    'label' => __('Padding left/right', 'blkcanvas'),
                     'type' => 'text',
                 ),
                 'default' => '16px',
@@ -77,6 +84,25 @@ function blkcanvas_get_theme_settings()
                 'section' => 'templates_global',
                 'transport' => 'refresh',
             ),
+            'header_alignment' => array(
+                'control' => array(
+                    'class' => 'Alignment_Customize_Control',
+                    'choices' => array(
+                        'flex-start' => 'Left',
+                        'center' => 'Center',
+                        'flex-end' => 'Right'
+                    ),
+                    'label' => __('Header alignment', 'blkcanvas'),
+                    'type' => 'text',
+                ),
+                'default' => '16px',
+                'selectors' => array(
+                    'header' => '--header-justify-content'
+                ),
+                'setting' => 'header_alignment',
+                'section' => 'templates_header',
+                'transport' => 'refresh',
+            ),
             // Fonts
             'font_size_body' => array(
                 'control' => array(
@@ -84,27 +110,27 @@ function blkcanvas_get_theme_settings()
                     'label' => __('Site font size', 'blkcanvas'),
                     'type' => 'text',
                 ),
-                'default' => '16px',
+                'default' => '1em',
                 'selectors' => array(
-                    'body' => 'font-size'
+                    'body' => '--font-size-base'
                 ),
                 'setting' => 'font_size_body',
                 'section' => 'fonts_global',
-                'transport' => 'postMessage',
+                'transport' => 'refresh',
             ),
-            'font_size_headers' => array(
+            'font_select_site_title' => array(
                 'control' => array(
-                    'class' => 'WP_Customize_Control',
-                    'label' => __('Site font size', 'blkcanvas'),
+                    'class' => 'Fonts_Search_Select',
+                    'label' => __('Site title font', 'blkcanvas'),
                     'type' => 'text',
                 ),
-                'default' => '16px',
+                'default' => '',
                 'selectors' => array(
-                    'body' => 'font-size'
+                    '.site-title' => '--site-title-font-family'
                 ),
-                'setting' => 'font_size_body',
+                'setting' => 'font_select_site_title',
                 'section' => 'fonts_global',
-                'transport' => 'postMessage',
+                'transport' => 'refresh',
             ),
             'font_select_body' => array(
                 'control' => array(
@@ -114,7 +140,7 @@ function blkcanvas_get_theme_settings()
                 ),
                 'default' => '',
                 'selectors' => array(
-                    'body' => 'font-family'
+                    'body' => '--font-family'
                 ),
                 'setting' => 'font_select_body',
                 'section' => 'fonts_global',
@@ -156,7 +182,7 @@ function blkcanvas_get_theme_settings()
                 ),
                 'default' => '#ffff',
                 'selectors' => array(
-                    '.site-header' => 'background-color'
+                    '.site-header, .site-navigation' => 'background-color'
                 ),
                 'setting' => 'header_bg_color',
                 'section' => 'colors',
