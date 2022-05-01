@@ -105,6 +105,34 @@ function bca_add_cache_headers()
     return insert_with_markers($htaccess_file, 'BCA_CACHE_HEADERS', $insertion);
 }
 
-// add_action("admin_init", 'bca_add_secure_headers');
-// add_action("admin_init", 'bca_add_cache_headers');
-// add_action("admin_init", 'bca_add_compression_headers');
+function bca_remove_headers( $marker )
+{
+    if (!$marker) {
+        return;
+    }
+    $htaccess_file = ABSPATH.'.htaccess';
+    $insertion = '';
+    return insert_with_markers($htaccess_file, $marker, $insertion);
+}
+function bca_remove_cache_headers()
+{
+    bca_remove_headers( 'BCA_CACHE_HEADERS' );
+}
+function bca_remove_compression_headers()
+{
+    bca_remove_headers( 'BCA_COMPRESSION_HEADERS' );
+}
+function bca_save_cache_headers()
+{
+    if ( get_theme_mod( 'enable_cache', '' ) ) {
+        bca_add_cache_headers();
+    } else {
+        bca_remove_cache_headers();
+    }
+    if ( get_theme_mod( 'enable_gzip', '' ) ) {
+        bca_add_compression_headers();
+    } else {
+        bca_remove_compression_headers();
+    }
+}
+add_action( 'customize_save_after', 'bca_save_cache_headers', 10, 3 );

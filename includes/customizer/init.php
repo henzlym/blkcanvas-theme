@@ -44,37 +44,39 @@ function blkcanvas_customize_register($wp_customize)
         }
     }
 
-    foreach ($theme_settings['settings'] as $key => $setting) {
-        // Settings
-        $wp_customize->add_setting($setting['setting'], array(
-            'default'   => $setting['default'],
-            'transport' => $setting['transport'],
-        ));
-
-        if (isset($setting['control']) && !empty($setting['control'])) {
-            // Controls
-            $customizer_class = isset( $setting['control']['class'] ) ? $setting['control']['class'] : 'WP_Customize_Control';
-            $control_args = array(
-                'label'      => __($setting['control']['label'], 'blkcanvas'),
-                'section'    => $setting['section'],
-                'settings'   => $setting['setting']
-            );
-
-            if (isset($setting['control']['type'])) {
-                $control_args['type'] = $setting['control']['type'];
+    if (is_array($theme_settings['settings'])) {
+        foreach ($theme_settings['settings'] as $key => $setting) {
+            // Settings
+            $wp_customize->add_setting($setting['setting'], array(
+                'default'   => $setting['default'],
+                'transport' => $setting['transport'],
+            ));
+    
+            if (isset($setting['control']) && !empty($setting['control'])) {
+                // Controls
+                $customizer_class = isset( $setting['control']['class'] ) ? $setting['control']['class'] : 'WP_Customize_Control';
+                $control_args = array(
+                    'label'      => __($setting['control']['label'], 'blkcanvas'),
+                    'section'    => $setting['section'],
+                    'settings'   => $setting['setting']
+                );
+    
+                if (isset($setting['control']['type'])) {
+                    $control_args['type'] = $setting['control']['type'];
+                }
+    
+                if (isset($setting['control']['choices'])) {
+                    $control_args['choices'] = $setting['control']['choices'];
+                }
+    
+                $wp_customize->add_control(
+                    new $customizer_class(
+                        $wp_customize,
+                        $setting['setting'],
+                        $control_args
+                    )
+                );
             }
-
-            if (isset($setting['control']['choices'])) {
-                $control_args['choices'] = $setting['control']['choices'];
-            }
-
-            $wp_customize->add_control(
-                new $customizer_class(
-                    $wp_customize,
-                    $setting['setting'],
-                    $control_args
-                )
-            );
         }
     }
 

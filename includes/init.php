@@ -5,3 +5,4 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 require_once get_template_directory() . '/includes/customizer/init.php';
+require_once get_template_directory() . '/includes/headers/init.php';

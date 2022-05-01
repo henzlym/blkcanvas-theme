@@ -7,17 +7,26 @@ if (!defined('WPINC')) {
 function blkcanvas_get_theme_settings()
 {
  
-    $sections_colors = include get_template_directory() . '/includes/customizer/sections/colors.php';
-    $sections_fonts = include get_template_directory() . '/includes/customizer/sections/fonts.php';
-    $sections_templates = include get_template_directory() . '/includes/customizer/sections/templates.php';
-    $sections = array_merge( $sections_colors, $sections_fonts, $sections_templates );
-    
-    $settings_colors = include get_template_directory() . '/includes/customizer/settings/colors.php';
-    $settings_fonts = include get_template_directory() . '/includes/customizer/settings/fonts.php';
-    $settings_templates = include get_template_directory() . '/includes/customizer/settings/templates.php';
-    $settings = array_merge( $settings_colors, $settings_fonts, $settings_templates );
-    // error_log(print_r($colors,true));
+    $site_areas = array(
+        'colors',
+        'fonts',
+        'performance',
+        'templates'
+    );
+    $sections = array();
+    $settings = array();
+    foreach ($site_areas as $key => $area ) {
+        if ( 
+            file_exists( get_template_directory() . '/includes/customizer/sections/'.$area.'.php' ) &&
+            file_exists( get_template_directory() . '/includes/customizer/settings/'.$area.'.php' ) 
+        ) {
+            $area_sections = include get_template_directory() . '/includes/customizer/sections/'.$area.'.php';
+            $area_settings = include get_template_directory() . '/includes/customizer/settings/'.$area.'.php';
 
+            $sections = array_merge($sections, $area_sections);
+            $settings = array_merge($settings, $area_settings);
+        }
+    }
 
     $theme_settings = array(
         'panels' => array(
