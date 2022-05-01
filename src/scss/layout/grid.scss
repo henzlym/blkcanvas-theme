@@ -1,7 +1,7 @@
 /* ===== SITE ===== */
 .site,
 .blkcanvas-container,
-.page-header,
+.archive-header,
 .entry-content,
 .footer-container,
 .wp-block-cover__inner-container,
@@ -12,18 +12,19 @@
     max-width: var(--container-width);
 }
 .site{
-    margin-top: 0;
+    padding-top: var( --global-padding-y );
+    padding-bottom: var( --global-padding-y );
 }
-.entry-header,
-.entry-content,
-aside.sidebar,
+.entry,
+.archive-header,
+.sidebar,
 .blkcanvas-container, 
 .site-navigation.active{
     padding-left: var( --global-padding-x );
     padding-right: var( --global-padding-x );
 }
 @media screen and (min-width:768px) {
-    aside.sidebar{
+    .sidebar{
         padding-left: 0;
         padding-right:0;
     }

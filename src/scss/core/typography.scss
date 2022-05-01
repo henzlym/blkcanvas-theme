@@ -35,3 +35,15 @@ h5 {font-size: var(--h5-font-size);}
 h6 {font-size: var(--h6-font-size);}
 
 small, .text_small {font-size: 0.833rem;}
+
+.site-title{
+  font-family: var(--site-title-font-family);
+  font-size: var(--h3-font-size);
+  margin: 0;
+  @media screen and (min-width:980px) {
+    font-size: var(--h2-font-size);
+  }
+}
+.site-description{
+  margin-bottom: 0;
+}

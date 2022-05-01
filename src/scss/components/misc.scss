@@ -1,6 +1,6 @@
 /* ===== MISC ===== */
 .sticky{
-    position: sticky;
+    position: sticky !important;
     top: 0;
 }
 /* Position child elements relative to this element */
@@ -37,7 +37,9 @@
         max-width: 100%;
     }
 }
-
+body.mobile-nav-open{
+    overflow-y: hidden;
+}
 .entry-content {
     .alignwide {
         margin-left  : -80px;

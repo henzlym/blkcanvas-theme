@@ -1,0 +1,10 @@
+/* ===== ARCHIVE ===== */
+@media screen and (min-width: 980px) {
+  .archive .site {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    grid-column-gap: 16px;
+  }
+}
+
+/*# sourceMappingURL=archive.css.map */

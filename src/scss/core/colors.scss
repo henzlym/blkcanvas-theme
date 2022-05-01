@@ -1,0 +1,30 @@
+body{
+    background-color: var(--site-background-color);
+    color: var(--site-text-color);
+    a{
+        color: var(--site-links-color);
+    }
+}
+header.header{
+    background-color: var(--header-background-color);
+    color: var(--header-text-color);
+    a{
+        color: var(--header-links-color);
+    }
+    .site-title{
+        color: var(--header-text-color);
+        a{
+            color: inherit;
+            &:hover{
+                color: var(--header-links-color);
+            }
+        }
+    }
+}
+footer.footer{
+    background-color: var(--footer-background-color);
+    color: var(--footer-text-color);
+    a{
+        color: var(--footer-links-color);
+    }
+}

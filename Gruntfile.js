@@ -1,3 +1,4 @@
+const Fiber = require('fibers');
 const sass = require('node-sass');
 /**
  * Youtube Tutorial: GRUNT TUTORIAL - Grunt makes your web development better!
@@ -35,12 +36,20 @@ module.exports = function (grunt) {
 		sass: {
 			options: {
 				implementation: sass,
+				fiber:Fiber,
 				sourceMap: true
 			},
 			dist: {
 				files: [
 					{
 						'src/css/style.css': 'src/scss/style.scss',
+					},
+					{
+						expand: true,
+						cwd: 'src/scss',
+						src: ['**/*.scss'],
+						dest: 'src/css',
+						ext: '.css'
 					},
 					{
 						expand: true,

@@ -6,6 +6,25 @@
  */
  ( function( $ ) {
 
+	function updateCustomizerSelectors(setting, key) {
+		
+		if (typeof setting.selectors == 'undefined' ) {
+			return;
+		}
+		
+		const selectors = Object.entries(setting.selectors);
+
+		wp.customize( key, function( value ) {
+			console.log(key);
+			value.bind( function( newval ) {
+				selectors.forEach(([k, v]) => {
+					console.log(key, k, v, newval);
+					$( k ).css( v, newval );
+				});
+			} );
+		} );
+
+	}
     
 	// Update the site title in real time...
 	wp.customize( 'blogname', function( value ) {
@@ -25,17 +44,8 @@
 	// console.log(BLKCANVAS_CUSTOMIZER_SETTINGS);
 	
 	keys.forEach((key, index) => {
-		if (typeof BLKCANVAS_CUSTOMIZER_SETTINGS[key].selectors == 'undefined' ) {
-			return;
-		}
-		const selectors = Object.entries(BLKCANVAS_CUSTOMIZER_SETTINGS[key].selectors);
-		wp.customize( key, function( value ) {
-			value.bind( function( newval ) {
-				selectors.forEach(([k, v]) => {
-					$( k ).css( v, newval );
-				});
-			} );
-		} );
+		const setting = BLKCANVAS_CUSTOMIZER_SETTINGS[key];
+		updateCustomizerSelectors( setting , key );
 	});
 	
 

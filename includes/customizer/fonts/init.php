@@ -8,6 +8,7 @@ define('BLKCANVAS_GA_FONTS_API', 'AIzaSyDnwZn-QK0yEpd_0vg836iodMKkyG1IbBY');
 /**
  * Add our Customizer content
  * @see https://maddisondesigns.com/2017/05/the-wordpress-customizer-a-developers-guide-part-2
+ * @see https://github.com/maddisondesigns/customizer-custom-controls
  */
 if (class_exists('WP_Customize_Control')) {
     // Add all your Customizer Custom Control classes here...

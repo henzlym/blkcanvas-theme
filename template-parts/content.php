@@ -9,7 +9,7 @@
 
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+<article id="post-<?php the_ID(); ?>" <?php post_class('entry'); ?>>
 	<header class="entry-header">
 		<span class="entry-categories"><?php the_category( "&nbsp;&nbsp;" ); ?></span>
 		
@@ -40,6 +40,16 @@
 	<?php blkcanvas_content(); ?>
 	<?php endif; ?>
 
-	<?php the_tags('<p>Tags: ', ' ', '</p>'); ?>
+	<?php the_tags('<p class="entry-tags">Tags: ', ' ', '</p>'); ?>
+
+	<?php 
+	the_post_navigation(
+		array(
+			'class' => 'entry-pagination',
+			'prev_text' => '<span class="nav-subtitle">' . esc_html__( 'Previous:', 'blkcanvas' ) . '</span> <span class="nav-title">%title</span>',
+			'next_text' => '<span class="nav-subtitle">' . esc_html__( 'Next:', 'blkcanvas' ) . '</span> <span class="nav-title">%title</span>',
+		)
+	);
+	?>
 
 </article><!-- #post-<?php the_ID(); ?> -->

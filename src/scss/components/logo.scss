@@ -1,0 +1,10 @@
+a.custom-logo-link {
+    img.custom-logo{
+        display: block;
+        width: auto;
+        max-height: 30px;
+        @media screen and (min-width:768px) {
+            max-height: 50px;
+        }
+    }
+}

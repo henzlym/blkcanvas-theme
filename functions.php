@@ -123,16 +123,7 @@ function blkcanvas_theme_setup() {
 	);
 
 	// Set up the WordPress core custom background feature.
-	add_theme_support(
-		'custom-background',
-		apply_filters(
-			'blkcanvas_custom_background_args',
-			array(
-				'default-color' => 'ffffff',
-				'default-image' => '',
-			)
-		)
-	);
+
 
 	// Add theme support for selective refresh for widgets.
 	add_theme_support( 'customize-selective-refresh-widgets' );
@@ -263,9 +254,7 @@ if ( ! function_exists( 'blkcanvas_post_thumbnail' ) ) :
 		if ( is_singular() ) :
 			
 			the_post_thumbnail( 'medium' ); 
-			
-			the_post_thumbnail_caption();
-			
+						
 		?>
 
 		<?php else : ?>
@@ -295,7 +284,8 @@ function blkcanvs_post_thumbnail_html( $html )
 	if( is_admin() ) return;
 
 	if( is_singular() && !is_front_page() ){
-		return '<!-- .entry-image --><div class="entry-image">'.$html.'</div><!-- /.entry-image -->';
+		$caption = '<!-- .entry-thumbnail_caption --><div class="entry-thumbnail_caption">' . get_the_post_thumbnail_caption() . '</div><!-- /.entry-thumbnail_caption -->';
+		return '<!-- .entry-thumbnail --><div class="entry-thumbnail">'.$html.$caption.'</div><!-- /.entry-thumbnail -->';
 	}
 	return $html;
 }
@@ -443,12 +433,12 @@ function blkcanvas_get_archive_header()
 {
 	if (!is_archive()) return;
 ?>
-<header class="page-header">
+<header class="archive-header">
 	<?php
-	the_archive_title( '<h1 class="page-title">', '</h1>' );
+	the_archive_title( '<h1 class="archive-title">', '</h1>' );
 	the_archive_description( '<div class="archive-description">', '</div>' );
 	?>
-</header><!-- .page-header -->
+</header><!-- .archive-header -->
 <?php
 }
 

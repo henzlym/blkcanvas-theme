@@ -57,8 +57,12 @@ function blkcanvas_customize_register($wp_customize)
             $control_args = array(
                 'label'      => __($setting['control']['label'], 'blkcanvas'),
                 'section'    => $setting['section'],
-                'settings'   => $setting['setting'],
+                'settings'   => $setting['setting']
             );
+
+            if (isset($setting['control']['type'])) {
+                $control_args['type'] = $setting['control']['type'];
+            }
 
             if (isset($setting['control']['choices'])) {
                 $control_args['choices'] = $setting['control']['choices'];

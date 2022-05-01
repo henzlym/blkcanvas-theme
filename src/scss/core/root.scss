@@ -1,4 +1,4 @@
-// Cross-platform generic font family (default user interface font)
+// Fonts
 :root{
     --font-size-base:1rem;
     --font-family:
@@ -14,17 +14,33 @@
     --font-weight:400;
     --font-line-height:1.5;
     --site-title-font-family:var(--font-family);
-    --heading-margin-bottom:0.5rem;
     --h1-font-size: calc( var(--font-size-base) * 2.5  );
     --h2-font-size: calc( var(--font-size-base) * 2 );
     --h3-font-size: calc( var(--font-size-base) * 1.75 );
     --h4-font-size: calc( var(--font-size-base) * 1.5 );
     --h5-font-size: calc( var(--font-size-base) * 1.25 );
     --h6-font-size: var(--font-size-base);
+    --small-font-size: 0.833rem;
+}
+// Colors
+:root{
+    --site-background-color:#fff;
+    --site-text-color:#000;
+    --site-links-color:#1e73be;
+    --header-background-color:var(--site-background-color);
+    --header-text-color:var(--site-text-color);
+    --header-links-color:var(--site-links-color);
+    --footer-background-color:var(--site-background-color);
+    --footer-text-color:var(--site-text-color);
+    --footer-links-color:var(--site-links-color);
+}
+// Sizing, Spacing, Alignments
+:root{
+    --heading-margin-bottom:0.5rem;
     --container-width:1080px;
     --breakpoint-desktop:var(--container-width);
     --breakpoint-tablet:980px;
     --breakpoint-mobile:768px;
-    --navigation-bg-color:#eee;
-    
+    --global-padding-x:16px;
+    --global-padding-y:16px;
 }
