@@ -1,5 +1,5 @@
 <?php return array(
-    // Colors
+    // Performance
     'enable_cache' => array(
         'control' => array(
             'class' => 'WP_Customize_Control',

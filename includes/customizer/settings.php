@@ -11,19 +11,24 @@ function blkcanvas_get_theme_settings()
         'colors',
         'fonts',
         'performance',
-        'templates'
+        'templates',
+        'title-tagline',
     );
     $sections = array();
     $settings = array();
     foreach ($site_areas as $key => $area ) {
         if ( 
-            file_exists( get_template_directory() . '/includes/customizer/sections/'.$area.'.php' ) &&
-            file_exists( get_template_directory() . '/includes/customizer/settings/'.$area.'.php' ) 
+            file_exists( get_template_directory() . '/includes/customizer/sections/'.$area.'.php' )
         ) {
             $area_sections = include get_template_directory() . '/includes/customizer/sections/'.$area.'.php';
-            $area_settings = include get_template_directory() . '/includes/customizer/settings/'.$area.'.php';
 
             $sections = array_merge($sections, $area_sections);
+        }
+        if ( 
+            file_exists( get_template_directory() . '/includes/customizer/settings/'.$area.'.php' ) 
+        ) {
+            $area_settings = include get_template_directory() . '/includes/customizer/settings/'.$area.'.php';
+
             $settings = array_merge($settings, $area_settings);
         }
     }

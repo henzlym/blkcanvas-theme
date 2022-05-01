@@ -455,11 +455,15 @@ function blkcanvas_logo()
 	<?php else: ?>
 		<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
 		<?php
-		$sandbox_description = get_bloginfo( 'description', 'display' );
-		if ( $sandbox_description || is_customize_preview() ) :
-			?>
-			<p class="site-description"><?php echo $sandbox_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
-		<?php endif; 
+		
+		if ( get_theme_mod('show_site_tagline' ) ) {
+			$sandbox_description = get_bloginfo( 'description', 'raw' );
+			if ( $sandbox_description || is_customize_preview() ) :
+				?>
+				<p class="site-description"><?php echo $sandbox_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
+			<?php endif; 
+		}
+
 	endif;?>
 	</div>
 	<?php
