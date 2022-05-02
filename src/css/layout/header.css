@@ -1,5 +1,6 @@
 .site-navigation {
   display: none;
+  background-color: var(--navigation-background-color);
 }
 @media screen and (min-width: 980px) {
   .site-navigation {
@@ -146,14 +147,17 @@ header.header {
   position: relative;
   padding-top: 10px;
   padding-bottom: 10px;
+  z-index: 10;
 }
 header.header .blkcanvas-container {
   display: flex;
   align-items: center;
   justify-content: var(--header-justify-content);
 }
-.admin-bar header.header.sticky {
-  top: 32px;
+@media screen and (min-width: 780px) {
+  .admin-bar header.header.sticky {
+    top: 32px;
+  }
 }
 @media screen and (min-width: 980px) {
   header.header .site-logo-container {

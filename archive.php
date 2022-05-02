@@ -23,11 +23,21 @@ get_header();
 				 * If you want to override this in a child theme, then include a file
 				 * called content-___.php (where ___ is the Post Type name) and that will be used instead.
 				 */
-                get_template_part( 'template-parts/cards/card', '', array( 'card_class' => 'horizontal' , 'show_byline' => false, 'show_read_more' => false ) );
+                get_template_part( 'template-parts/cards/card', '', 
+					array( 
+						'card_class' => 'entry horizontal' , 
+						'show_byline' => get_theme_mod('archive_byline'), 
+						'show_author' => get_theme_mod('archive_author'), 
+						'show_date' => get_theme_mod('archive_date'), 
+						'show_read_more' => get_theme_mod('archive_read_more'),
+						'show_thumbnail' => get_theme_mod('archive_thumbnail'),
+						'show_excerpt' => get_theme_mod('archive_excerpt')
+					) 
+				);
 
 			endwhile;
 
-			the_posts_navigation();
+			the_posts_pagination();
 
 		else :
 

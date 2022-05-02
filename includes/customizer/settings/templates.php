@@ -86,4 +86,85 @@
         'section' => 'templates_navigation',
         'transport' => 'postMessage',
     ),
+    'archive_thumbnail' => array(
+        'control' => array(
+            'class' => 'WP_Customize_Control',
+            'label' => __('Show featured image', 'blkcanvas'),
+            'type' => 'checkbox',
+        ),
+        'default' => true,
+        'setting' => 'archive_thumbnail',
+        'section' => 'templates_archive',
+        'transport' => 'refresh',
+    ),
+    'archive_excerpt' => array(
+        'control' => array(
+            'class' => 'WP_Customize_Control',
+            'label' => __('Show excerpt', 'blkcanvas'),
+            'type' => 'checkbox',
+        ),
+        'default' => true,
+        'setting' => 'archive_excerpt',
+        'section' => 'templates_archive',
+        'transport' => 'refresh',
+    ),
+    // Condition settings - Excerpt
+    'archive_excerpt_length' => array(
+        'control' => array(
+            'class' => 'WP_Customize_Control',
+            'label' => __('Excerpt character length', 'blkcanvas'),
+            'type' => 'number',
+        ),
+        'default' => 20,
+        'setting' => 'archive_excerpt_length',
+        'section' => 'templates_archive',
+        'transport' => 'refresh',
+    ),
+    // End Condition settings - Excerpt
+    'archive_byline' => array(
+        'control' => array(
+            'class' => 'WP_Customize_Control',
+            'label' => __('Show byline', 'blkcanvas'),
+            'type' => 'checkbox',
+        ),
+        'default' => true,
+        'setting' => 'archive_byline',
+        'section' => 'templates_archive',
+        'transport' => 'refresh',
+    ),
+    // Conditional Settings - Byline
+    'archive_author' => array(
+        'control' => array(
+            'class' => 'WP_Customize_Control',
+            'label' => __('Show author', 'blkcanvas'),
+            'type' => 'checkbox',
+        ),
+        'default' => true,
+        'setting' => 'archive_author',
+        'section' => 'templates_archive',
+        'transport' => 'refresh',
+    ),
+    'archive_date' => array(
+        'control' => array(
+            'class' => 'WP_Customize_Control',
+            'label' => __('Show published date', 'blkcanvas'),
+            'type' => 'checkbox',
+        ),
+        'default' => false,
+        'setting' => 'archive_date',
+        'section' => 'templates_archive',
+        'transport' => 'refresh',
+    ),
+     // End Condition settings - Byline
+    'archive_read_more' => array(
+        'control' => array(
+            'class' => 'WP_Customize_Control',
+            'label' => __('Show read more button', 'blkcanvas'),
+            'type' => 'checkbox',
+        ),
+        'default' => false,
+        'setting' => 'archive_read_more',
+        'section' => 'templates_archive',
+        'transport' => 'refresh',
+    ),
 );

@@ -137,6 +137,7 @@ a, button {
   --header-background-color:var(--site-background-color);
   --header-text-color:var(--site-text-color);
   --header-links-color:var(--site-links-color);
+  --navigation-background-color:var(--header-background-color);
   --footer-background-color:var(--site-background-color);
   --footer-text-color:var(--site-text-color);
   --footer-links-color:var(--site-links-color);
@@ -150,6 +151,7 @@ a, button {
   --breakpoint-mobile:768px;
   --global-padding-x:16px;
   --global-padding-y:16px;
+  --card-margin-y:16px;
 }
 
 html {
@@ -220,6 +222,7 @@ small, .text_small {
 
 .site-navigation {
   display: none;
+  background-color: var(--navigation-background-color);
 }
 @media screen and (min-width: 980px) {
   .site-navigation {
@@ -366,14 +369,17 @@ header.header {
   position: relative;
   padding-top: 10px;
   padding-bottom: 10px;
+  z-index: 10;
 }
 header.header .blkcanvas-container {
   display: flex;
   align-items: center;
   justify-content: var(--header-justify-content);
 }
-.admin-bar header.header.sticky {
-  top: 32px;
+@media screen and (min-width: 780px) {
+  .admin-bar header.header.sticky {
+    top: 32px;
+  }
 }
 @media screen and (min-width: 980px) {
   header.header .site-logo-container {
@@ -403,7 +409,7 @@ header.header .blkcanvas-container {
   max-width: var(--container-width);
 }
 
-.site {
+body:not(.page-template-blank) .site {
   padding-top: var(--global-padding-y);
   padding-bottom: var(--global-padding-y);
 }
@@ -412,17 +418,12 @@ header.header .blkcanvas-container {
 .archive-header,
 .sidebar,
 .blkcanvas-container,
-.site-navigation.active {
+.site-navigation.active,
+.pagination {
   padding-left: var(--global-padding-x);
   padding-right: var(--global-padding-x);
 }
 
-@media screen and (min-width: 768px) {
-  .sidebar {
-    padding-left: 0;
-    padding-right: 0;
-  }
-}
 /* ===== MISC ===== */
 .sticky {
   position: sticky !important;
@@ -468,21 +469,22 @@ body.mobile-nav-open {
   overflow-y: hidden;
 }
 
-.entry-content .alignwide {
+.alignwide {
   margin-left: -80px;
   margin-right: -80px;
 }
-.entry-content .alignfull {
+
+.alignfull {
   margin-left: calc(-50vw + 50%);
   margin-right: calc(-50vw + 50%);
   max-width: 100vw;
   width: 100vw;
 }
-.entry-content .alignfull .wp-block-group__inner-container {
+.alignfull .wp-block-group__inner-container {
   margin-left: auto;
   margin-right: auto;
 }
-.entry-content .alignfull.is-position-top-left .wp-block-cover__inner-container {
+.alignfull.is-position-top-left .wp-block-cover__inner-container {
   width: auto;
 }
 

@@ -6,13 +6,16 @@ header.header {
     position: relative;
     padding-top: 10px;
     padding-bottom: 10px;
+    z-index: 10;
     .blkcanvas-container {
         display: flex;
         align-items: center;
         justify-content: var(--header-justify-content);
     }
-    .admin-bar &.sticky {
-        top:  32px;
+    @media screen and (min-width:780px){
+        .admin-bar &.sticky {
+            top:  32px;
+        }
     }
     @media screen and (min-width:980px){
         .site-logo-container{

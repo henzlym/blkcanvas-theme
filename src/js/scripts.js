@@ -2,13 +2,38 @@
 	'use strict';
     // Universal functions
 
-    var hamburger = document.querySelector( '.hamburger-menu' );
-    var navigation = document.querySelector( '.site-navigation' );
-    var searchIcon = document.querySelector( '.blkcanvas-search-icon' );
+    let hamburger = document.querySelector( '.hamburger-menu' );
+    let navigation = document.querySelector( '.site-navigation' );
+    let searchIcon = document.querySelector( 'header .search-trigger' );
+    let searchForm = document.querySelector( 'header form.search' );
 
     function toggleMenu() {
+        document.body.classList.toggle( 'mobile-nav-open' );
         navigation.classList.toggle( 'active' );
+        if (navigation.classList.contains('active')) {
+            let header = document.querySelector('header.header');
+            let width = header.offsetWidth;
+            let height = header.offsetHeight;
+            
+            if (blkcanvasTheme.isAdminBarShowing) {
+                let adminBar = document.querySelector('#wpadminbar');
+                height = height + adminBar.offsetHeight;
+            }
+
+            navigation.style.top = height + 'px';
+        } else{
+            navigation.style.top = '0px';
+        }
+        
+    }
+    function toggleSearch(e){
+        e.preventDefault();
+        searchForm.classList.toggle( 'open' );
+        if (document.body.contains( 'mobile-nav-open' )) {
+
+        }
     }
     hamburger.addEventListener('click', toggleMenu);
-    // searchIcon.addEventListener('click', toggleMenu);
+    searchIcon.addEventListener('click', toggleSearch);
+    
 })(jQuery, window, document);

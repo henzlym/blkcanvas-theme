@@ -12,7 +12,7 @@
   max-width: var(--container-width);
 }
 
-.site {
+body:not(.page-template-blank) .site {
   padding-top: var(--global-padding-y);
   padding-bottom: var(--global-padding-y);
 }
@@ -21,16 +21,10 @@
 .archive-header,
 .sidebar,
 .blkcanvas-container,
-.site-navigation.active {
+.site-navigation.active,
+.pagination {
   padding-left: var(--global-padding-x);
   padding-right: var(--global-padding-x);
-}
-
-@media screen and (min-width: 768px) {
-  .sidebar {
-    padding-left: 0;
-    padding-right: 0;
-  }
 }
 
 /*# sourceMappingURL=grid.css.map */

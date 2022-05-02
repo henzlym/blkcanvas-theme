@@ -1,4 +1,8 @@
 /* ===== CARDS ===== */
+.card {
+  margin-bottom: var(--card-margin-y);
+}
+
 .card.shadow .post-thumbnail {
   border-radius: 3px;
   box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.3);

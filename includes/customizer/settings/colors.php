@@ -49,7 +49,8 @@
         ),
         'default' => '',
         'selectors' => array(
-            'header.header' => '--header-background-color'
+            'header.header' => '--header-background-color',
+            'nav.site-navigation' => '--navigation-background-color'
         ),
         'setting' => 'header_background_color',
         'section' => 'colors_header',

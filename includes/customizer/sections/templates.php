@@ -20,4 +20,11 @@
         'panel' => 'templates',
         'priority' => 160,
     ),
+    'templates_archive' => array(
+        'capability' => 'edit_theme_options',
+        'id' => 'templates_archive',
+        'title' => 'Archive',
+        'panel' => 'templates',
+        'priority' => 160,
+    ),
 );

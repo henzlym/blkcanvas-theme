@@ -18,10 +18,6 @@
 		else :
 			the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
 		endif;?>
-
-		<?php if( is_archive() ): ?>	
-		<?php blkcanvas_content(); ?>
-		<?php endif; ?>
 		
 		<?php if ( 'post' === get_post_type() ) :?>
 		<div class="entry-meta">
@@ -36,9 +32,7 @@
 
 	<?php blkcanvas_post_thumbnail(); ?>
 	
-	<?php if( is_singular() ): ?>
 	<?php blkcanvas_content(); ?>
-	<?php endif; ?>
 
 	<?php the_tags('<p class="entry-tags">Tags: ', ' ', '</p>'); ?>
 

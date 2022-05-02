@@ -1,5 +1,6 @@
 .site-navigation{
     display: none;
+    background-color: var(--navigation-background-color);
     @media screen and (min-width:980px) {
         display: flex;
     }

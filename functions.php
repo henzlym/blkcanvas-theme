@@ -9,10 +9,10 @@ require_once get_template_directory() . '/includes/init.php';
  * Enqueue scripts and styles.
  */
 function blkcanvas_scripts() {
-	// wp_enqueue_style( 'blkcanvas-style', get_stylesheet_directory_uri() . '/dist/style.min.css', array(), _S_VERSION );
+	$asset = include_once get_template_directory() . '/build/index.asset.php';
+	// wp_enqueue_style( 'blkcanvas-style', get_stylesheet_directory_uri() . '/dist/style.min.css', $asset['dependencies'], $asset['version'] );
 	wp_style_add_data( 'blkcanvas-style', 'rtl', 'replace' );
-
-	wp_enqueue_script( 'blkcanvas-navigation', get_template_directory_uri() . '/js/scripts.js', array('jquery'), _S_VERSION, true );
+	wp_enqueue_script( 'blkcanvas-navigation', get_template_directory_uri() . '/build/index.js', $asset['dependencies'], $asset['version'], true );
 	wp_localize_script( 'blkcanvas-navigation', 'blkcanvasTheme', array(
 		'isAdminBarShowing' => is_admin_bar_showing()
 	));
@@ -381,8 +381,26 @@ endif;
  * @return int (Maybe) modified excerpt length.
  */
 function blkcanvas_archive_excerpt_length( $length ) {
-    return 20;
+	if (!is_archive()) {
+		return $length;
+	}
+
+    return get_theme_mod('archive_excerpt_length', 20 );
 }
+
+add_filter( 'excerpt_length', 'blkcanvas_archive_excerpt_length' );
+
+function blkcanvas_archive_excerpt($excerpt) {
+    if (has_excerpt()) {
+        $excerpt = wp_trim_words(
+			get_the_excerpt(), 
+			apply_filters("excerpt_length", get_theme_mod('archive_excerpt_length', 20 ))
+		);
+    }
+
+    return $excerpt;
+}
+add_filter("the_excerpt", "blkcanvas_archive_excerpt", 999);
 
 function blkcanvas_filter_archive_content( $content )
 {
@@ -392,7 +410,6 @@ function blkcanvas_filter_archive_content( $content )
 	
 	setup_postdata( $post );
 
-	add_filter( 'excerpt_length', 'blkcanvas_archive_excerpt_length', 999 );
 
 	remove_filter('the_content', 'blkcanvas_filter_archive_content', 10, 1);
 	
@@ -403,7 +420,7 @@ function blkcanvas_filter_archive_content( $content )
 	return $content;
 }
 
-add_filter('the_content', 'blkcanvas_filter_archive_content', 10, 1);
+// add_filter('the_content', 'blkcanvas_filter_archive_content', 10, 1);
 
 function blkcanvas_excerpt()
 {
@@ -417,7 +434,7 @@ function blkcanvas_excerpt()
  */
 function blkcanvas_excerpt_more( $excerpt ) {
 	
-    if ( ! is_single() ) {
+    if ( is_single() ) {
         $excerpt = $excerpt . ' <a class="read-more" href="'.get_permalink( get_the_ID() ).'">Read More</a>';
     }
 	

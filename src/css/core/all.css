@@ -137,6 +137,7 @@ a, button {
   --header-background-color:var(--site-background-color);
   --header-text-color:var(--site-text-color);
   --header-links-color:var(--site-links-color);
+  --navigation-background-color:var(--header-background-color);
   --footer-background-color:var(--site-background-color);
   --footer-text-color:var(--site-text-color);
   --footer-links-color:var(--site-links-color);
@@ -150,6 +151,7 @@ a, button {
   --breakpoint-mobile:768px;
   --global-padding-x:16px;
   --global-padding-y:16px;
+  --card-margin-y:16px;
 }
 
 html {
