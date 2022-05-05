@@ -12,14 +12,20 @@
   "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-weight:400;
   --font-line-height:1.5;
-  --site-title-font-family:var(--font-family);
   --h1-font-size: calc( var(--font-size-base) * 2.5 );
   --h2-font-size: calc( var(--font-size-base) * 2 );
   --h3-font-size: calc( var(--font-size-base) * 1.75 );
   --h4-font-size: calc( var(--font-size-base) * 1.5 );
   --h5-font-size: calc( var(--font-size-base) * 1.25 );
   --h6-font-size: var(--font-size-base);
+  --heading-weight:1.3;
   --small-font-size: 0.833rem;
+  --site-title-font-family:var(--font-family);
+  --site-title-font-weight:var(--font-weight);
+  --single-title-font-size:var(--h1-font-size);
+  --single-title-font-weight:var(--font-weight);
+  --single-title-font-lineheight:1.3;
+  --single-title-text-transform:captilize;
 }
 
 :root {
@@ -29,6 +35,7 @@
   --header-background-color:var(--site-background-color);
   --header-text-color:var(--site-text-color);
   --header-links-color:var(--site-links-color);
+  --header-links-hover-color:var(--site-links-color);
   --navigation-background-color:var(--header-background-color);
   --footer-background-color:var(--site-background-color);
   --footer-text-color:var(--site-text-color);
@@ -38,6 +45,10 @@
 :root {
   --heading-margin-bottom:0.5rem;
   --container-width:1080px;
+  --content-width:1080px;
+  --content-wide-width-bump:200px;
+  --content-wide-width-bump-margin:calc( (var(--content-wide-width-bump) / 2) * -1 );
+  --content-wide-width:calc(var(--container-width) + var(--content-wide-width-bump));
   --breakpoint-desktop:var(--container-width);
   --breakpoint-tablet:980px;
   --breakpoint-mobile:768px;

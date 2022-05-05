@@ -11,7 +11,7 @@ body {
 h1, h2, h3, h4, h5 {
   margin: 0 0 var(--heading-margin-bottom);
   font-weight: var(--font-weight);
-  line-height: 1.3;
+  line-height: var(--heading-weight);
 }
 
 p,
@@ -39,6 +39,7 @@ small, .text_small {font-size: 0.833rem;}
 .site-title{
   font-family: var(--site-title-font-family);
   font-size: var(--h3-font-size);
+  font-weight: var(--site-title-font-weight);
   margin: 0;
   @media screen and (min-width:980px) {
     font-size: var(--h2-font-size);
@@ -46,4 +47,13 @@ small, .text_small {font-size: 0.833rem;}
 }
 .site-description{
   margin-bottom: 0;
+}
+
+.single{
+  .entry-title{
+    font-size: var(--single-title-font-size);
+    font-weight: var(--single-title-font-weight);
+    line-height: var(--single-title-font-lineheight);
+    text-transform: var(--single-title-font-text-transform);
+  }
 }

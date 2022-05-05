@@ -41,7 +41,7 @@ function blkcanvas_get_theme_settings()
             ),
             'fonts' => array(
                 'id' => 'fonts',
-                'title' => 'Font',
+                'title' => 'Fonts',
             ),
             'performance' => array(
                 'id' => 'performance',

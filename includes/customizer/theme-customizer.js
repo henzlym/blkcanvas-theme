@@ -15,10 +15,8 @@
 		const selectors = Object.entries(setting.selectors);
 
 		wp.customize( key, function( value ) {
-			console.log(key);
 			value.bind( function( newval ) {
 				selectors.forEach(([k, v]) => {
-					console.log(key, k, v, newval);
 					$( k ).css( v, newval );
 				});
 			} );
@@ -41,7 +39,6 @@
 	} );
 
 	const keys = Object.keys(BLKCANVAS_CUSTOMIZER_SETTINGS);
-	// console.log(BLKCANVAS_CUSTOMIZER_SETTINGS);
 	
 	keys.forEach((key, index) => {
 		const setting = BLKCANVAS_CUSTOMIZER_SETTINGS[key];

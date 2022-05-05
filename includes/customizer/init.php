@@ -11,8 +11,6 @@ require_once get_template_directory() . '/includes/customizer/settings.php';
 function blkcanvas_customize_register($wp_customize)
 {
     //All our sections, settings, and controls will be added here
-    $wp_customize->get_setting('blogname')->transport = 'postMessage';
-    $wp_customize->get_setting('blogdescription')->transport = 'postMessage';
 
     $theme_settings = blkcanvas_get_theme_settings();
 
@@ -69,6 +67,10 @@ function blkcanvas_customize_register($wp_customize)
                     $control_args['choices'] = $setting['control']['choices'];
                 }
     
+                if (isset($setting['control']['input_attrs'])) {
+                    $control_args['input_attrs'] = $setting['control']['input_attrs'];
+                }
+
                 $wp_customize->add_control(
                     new $customizer_class(
                         $wp_customize,
@@ -79,6 +81,10 @@ function blkcanvas_customize_register($wp_customize)
             }
         }
     }
+
+    $wp_customize->get_setting( 'blogname' )->transport = 'refresh';
+    $wp_customize->get_setting( 'blogdescription' )->transport = 'postMessage';
+
 
 }
 add_action('customize_register', 'blkcanvas_customize_register');

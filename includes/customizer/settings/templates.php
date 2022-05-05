@@ -65,7 +65,18 @@
         'default' => '',
         'setting' => 'header_is_sticky',
         'section' => 'templates_header',
-        'transport' => 'postMessage',
+        'transport' => 'refresh',
+    ),
+    'header_boxshadow' => array(
+        'control' => array(
+            'class' => 'WP_Customize_Control',
+            'label' => __('Box shadow', 'blkcanvas'),
+            'type' => 'checkbox',
+        ),
+        'default' => '',
+        'setting' => 'header_boxshadow',
+        'section' => 'templates_header',
+        'transport' => 'refresh',
     ),
     'navigation_alignment' => array(
         'control' => array(

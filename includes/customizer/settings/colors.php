@@ -85,6 +85,20 @@
         'transport' => 'postMessage',
 
     ),
+    'header_links_hover_color' => array(
+        'control' => array(
+            'class' => 'WP_Customize_Color_Control',
+            'label' => __('Links hover', 'blkcanvas'),
+        ),
+        'default' => '',
+        'selectors' => array(
+            'header.header a' => '--header-links-hover-color'
+        ),
+        'setting' => 'header_links_hover_color',
+        'section' => 'colors_header',
+        'transport' => 'postMessage',
+
+    ),
     'footer_background_color' => array(
         'control' => array(
             'class' => 'WP_Customize_Color_Control',

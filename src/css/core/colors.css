@@ -13,6 +13,9 @@ header.header {
 header.header a {
   color: var(--header-links-color);
 }
+header.header a:hover {
+  color: var(--header-links-hover-color);
+}
 header.header .site-title {
   color: var(--header-text-color);
 }
@@ -20,7 +23,7 @@ header.header .site-title a {
   color: inherit;
 }
 header.header .site-title a:hover {
-  color: var(--header-links-color);
+  color: var(--header-links-hover-color);
 }
 
 footer.footer {

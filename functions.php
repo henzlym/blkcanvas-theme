@@ -91,10 +91,18 @@ function blkcanvas_theme_setup() {
 		*/
 	add_theme_support( 'post-thumbnails' );
 
-	add_image_size('thumbnail', 336, 0, true);
-	add_image_size('medium', 750, 422, true);
-	add_image_size('medium_large', 750, 0, true);
-	add_image_size('large', 1024, 0, true);
+	$image_sizes = bca_theme_image_sizes();
+
+	if (is_array($image_sizes) && !empty($image_sizes) ) {
+		foreach ($image_sizes as $key => $images_size) {
+			add_image_size(
+				$images_size['name'], 
+				$images_size['width'], 
+				$images_size['height'], 
+				$images_size['crop']
+			);
+		}
+	}
 
 	// This theme uses wp_nav_menu() in one location.
 	register_nav_menus(
@@ -161,12 +169,16 @@ add_action( 'after_setup_theme', 'blkcanvas_theme_setup' );
 
 function tpd_override_media_settings() {
 
-	update_option( 'thumbnail_size_w' , 336 );
-	update_option( 'thumbnail_size_h' , 0 );
-	update_option( 'medium_size_w' , 750 );
-	update_option( 'medium_size_h' , 422 );
-	update_option( 'large_size_w' , 1024 );
-	update_option( 'large_size_h' , 0 );
+	$image_sizes = bca_theme_image_sizes();
+	$image_options = array( 'thumbnail', 'medium', 'large' );
+	if (is_array($image_sizes) && !empty($image_sizes) ) {
+		foreach ($image_sizes as $key => $image_size) {
+			if (!in_array($image_size['name'],$image_options)) continue;
+			$height = ( $image_size['height'] == 0 ) ? null : $image_size['height'];
+			update_option( $image_size['name']. '_size_w' , $image_size['width'] );
+			update_option( $image_size['name']. '_size_h' , $height );
+		}
+	}
 
 }
 
@@ -570,10 +582,6 @@ function blkcanvas_preloads()
 
 	blkcanvas_head_scripts();
 	
-	if ( is_single() ) {
-		$thumbnail_url = get_the_post_thumbnail_url();
-		echo '<link rel="preload" as="image" href="' . $thumbnail_url . '" />';
-	}
 }
 add_action( 'wp_head', 'blkcanvas_preloads' );
 
@@ -612,6 +620,18 @@ function blkcanvas_get_content_width()
 	return str_replace('px', '', $site_width);
 }
 
+function blkcanvas_get_header_class( $class = false )
+{
+	$classes = array();
+	$classes[] = ( get_theme_mod('header_is_sticky', '') ) ? 'sticky' : '';
+	$classes[] = ( get_theme_mod('header_boxshadow', '') ) ? 'boxshadow' : '';
+
+	if ( $class ) {
+		$classes[] = $class;
+	}
+	
+	return implode( ' ', $classes );
+}
 function blkcanvas_register_block_styles()
 {
 	register_block_style(
@@ -670,3 +690,66 @@ function blkcanvas_register_block_styles()
 }
 
 add_action('init', 'blkcanvas_register_block_styles');
+
+
+
+/**
+ * Filter post thumbnail to use the Picture element. 
+ * Gives use better control of what image size is used for each browser size
+ * @see https://www.youtube.com/watch?v=Rik3gHT24AM | The HTML picture element explained [ Images on the web part 3 ]
+ */
+function bca_attachment_remove_attrs( $attr, $attachment, $size )
+{
+	if ( is_admin() ) return $attr;
+
+	unset( $attr['srcset'] );
+	unset( $attr['sizes'] );
+	return $attr;
+}
+
+add_filter( 'wp_get_attachment_image_attributes', 'bca_attachment_remove_attrs', 10, 5 );
+
+function bca_compare_array_value($a, $b)
+{
+    if ($a['width'] == $b['width']) {
+        return 0;
+    }
+    return ($a['width'] < $b['width']) ? -1 : 1;
+}
+
+function bca_attachment_add_picture_element( $html, $attachment_id, $size, $icon, $attr )
+{
+	if ( is_admin() ) return $html;
+
+	// retrive attachtment metadata and media upload paths
+	$image_meta = wp_get_attachment_metadata( $attachment_id );
+	$dirname = _wp_get_attachment_relative_path( $image_meta['file'] );
+	$upload_dir    = wp_get_upload_dir();
+    $image_baseurl = trailingslashit( $upload_dir['baseurl'] ) . $dirname . '/';
+	
+	if ( !is_array( $image_meta['sizes'] ) || empty( $image_meta['sizes'] ) ) {
+		return $html;
+	}
+	$sources = array();
+
+	// order sizes from smallest to largest
+	uasort($image_meta['sizes'], "bca_compare_array_value");
+
+	foreach ($image_meta['sizes'] as $key => $image_size) {
+		// if selected size equals image size do not add anymore source sizes
+		if ($size == $key) {
+			break;
+		}
+		$width = $image_size['width'] + 50;
+		$sources[] = '<source media="(max-width: '.$width.'px)" srcset="' . $image_baseurl . $image_size['file'] . '">';
+	}
+
+	if (!empty($sources)) {
+		$html = '<picture>' . implode( "\n",  $sources ) . $html . '</picture>';
+	}
+	
+
+	return $html;
+}
+
+add_filter( 'wp_get_attachment_image', 'bca_attachment_add_picture_element', 10, 5 );

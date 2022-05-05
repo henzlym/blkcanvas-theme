@@ -10,13 +10,16 @@ header.header{
     color: var(--header-text-color);
     a{
         color: var(--header-links-color);
+        &:hover{
+            color: var(--header-links-hover-color);
+        }
     }
     .site-title{
         color: var(--header-text-color);
         a{
             color: inherit;
             &:hover{
-                color: var(--header-links-color);
+                color: var(--header-links-hover-color);
             }
         }
     }
