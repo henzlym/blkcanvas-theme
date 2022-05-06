@@ -1,5 +1,5 @@
 <?php return array(
-    // Templates
+    // GLOBAL
     'container_width' => array(
         'control' => array(
             'class' => 'WP_Customize_Control',
@@ -56,6 +56,7 @@
         'section' => 'templates_global',
         'transport' => 'postMessage',
     ),
+    // HEADER
     'header_is_sticky' => array(
         'control' => array(
             'class' => 'WP_Customize_Control',
@@ -78,6 +79,7 @@
         'section' => 'templates_header',
         'transport' => 'refresh',
     ),
+    // NAVIGATION
     'navigation_alignment' => array(
         'control' => array(
             'class' => 'Alignment_Customize_Control',
@@ -97,6 +99,54 @@
         'section' => 'templates_navigation',
         'transport' => 'postMessage',
     ),
+    // SINGLE
+    'single_thumbnail' => array(
+        'control' => array(
+            'class' => 'WP_Customize_Control',
+            'label' => __('Show featured image', 'blkcanvas'),
+            'type' => 'checkbox',
+        ),
+        'default' => true,
+        'setting' => 'single_thumbnail',
+        'section' => 'templates_single',
+        'transport' => 'refresh',
+    ),
+    'single_thumbnail_size' => array(
+        'control' => array(
+            'class' => 'WP_Customize_Control',
+            'label' => __('Featured image size', 'blkcanvas'),
+            'type' => 'select',
+            'choices' => wp_list_pluck( bca_theme_image_sizes(), 'name', 'name' ),
+            'active_callback' => function () { return get_theme_mod( 'single_thumbnail' ); },
+        ),
+        'default' => 'medium',
+        'setting' => 'single_thumbnail_size',
+        'section' => 'templates_single',
+        'transport' => 'refresh',
+    ),
+    'single_categories' => array(
+        'control' => array(
+            'class' => 'WP_Customize_Control',
+            'label' => __('Show categories', 'blkcanvas'),
+            'type' => 'checkbox',
+        ),
+        'default' => true,
+        'setting' => 'single_categories',
+        'section' => 'templates_single',
+        'transport' => 'refresh',
+    ),
+    'single_tags' => array(
+        'control' => array(
+            'class' => 'WP_Customize_Control',
+            'label' => __('Show tags', 'blkcanvas'),
+            'type' => 'checkbox',
+        ),
+        'default' => true,
+        'setting' => 'single_tags',
+        'section' => 'templates_single',
+        'transport' => 'refresh',
+    ),
+    // ARCHIVE
     'archive_thumbnail' => array(
         'control' => array(
             'class' => 'WP_Customize_Control',
@@ -105,6 +155,19 @@
         ),
         'default' => true,
         'setting' => 'archive_thumbnail',
+        'section' => 'templates_archive',
+        'transport' => 'refresh',
+    ),
+    'archive_thumbnail_size' => array(
+        'control' => array(
+            'class' => 'WP_Customize_Control',
+            'label' => __('Featured image size', 'blkcanvas'),
+            'type' => 'select',
+            'choices' => wp_list_pluck( bca_theme_image_sizes(), 'name', 'name' ),
+            'active_callback' => function () { return get_theme_mod( 'archive_thumbnail' ); },
+        ),
+        'default' => 'thumbnail',
+        'setting' => 'archive_thumbnail_size',
         'section' => 'templates_archive',
         'transport' => 'refresh',
     ),
@@ -125,6 +188,7 @@
             'class' => 'WP_Customize_Control',
             'label' => __('Excerpt character length', 'blkcanvas'),
             'type' => 'number',
+            'active_callback' => function () { return get_theme_mod( 'archive_excerpt' ); },
         ),
         'default' => 20,
         'setting' => 'archive_excerpt_length',
@@ -149,6 +213,7 @@
             'class' => 'WP_Customize_Control',
             'label' => __('Show author', 'blkcanvas'),
             'type' => 'checkbox',
+            'active_callback' => function () { return get_theme_mod( 'archive_byline' ); },
         ),
         'default' => true,
         'setting' => 'archive_author',
@@ -160,6 +225,7 @@
             'class' => 'WP_Customize_Control',
             'label' => __('Show published date', 'blkcanvas'),
             'type' => 'checkbox',
+            'active_callback' => function () { return get_theme_mod( 'archive_date' ); },
         ),
         'default' => false,
         'setting' => 'archive_date',

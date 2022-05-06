@@ -20,6 +20,13 @@
         'panel' => 'templates',
         'priority' => 160,
     ),
+    'templates_single' => array(
+        'capability' => 'edit_theme_options',
+        'id' => 'templates_single',
+        'title' => 'Single',
+        'panel' => 'templates',
+        'priority' => 160,
+    ),
     'templates_archive' => array(
         'capability' => 'edit_theme_options',
         'id' => 'templates_archive',

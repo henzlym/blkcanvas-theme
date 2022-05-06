@@ -110,6 +110,10 @@
 }
 
 /* WP embed shortcode */
+p > iframe {
+  max-width: 100%;
+}
+
 .blkcanvas-embed-responsive {
   position: relative;
 }

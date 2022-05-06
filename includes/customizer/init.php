@@ -53,6 +53,7 @@ function blkcanvas_customize_register($wp_customize)
             if (isset($setting['control']) && !empty($setting['control'])) {
                 // Controls
                 $customizer_class = isset( $setting['control']['class'] ) ? $setting['control']['class'] : 'WP_Customize_Control';
+                
                 $control_args = array(
                     'label'      => __($setting['control']['label'], 'blkcanvas'),
                     'section'    => $setting['section'],
@@ -69,6 +70,10 @@ function blkcanvas_customize_register($wp_customize)
     
                 if (isset($setting['control']['input_attrs'])) {
                     $control_args['input_attrs'] = $setting['control']['input_attrs'];
+                }
+
+                if (isset($setting['control']['active_callback'])) {
+                    $control_args['active_callback'] = $setting['control']['active_callback'];
                 }
 
                 $wp_customize->add_control(

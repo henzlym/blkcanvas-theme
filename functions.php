@@ -264,8 +264,8 @@ if ( ! function_exists( 'blkcanvas_post_thumbnail' ) ) :
 		}
 
 		if ( is_singular() ) :
-			
-			the_post_thumbnail( 'medium' ); 
+
+			the_post_thumbnail( get_theme_mod('single_thumbnail_size', 'medium') ); 
 						
 		?>
 

@@ -11,8 +11,11 @@
 
 <article id="post-<?php the_ID(); ?>" <?php post_class('entry'); ?>>
 	<header class="entry-header">
-		<span class="entry-categories"><?php the_category( "&nbsp;&nbsp;" ); ?></span>
 		
+		<?php if(get_theme_mod('single_categories', true )): ?>
+		<span class="entry-categories"><?php the_category( "&nbsp;&nbsp;" ); ?></span>
+		<?php endif; ?>
+
 		<?php if ( is_singular() ) :
 			the_title( '<h1 class="entry-title">', '</h1>' );
 		else :
@@ -34,7 +37,9 @@
 	
 	<?php blkcanvas_content(); ?>
 
+	<?php if(get_theme_mod( 'single_tags', true )): ?>
 	<?php the_tags('<p class="entry-tags">Tags: ', ' ', '</p>'); ?>
+	<?php endif; ?>
 
 	<?php 
 	the_post_navigation(
