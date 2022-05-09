@@ -32,7 +32,7 @@ function blkcanvas_critical_css()
 		}
 	}
 	
-	if(is_archive()){
+	if(is_archive() || is_search()){
 		blkcanvas_get_critical_css( 'archive' );
 	}
 
@@ -274,7 +274,7 @@ if ( ! function_exists( 'blkcanvas_post_thumbnail' ) ) :
 			<a class="post-thumbnail <?php echo $thumbnail_class; ?>" href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1">
 				<?php
 					the_post_thumbnail(
-						'post-thumbnail',
+						get_theme_mod('archive_thumbnail_size', 'thumbnail'),
 						array(
 							'alt' => the_title_attribute(
 								array(
@@ -296,8 +296,9 @@ function blkcanvs_post_thumbnail_html( $html )
 	if( is_admin() ) return;
 
 	if( is_singular() && !is_front_page() ){
+		
 		$caption = '<!-- .entry-thumbnail_caption --><div class="entry-thumbnail_caption">' . get_the_post_thumbnail_caption() . '</div><!-- /.entry-thumbnail_caption -->';
-		return '<!-- .entry-thumbnail --><div class="entry-thumbnail">'.$html.$caption.'</div><!-- /.entry-thumbnail -->';
+		return '<!-- .entry-thumbnail --><div class="entry-thumbnail aspect-ratio">'.$html.$caption.'</div><!-- /.entry-thumbnail -->';
 	}
 	return $html;
 }
@@ -359,20 +360,7 @@ if ( ! function_exists( 'blkcanvas_content' ) ) :
 		?>
 		<div class="entry-content">
 		<?php
-		the_content(
-			sprintf(
-				wp_kses(
-					/* translators: %s: Name of current post. Only visible to screen readers */
-					__( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'blkcanvas' ),
-					array(
-						'span' => array(
-							'class' => array(),
-						),
-					)
-				),
-				wp_kses_post( get_the_title() )
-			)
-		);
+		the_content();
 
 		wp_link_pages(
 			array(
@@ -471,7 +459,43 @@ function blkcanvas_get_archive_header()
 <?php
 }
 
-add_action('wp_body_open', 'blkcanvas_get_archive_header');
+add_action('wp_body_open', 'blkcanvas_get_archive_header', 20);
+
+function blkcanvas_get_search_header()
+{
+	global $wp_query;
+	if (!is_search()) return;
+?>
+<header class="archive-header">
+	<h1 class="archive-title">
+		<?php
+		printf(
+			/* translators: %s: Search term. */
+			esc_html__( 'Results for "%s"', 'blkcanvas' ),
+			'<span class="page-description search-term">' . esc_html( get_search_query() ) . '</span>'
+		);
+		?>
+	</h1>
+	<div class="archive-description search-result-count">
+		<?php
+		printf(
+			esc_html(
+				/* translators: %d: The number of search results. */
+				_n(
+					'%d result for your search.',
+					'%d results for your search.',
+					(int) $wp_query->found_posts,
+					'blkcanvas'
+				)
+			),
+			(int) $wp_query->found_posts
+		);
+		?>
+	</div><!-- .search-result-count -->
+</header><!-- .page-header -->
+<?php
+}
+add_action('wp_body_open', 'blkcanvas_get_search_header', 20);
 
 function blkcanvas_logo()
 {
@@ -690,66 +714,94 @@ function blkcanvas_register_block_styles()
 }
 
 add_action('init', 'blkcanvas_register_block_styles');
-
-
-
 /**
- * Filter post thumbnail to use the Picture element. 
- * Gives use better control of what image size is used for each browser size
- * @see https://www.youtube.com/watch?v=Rik3gHT24AM | The HTML picture element explained [ Images on the web part 3 ]
+ * Ads
  */
-function bca_attachment_remove_attrs( $attr, $attachment, $size )
+function bca_render_header_ad()
 {
-	if ( is_admin() ) return $attr;
-
-	unset( $attr['srcset'] );
-	unset( $attr['sizes'] );
-	return $attr;
-}
-
-add_filter( 'wp_get_attachment_image_attributes', 'bca_attachment_remove_attrs', 10, 5 );
-
-function bca_compare_array_value($a, $b)
-{
-    if ($a['width'] == $b['width']) {
-        return 0;
-    }
-    return ($a['width'] < $b['width']) ? -1 : 1;
-}
-
-function bca_attachment_add_picture_element( $html, $attachment_id, $size, $icon, $attr )
-{
-	if ( is_admin() ) return $html;
-
-	// retrive attachtment metadata and media upload paths
-	$image_meta = wp_get_attachment_metadata( $attachment_id );
-	$dirname = _wp_get_attachment_relative_path( $image_meta['file'] );
-	$upload_dir    = wp_get_upload_dir();
-    $image_baseurl = trailingslashit( $upload_dir['baseurl'] ) . $dirname . '/';
-	
-	if ( !is_array( $image_meta['sizes'] ) || empty( $image_meta['sizes'] ) ) {
-		return $html;
+	if (get_theme_mod('enable_ads', false) && get_theme_mod('script_url', '')) {
+		?>
+		<div class="ad-container">
+			<div id="banner-ad_header" class="ad-slot"></div>
+		</div>
+		<?php
 	}
-	$sources = array();
+}
+add_action('wp_body_open', 'bca_render_header_ad');
 
-	// order sizes from smallest to largest
-	uasort($image_meta['sizes'], "bca_compare_array_value");
+function bca_init_ad_scripts()
+{
+	if (get_theme_mod('enable_ads', false) && $script_url = get_theme_mod('script_url', '')) {
+		$loading = get_theme_mod('load_js', '');
+		echo '<script '.$loading.' src="'.$script_url.'"></script>';
+	}
+}
 
-	foreach ($image_meta['sizes'] as $key => $image_size) {
-		// if selected size equals image size do not add anymore source sizes
-		if ($size == $key) {
-			break;
+add_action('wp_head', 'bca_init_ad_scripts');
+
+function blkcanvas_critical_css_add_ads_css( $template_css )
+{
+	$file = get_template_directory() . '/build/index.css';
+	$template_css = $template_css . file_get_contents( $file );
+
+	return $template_css;
+}
+add_filter( 'blkcanvas_critical_css', 'blkcanvas_critical_css_add_ads_css', 10 );
+
+
+function bca_render_footer_ad()
+{
+	if (get_theme_mod('enable_ads', false) && get_theme_mod('script_url', '')) {
+		?>
+		<div class="ad-container footer-slot">
+			<div id="banner-ad_footer" class="ad-slot"></div>
+		</div>
+		<?php
+	}
+}
+
+add_action('wp_footer', 'bca_render_footer_ad');
+
+function bca_render_box_ad( $content )
+{
+	global $post;
+
+	$paragraphs = 0;
+	$box_ads = array(
+		array(
+			'id' => 'in_content_ad_1',
+			'ad' => get_theme_mod('in_content_ad_1')
+		),
+		array(
+			'id' => 'in_content_ad_2',
+			'ad' => get_theme_mod('in_content_ad_2')
+		)
+	);
+	if (has_blocks($post)) {
+
+		$content = "";
+		$blocks = parse_blocks( $post->post_content );
+		foreach ( $blocks as $block ) {
+
+			$content .= render_block($block);
+
+			if ( 'core/paragraph' === $block['blockName'] ) {
+
+				if ( $paragraphs % 3 === 0 && $paragraphs !== 0 ) {
+					$content .= ( isset( $box_ads[0]['ad'] ) && $box_ads[0]['ad'] ) ? $box_ads[0]['ad'] : '';
+					array_shift($box_ads);
+				}
+
+				$paragraphs++;
+				
+				 
+			}
+			 
 		}
-		$width = $image_size['width'] + 50;
-		$sources[] = '<source media="(max-width: '.$width.'px)" srcset="' . $image_baseurl . $image_size['file'] . '">';
+
 	}
 
-	if (!empty($sources)) {
-		$html = '<picture>' . implode( "\n",  $sources ) . $html . '</picture>';
-	}
-	
+	return $content;
 
-	return $html;
 }
-
-add_filter( 'wp_get_attachment_image', 'bca_attachment_add_picture_element', 10, 5 );
+add_action('the_content', 'bca_render_box_ad', 1, 1);

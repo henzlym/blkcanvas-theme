@@ -31,6 +31,7 @@ get_header();
 						'show_date' => get_theme_mod('archive_date'), 
 						'show_read_more' => get_theme_mod('archive_read_more'),
 						'show_thumbnail' => get_theme_mod('archive_thumbnail'),
+						'thumbnail_size' => get_theme_mod('archive_thumbnail_size', 'thumbnail'),
 						'show_excerpt' => get_theme_mod('archive_excerpt')
 					) 
 				);

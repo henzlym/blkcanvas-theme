@@ -11,35 +11,6 @@ get_header();
 ?>
 	<main id="primary" class="site-main">
 
-        <header class="blkcanvas-container">
-            <h1 class="page-title">
-                <?php
-                printf(
-                    /* translators: %s: Search term. */
-                    esc_html__( 'Results for "%s"', 'blkcanvas' ),
-                    '<span class="page-description search-term">' . esc_html( get_search_query() ) . '</span>'
-                );
-                ?>
-            </h1>
-            <div class="search-result-count">
-                <?php
-                printf(
-                    esc_html(
-                        /* translators: %d: The number of search results. */
-                        _n(
-                            '%d result for your search.',
-                            '%d results for your search.',
-                            (int) $wp_query->found_posts,
-                            'blkcanvas'
-                        )
-                    ),
-                    (int) $wp_query->found_posts
-                );
-                ?>
-            </div><!-- .search-result-count -->
-        </header><!-- .page-header -->
-
-
 		<?php if ( have_posts() ) : ?>
 
 			<?php
@@ -52,7 +23,18 @@ get_header();
 				 * If you want to override this in a child theme, then include a file
 				 * called content-___.php (where ___ is the Post Type name) and that will be used instead.
 				 */
-                get_template_part( 'template-parts/cards/card', '', array( 'card_class' => 'horizontal' , 'show_byline' => false, 'show_read_more' => false ) );
+                get_template_part( 'template-parts/cards/card', '', 
+					array( 
+						'card_class' => 'entry horizontal' , 
+						'show_byline' => get_theme_mod('archive_byline'), 
+						'show_author' => get_theme_mod('archive_author'), 
+						'show_date' => get_theme_mod('archive_date'), 
+						'show_read_more' => get_theme_mod('archive_read_more'),
+						'show_thumbnail' => get_theme_mod('archive_thumbnail'),
+						'thumbnail_size' => get_theme_mod('archive_thumbnail_size', 'thumbnail'),
+						'show_excerpt' => get_theme_mod('archive_excerpt')
+					) 
+				);
 
 			endwhile;
 

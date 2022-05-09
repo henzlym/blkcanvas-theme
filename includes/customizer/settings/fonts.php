@@ -173,7 +173,7 @@
         ),
         'default' => '20px',
         'selectors' => array(
-            'body.archive .entry-title' => 'font-size'
+            'body.archive .entry-title, body.search .entry-title' => 'font-size'
         ),
         'setting' => 'font_size_archive_headers',
         'section' => 'fonts_archive',

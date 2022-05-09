@@ -1,4 +1,6 @@
-(function($, w, d) {
+import './ads';
+
+(function(w, d) {
 	'use strict';
     // Universal functions
 
@@ -36,4 +38,4 @@
     hamburger.addEventListener('click', toggleMenu);
     searchIcon.addEventListener('click', toggleSearch);
     
-})(jQuery, window, document);
+})(window, document);

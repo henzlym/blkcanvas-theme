@@ -1,0 +1,50 @@
+.ad-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    &.footer-slot{
+        position: fixed;
+        bottom: 0;
+        z-index: 9;
+    }
+}
+.ad-slot {
+    display: flex;
+    align-items: center;
+    background-color: lightgrey;
+    justify-content: center;
+    .sidebar & {
+        margin-bottom: 1rem;
+    }
+    .entry-content & {
+        margin-bottom: 1rem;
+    }
+    &:empty::before {
+        background-color: dimgrey;
+        border-radius: 5px;
+        color: lightgrey;
+        content: "Ad";
+        font: 12px sans-serif;
+        padding: 3px;
+        text-align: center;
+    }
+    &:hover{
+        cursor: pointer;
+    }
+}
+#banner-ad_header{
+    height: 90px;
+    width: 728px;
+    .ad-container & {
+        margin-top: 1rem;
+    }
+}
+#banner-ad_footer{
+    height: 90px;
+    width: 728px;
+}
+[id^="box-ad"]{
+    height: 250px;
+    width: 300px;
+}

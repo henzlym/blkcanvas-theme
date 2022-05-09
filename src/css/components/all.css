@@ -42,11 +42,11 @@
 }
 
 .card.horizontal .entry-thumbnail {
-  flex: 1 1 50%;
+  flex: 1 1 25%;
 }
 
 .card.horizontal .entry-header {
-  flex: 1 1 50%;
+  flex: 1 1 75%;
 }
 
 @media screen and (min-width: 768px) {
@@ -169,6 +169,61 @@ body.page-template-blank .alignfull.is-position-top-left .wp-block-cover__inner-
 .entry-pagination .nav-links {
   display: flex;
   justify-content: space-between;
+}
+
+.ad-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.ad-container.footer-slot {
+  position: fixed;
+  bottom: 0;
+  z-index: 9;
+}
+
+.ad-slot {
+  display: flex;
+  align-items: center;
+  background-color: lightgrey;
+  justify-content: center;
+}
+.sidebar .ad-slot {
+  margin-bottom: 1rem;
+}
+.entry-content .ad-slot {
+  margin-bottom: 1rem;
+}
+.ad-slot:empty::before {
+  background-color: dimgrey;
+  border-radius: 5px;
+  color: lightgrey;
+  content: "Ad";
+  font: 12px sans-serif;
+  padding: 3px;
+  text-align: center;
+}
+.ad-slot:hover {
+  cursor: pointer;
+}
+
+#banner-ad_header {
+  height: 90px;
+  width: 728px;
+}
+.ad-container #banner-ad_header {
+  margin-top: 1rem;
+}
+
+#banner-ad_footer {
+  height: 90px;
+  width: 728px;
+}
+
+[id^=box-ad] {
+  height: 250px;
+  width: 300px;
 }
 
 /*# sourceMappingURL=all.css.map */

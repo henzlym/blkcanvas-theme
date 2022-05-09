@@ -1,6 +1,10 @@
 @import '../components/card.scss';
 
-.archive{
+.archive,
+.search{
+    .archive-header{
+        padding-top: var(--global-padding-y);
+    }
     @media screen and (min-width:980px) {
         .site{
             display: grid;

@@ -1,0 +1,17 @@
+{
+    "version": 2,
+    "settings": {
+        "spacing": {
+			"blockGap": true,
+            "margin": true,
+            "padding":true
+		}
+    },
+    "styles": {
+        "spacing": {
+			"blockGap": "5px"
+		}
+    },
+    "customTemplates": {},
+    "templateParts": {}
+}

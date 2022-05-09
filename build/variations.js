@@ -1,0 +1,1 @@
+!function(){"use strict";var o=window.wp.hooks,s=window.lodash;(0,o.addFilter)("blocks.registerBlockType","intro-to-filters/cover-block/alignment-settings",(function(o,t){return"core/columns"===t?void 0===o.supports?o:(0,s.assign)({},o,{supports:{...o.supports,spacing:{...o.supports.spacing,blockGap:!0,margin:["top","bottom","left","right"]}}}):o}))}();

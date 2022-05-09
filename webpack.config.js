@@ -15,7 +15,8 @@ module.exports = {
         entry:{
             ...defaultConfig.entry,
             'search-select': path.resolve( 'includes', 'customizer', 'fonts', 'js', 'scripts.js' ),
-            'alignment': path.resolve( 'includes', 'customizer', 'alignment', 'index.js' )
+            'alignment': path.resolve( 'includes', 'customizer', 'alignment', 'index.js' ),
+            'variations': path.resolve( 'includes', 'editor', 'src', 'index.js' )
         },
     }
 }

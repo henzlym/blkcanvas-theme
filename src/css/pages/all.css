@@ -42,11 +42,11 @@
 }
 
 .card.horizontal .entry-thumbnail {
-  flex: 1 1 50%;
+  flex: 1 1 25%;
 }
 
 .card.horizontal .entry-header {
-  flex: 1 1 50%;
+  flex: 1 1 75%;
 }
 
 @media screen and (min-width: 768px) {
@@ -72,8 +72,13 @@
     margin: initial;
   }
 }
+.archive .archive-header,
+.search .archive-header {
+  padding-top: var(--global-padding-y);
+}
 @media screen and (min-width: 980px) {
-  .archive .site {
+  .archive .site,
+.search .site {
     display: grid;
     grid-template-columns: 1fr 300px;
     grid-column-gap: 16px;
@@ -134,7 +139,7 @@
   .single .site,
 .page-template-default .site {
     display: grid;
-    grid-template-columns: 1fr 300px;
+    grid-template-columns: 1fr calc(var(--global-padding-x) * 2 + 300px);
     grid-column-gap: 16px;
   }
   .single .post-navigation,
