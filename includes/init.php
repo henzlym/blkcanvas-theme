@@ -9,3 +9,4 @@ require_once get_template_directory() . '/includes/customizer/init.php';
 require_once get_template_directory() . '/includes/headers/init.php';
 require_once get_template_directory() . '/includes/seo/init.php';
 require_once get_template_directory() . '/includes/performance.php';
+require_once get_template_directory() . '/includes/ads.php';
