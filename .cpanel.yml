@@ -3,4 +3,3 @@ deployment:
     tasks:
         - export DEPLOYPATH=/home/thedai63/public_html/wp-content/themes/bca-theme/
         - /bin/cp single.php $DEPLOYPATH
-        - /bin/cp -r * $DEPLOYPATH
