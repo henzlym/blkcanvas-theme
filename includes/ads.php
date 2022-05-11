@@ -1,5 +1,5 @@
 <?php
-function bca_render_box_ad( $content )
+function blkcanvas_render_box_ad( $content )
 {
 	global $post;
 
@@ -61,4 +61,76 @@ function bca_render_box_ad( $content )
 	return $content;
 
 }
-add_action('the_content', 'bca_render_box_ad', 1, 1);
+
+/**
+ * Enqueue scripts and styles.
+ */
+function blkcanvas_ad_scripts() {
+	
+	$asset = include_once get_template_directory() . '/build/ads.asset.php';
+	wp_enqueue_script( 'blkcanvas-ads', get_template_directory_uri() . '/build/ads.js', $asset['dependencies'], $asset['version'], true );
+
+}
+
+
+/**
+ * Ads
+ */
+function blkcanvas_render_header_ad()
+{
+	if (get_theme_mod('enable_ads', false) && get_theme_mod('script_url', '')) {
+		?>
+		<div class="ad-container">
+			<div id="banner-ad_header" class="ad-slot"></div>
+		</div>
+		<?php
+	}
+}
+
+
+function blkcanvas_init_ad_scripts()
+{
+	if (get_theme_mod('enable_ads', false) && $script_url = get_theme_mod('script_url', '')) {
+		$loading = get_theme_mod('load_js', '');
+		echo '<script '.$loading.' src="'.$script_url.'"></script>';
+	}
+}
+
+
+
+function blkcanvas_critical_css_add_ads_css( $template_css )
+{
+	$file = get_template_directory() . '/build/style-index.css';
+	$template_css = $template_css . file_get_contents( $file );
+
+	return $template_css;
+}
+
+
+
+function blkcanvas_render_footer_ad()
+{
+	if (get_theme_mod('enable_ads', false) && get_theme_mod('script_url', '')) {
+		?>
+		<div class="ad-container footer-slot">
+			<div id="banner-ad_footer" class="ad-slot"></div>
+		</div>
+		<?php
+	}
+}
+
+
+
+function blkcanvas_init_ads()
+{
+	if (!get_theme_mod( 'enable_ads' )) return;
+	
+	add_action( 'wp_head', 'blkcanvas_init_ad_scripts');
+	add_filter( 'blkcanvas_critical_css', 'blkcanvas_critical_css_add_ads_css', 10 );
+	add_action( 'wp_body_open', 'blkcanvas_render_header_ad');
+	add_action('the_content', 'blkcanvas_render_box_ad', 1, 1);
+	add_action( 'get_footer', 'blkcanvas_ad_scripts' );
+	add_action( 'wp_footer', 'blkcanvas_render_footer_ad');
+}
+
+add_action('init', 'blkcanvas_init_ads');
