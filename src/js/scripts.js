@@ -1,5 +1,3 @@
-import './ads';
-
 (function(w, d) {
 	'use strict';
     // Universal functions

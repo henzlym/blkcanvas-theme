@@ -1,3 +1,5 @@
+import '../scss/components/ads.scss';
+
 (function() {
     window.addEventListener('load', function(){
 
