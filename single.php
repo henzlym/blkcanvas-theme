@@ -9,7 +9,7 @@
 
 get_header(); ?>
 
-<main id="primary" class="site-main testing">
+<main id="primary" class="site-main test">
 
 <?php
 while ( have_posts() ) :
