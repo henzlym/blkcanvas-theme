@@ -9,7 +9,7 @@
 
 get_header(); ?>
 
-<main id="primary" class="site-main newstest">
+<main id="primary" class="site-main newstestings">
 
 <?php
 while ( have_posts() ) :
