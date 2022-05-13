@@ -77,7 +77,7 @@ small, .text_small {
   }
 }
 
-.arhive .entry-title, .home .entry-title {
+.archive .entry-title, .home .entry-title {
   font-size: var(--archive-title-font-size);
   font-weight: var(--archive-title-font-weight);
   line-height: var(--archive-title-font-lineheight);
