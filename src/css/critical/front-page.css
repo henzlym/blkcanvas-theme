@@ -75,6 +75,14 @@
 .home .archive-header {
   padding-top: var(--global-padding-y);
 }
+.home .entry-title {
+  margin-bottom: 10px;
+}
+.home .entry-categories {
+  font-size: var(--small-font-size);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
 @media screen and (min-width: 980px) {
   .home .site {
     display: grid;
