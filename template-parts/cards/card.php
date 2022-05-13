@@ -9,7 +9,7 @@
 <?php $thumbnail_class = isset( $args['thumbnail_class'] ) ? $args['thumbnail_class'] : ''; ?>
 <article id="post-<?php the_ID(); ?>" <?php post_class('card' . $card_class ); ?>>
 	
-	<?php if( $show_thumbnail ): ?>
+	<?php if( $show_thumbnail && has_post_thumbnail( get_the_ID() ) ): ?>
 	<div class="entry-thumbnail"><?php blkcanvas_post_thumbnail( $thumbnail_class ); ?></div>
 	<?php endif; ?>
 
