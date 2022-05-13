@@ -1,11 +1,12 @@
 a.custom-logo-link img.custom-logo {
   display: block;
   width: auto;
-  max-height: 30px;
+  max-width: var(--site-logo-max-width-mobile);
+  min-width: 30px;
 }
 @media screen and (min-width: 768px) {
   a.custom-logo-link img.custom-logo {
-    max-height: 50px;
+    max-width: var(--site-logo-max-width);
   }
 }
 

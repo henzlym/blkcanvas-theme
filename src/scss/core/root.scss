@@ -35,6 +35,7 @@
     --site-links-color:#1e73be;
     --header-background-color:var(--site-background-color);
     --header-text-color:var(--site-text-color);
+    --header-text-hover-color:var(--site-text-color);
     --header-links-color:var(--site-links-color);
     --header-links-hover-color:var(--site-links-color);
     --navigation-background-color:var(--header-background-color);
@@ -56,4 +57,6 @@
     --global-padding-x:16px;
     --global-padding-y:16px;
     --card-margin-y:16px;
+    --site-logo-max-width:150px;
+    --site-logo-max-width-mobile:calc( var(--site-logo-max-width ) - 50 );
 }

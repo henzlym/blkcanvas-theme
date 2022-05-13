@@ -528,7 +528,8 @@ function blkcanvas_site_navigation()
 			'theme_location' => 'main-menu',
 			'menu_id'        => 'main-menu',
 			'container' => 'nav',
-			'container_class' => 'site-navigation'
+			'container_class' => 'site-navigation',
+			'fallback_cb' => false
 		)
 	);
 }

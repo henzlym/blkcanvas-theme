@@ -16,6 +16,12 @@ header.header a {
 header.header a:hover {
   color: var(--header-links-hover-color);
 }
+header.header path {
+  fill: var(--header-text-color);
+}
+header.header path:hover {
+  fill: var(--header-text-hover-color);
+}
 header.header .site-title {
   color: var(--header-text-color);
 }

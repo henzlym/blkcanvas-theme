@@ -5,7 +5,7 @@
             'class' => 'WP_Customize_Color_Control',
             'label' => __('Background', 'blkcanvas'),
         ),
-        'default' => '',
+        'default' => '#fff',
         'selectors' => array(
             'body' => '--site-background-color'
         ),
@@ -67,6 +67,20 @@
             'header.header' => '--header-text-color'
         ),
         'setting' => 'header_text_color',
+        'section' => 'colors_header',
+        'transport' => 'postMessage',
+
+    ),
+    'header_text_hover_color' => array(
+        'control' => array(
+            'class' => 'WP_Customize_Color_Control',
+            'label' => __('Text hover', 'blkcanvas'),
+        ),
+        'default' => '',
+        'selectors' => array(
+            'header.header' => '--header-text-hover-color'
+        ),
+        'setting' => 'header_text_hover_color',
         'section' => 'colors_header',
         'transport' => 'postMessage',
 
