@@ -51,10 +51,13 @@ small, .text_small {font-size: 0.833rem;}
 
 .single{
   .entry-title{
-    font-size: var(--single-title-font-size);
+    font-size: var(--h3-font-size);
     font-weight: var(--single-title-font-weight);
     line-height: var(--single-title-font-lineheight);
     text-transform: var(--single-title-font-text-transform);
+    @media screen and (min-width:980px) {
+      font-size: var(--single-title-font-size);
+    }
   }
 }
 .arhive,.home{
