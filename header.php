@@ -12,7 +12,7 @@
 </head>
 
 <body <?php body_class(); ?>>
-    <header id="masthead" class="header <?php echo blkcanvas_get_header_class(); ?> andaddthis">
+    <header id="masthead" class="header <?php echo blkcanvas_get_header_class(); ?>">
         <div class="blkcanvas-container">
             <?php blkcanvas_logo(); ?>
             <?php get_template_part('searchform'); ?>
