@@ -76,6 +76,16 @@
 .search .archive-header {
   padding-top: var(--global-padding-y);
 }
+.archive .entry-title,
+.search .entry-title {
+  margin-bottom: 10px;
+}
+.archive .entry-categories,
+.search .entry-categories {
+  font-size: var(--small-font-size);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
 @media screen and (min-width: 980px) {
   .archive .site,
 .search .site {

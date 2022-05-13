@@ -7,13 +7,13 @@
 }
 .single .entry-title,
 .page-template-default .entry-title {
-  margin-top: 7px;
   margin-bottom: 10px;
 }
 .single .entry-categories,
 .page-template-default .entry-categories {
   font-size: var(--small-font-size);
   text-transform: uppercase;
+  margin-bottom: 10px;
 }
 .single .entry-thumbnail_caption,
 .page-template-default .entry-thumbnail_caption {
