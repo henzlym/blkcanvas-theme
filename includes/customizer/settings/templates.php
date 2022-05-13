@@ -177,7 +177,7 @@
             'label' => __('Show excerpt', 'blkcanvas'),
             'type' => 'checkbox',
         ),
-        'default' => true,
+        'default' => false,
         'setting' => 'archive_excerpt',
         'section' => 'templates_archive',
         'transport' => 'refresh',

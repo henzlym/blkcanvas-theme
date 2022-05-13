@@ -26,6 +26,10 @@ function blkcanvas_critical_css()
 	<?php
 	blkcanvas_get_critical_css( 'base' );
 
+	if(is_front_page()){
+		blkcanvas_get_critical_css( 'front-page' );
+	}
+
 	if(is_singular() && !is_front_page()){
 		if( is_single() || is_page() && get_page_template_slug() == '' ){
 			blkcanvas_get_critical_css( 'single' );

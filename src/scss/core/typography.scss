@@ -57,3 +57,11 @@ small, .text_small {font-size: 0.833rem;}
     text-transform: var(--single-title-font-text-transform);
   }
 }
+.arhive,.home{
+  .entry-title{
+    font-size: var(--archive-title-font-size);
+    font-weight: var(--archive-title-font-weight);
+    line-height: var(--archive-title-font-lineheight);
+    text-transform: var(--archive-title-font-text-transform);
+  }
+}

@@ -13,4 +13,11 @@
         'panel' => 'fonts',
         'priority' => 160,
     ),
+    'fonts_archive' => array(
+        'capability' => 'edit_theme_options',
+        'id' => 'fonts_archive',
+        'title' => 'Archive',
+        'panel' => 'fonts',
+        'priority' => 160,
+    ),
 );
