@@ -51,7 +51,7 @@ small, .text_small {
 
 .site-title {
   font-family: var(--site-title-font-family);
-  font-size: var(--h3-font-size);
+  font-size: var(--h4-font-size);
   font-weight: var(--site-title-font-weight);
   margin: 0;
 }
