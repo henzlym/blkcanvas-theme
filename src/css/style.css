@@ -820,6 +820,7 @@ header.header .blkcanvas-container {
 }
 .archive .entry-categories,
 .search .entry-categories {
+  display: block;
   font-size: var(--small-font-size);
   text-transform: uppercase;
   margin-bottom: 10px;
@@ -914,6 +915,7 @@ header.header .blkcanvas-container {
   margin-bottom: 10px;
 }
 .home .entry-categories {
+  display: block;
   font-size: var(--small-font-size);
   text-transform: uppercase;
   margin-bottom: 10px;
@@ -939,6 +941,7 @@ header.header .blkcanvas-container {
 }
 .single .entry-categories,
 .page-template-default .entry-categories {
+  display: block;
   font-size: var(--small-font-size);
   text-transform: uppercase;
   margin-bottom: 10px;

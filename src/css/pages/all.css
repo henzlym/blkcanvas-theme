@@ -82,6 +82,7 @@
 }
 .archive .entry-categories,
 .search .entry-categories {
+  display: block;
   font-size: var(--small-font-size);
   text-transform: uppercase;
   margin-bottom: 10px;
@@ -176,6 +177,7 @@
   margin-bottom: 10px;
 }
 .home .entry-categories {
+  display: block;
   font-size: var(--small-font-size);
   text-transform: uppercase;
   margin-bottom: 10px;
@@ -201,6 +203,7 @@
 }
 .single .entry-categories,
 .page-template-default .entry-categories {
+  display: block;
   font-size: var(--small-font-size);
   text-transform: uppercase;
   margin-bottom: 10px;

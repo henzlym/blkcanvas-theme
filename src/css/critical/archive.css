@@ -82,6 +82,7 @@
 }
 .archive .entry-categories,
 .search .entry-categories {
+  display: block;
   font-size: var(--small-font-size);
   text-transform: uppercase;
   margin-bottom: 10px;
