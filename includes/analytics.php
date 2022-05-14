@@ -23,7 +23,7 @@ function blkcanvas_head_scripts()
 
 function blkcanvas_init_analytics()
 {
-    if ( !get_theme_mod('enable_site_tracking') || get_theme_mod( 'site_tracking_id' ) ) return;
+    if ( !get_theme_mod('enable_site_tracking') || !get_theme_mod( 'site_tracking_id' ) ) return;
 
     add_action( 'wp_head', 'blkcanvas_wp_head_analytics' );
 }
