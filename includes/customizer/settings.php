@@ -13,7 +13,8 @@ function blkcanvas_get_theme_settings()
         'performance',
         'templates',
         'title-tagline',
-        'ads'
+        'ads',
+        'analytics'
     );
     $sections = array();
     $settings = array();
@@ -51,6 +52,10 @@ function blkcanvas_get_theme_settings()
             'templates' => array(
                 'id' => 'templates',
                 'title' => 'Templates',
+            ),
+            'analytics' => array(
+                'id' => 'analytics',
+                'title' => 'Analytics',
             ),
             'ads' => array(
                 'id' => 'ads',

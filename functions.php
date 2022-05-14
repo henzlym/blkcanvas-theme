@@ -604,31 +604,6 @@ function blkcanvas_load_fonts( $fonts = '' )
 	</noscript>
 	<?php
 }
-
-function blkcanvas_preloads()
-{
-	global $post;
-
-	blkcanvas_head_scripts();
-	
-}
-add_action( 'wp_head', 'blkcanvas_preloads' );
-
-
-function blkcanvas_head_scripts()
-{
-	?>
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-C0JN2YMJGW"></script>
-	<script>
-		window.dataLayer = window.dataLayer || [];
-		function gtag(){dataLayer.push(arguments);}
-		gtag('js', new Date());
-
-		gtag('config', 'G-C0JN2YMJGW');
-	</script>
-	<?php
-}
   
 function blkcanvas_embed_defaults() {
 
