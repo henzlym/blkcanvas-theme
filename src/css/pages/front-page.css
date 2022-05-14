@@ -30,11 +30,11 @@
   margin-bottom: 10px;
 }
 
-.home .archive-header {
+.home:not(.page-template) .archive-header {
   padding-top: var(--global-padding-y);
 }
 @media screen and (min-width: 980px) {
-  .home .site {
+  .home:not(.page-template) .site {
     display: grid;
     grid-template-columns: 1fr 300px;
     grid-column-gap: 16px;

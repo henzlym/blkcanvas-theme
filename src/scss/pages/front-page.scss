@@ -1,6 +1,6 @@
 @import '../components/entry.scss';
 
-.home{
+.home:not(.page-template){
     .archive-header{
         padding-top: var(--global-padding-y);
     }

@@ -394,42 +394,18 @@ function blkcanvas_archive_excerpt_length( $length ) {
 
 add_filter( 'excerpt_length', 'blkcanvas_archive_excerpt_length' );
 
-function blkcanvas_archive_excerpt($excerpt) {
-    if (has_excerpt()) {
-        $excerpt = wp_trim_words(
-			get_the_excerpt(), 
-			apply_filters("excerpt_length", get_theme_mod('archive_excerpt_length', 20 ))
-		);
-    }
+function blkcanvas_get_the_excerpt_filter($excerpt) {
+
+    $excerpt = wp_trim_words(
+		$excerpt, 
+		apply_filters("excerpt_length", get_theme_mod('archive_excerpt_length', 20 ))
+	);
 
     return $excerpt;
 }
-add_filter("the_excerpt", "blkcanvas_archive_excerpt", 999);
 
-function blkcanvas_filter_archive_content( $content )
-{
-	global $post;
+add_filter("get_the_excerpt", "blkcanvas_get_the_excerpt_filter");
 
-	if ( is_singular() ) return $content;
-	
-	setup_postdata( $post );
-
-
-	remove_filter('the_content', 'blkcanvas_filter_archive_content', 10, 1);
-	
-	$content = get_the_excerpt();
-	
-	add_filter('the_content', 'blkcanvas_filter_archive_content', 10, 1);
-	
-	return $content;
-}
-
-// add_filter('the_content', 'blkcanvas_filter_archive_content', 10, 1);
-
-function blkcanvas_excerpt()
-{
-	# code...
-}
 /**
  * Filter the "read more" excerpt string link to the post.
  *
