@@ -1,17 +1,8 @@
-@import '../components/card.scss';
+@import '../components/entry.scss';
 
 .home{
     .archive-header{
         padding-top: var(--global-padding-y);
-    }
-    .entry-title{
-        margin-bottom: 10px;
-    }
-    .entry-categories{
-        display: block;
-        font-size: var(--small-font-size);
-        text-transform: uppercase;
-        margin-bottom: 10px;
     }
     @media screen and (min-width:980px) {
         .site{

@@ -1,50 +1,12 @@
-/* ===== SINGLE ===== */
+@import '../components/entry.scss';
+
 .single,
 .page-template-default{
-    .entry-header,
-    .entry-thumbnail{
-        margin-bottom:16px;
-    }
-    .entry-title{
-        margin-bottom: 10px;
-    }
-    .entry-categories{
-        display: block;
-        font-size: var(--small-font-size);
-        text-transform: uppercase;
-        margin-bottom: 10px;
-    }
-    .entry-thumbnail_caption{
-        margin-top: 5px;
-        font-style: italic;
-        font-size: var(--small-font-size);
-    }
-    .entry-meta a,
-    .entry-categories a{
-        text-decoration: none;
-    }
-    .byline{
-        display: inline-block;
-        margin-right: 5px;
-    }
-    .entry-meta{
-        margin-top:10px;
-        margin-bottom: 10px;
-        font-size: var(--small-font-size);
-    }
-    .post-navigation{
-        padding-left: 16px;
-        padding-right:16px;
-    }
     @media screen and (min-width:980px) {
         .site{
             display: grid;
             grid-template-columns: 1fr calc( var( --global-padding-x ) * 2 + 300px );
             grid-column-gap: 16px;
-        }
-        .post-navigation{
-            padding-left: 0;
-            padding-right:0;
         }
     }
 }

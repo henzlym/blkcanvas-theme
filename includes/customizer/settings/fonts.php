@@ -171,7 +171,7 @@
             'label' => __('Title font size', 'blkcanvas'),
             'type' => 'text',
         ),
-        'default' => '',
+        'default' => '1rem',
         'selectors' => array(
             'body' => '--archive-title-font-size'
         ),
@@ -190,7 +190,7 @@
                 'max' => 900
             ),
         ),
-        'default' => 400,
+        'default' => 600,
         'selectors' => array(
             'body' => '--archive-title-font-weight'
         ),
@@ -209,7 +209,7 @@
                 'max' => 1.5
             ),
         ),
-        'default' => 1.1,
+        'default' => 1.2,
         'selectors' => array(
             'body' => '--archive-title-font-lineheight'
         ),
@@ -233,6 +233,77 @@
             'body' => '--archive-title-font-text-transform'
         ),
         'setting' => 'font_text_transform_archive_title',
+        'section' => 'fonts_archive',
+        'transport' => 'postMessage',
+    ),
+    'font_size_archive_meta' => array(
+        'control' => array(
+            'class' => 'WP_Customize_Control',
+            'label' => __('Meta font size', 'blkcanvas'),
+            'type' => 'text',
+        ),
+        'default' => '0.833rem',
+        'selectors' => array(
+            'body' => '--archive-meta-font-size'
+        ),
+        'setting' => 'font_size_archive_meta',
+        'section' => 'fonts_archive',
+        'transport' => 'postMessage',
+    ),
+    'font_weight_archive_meta' => array(
+        'control' => array(
+            'class' => 'WP_Customize_Control',
+            'label' => __('Meta font weight', 'blkcanvas'),
+            'type' => 'number',
+            'input_attrs' => array(
+                'step' => 100,
+                'min' => 100,
+                'max' => 900
+            ),
+        ),
+        'default' => 400,
+        'selectors' => array(
+            'body' => '--archive-meta-font-weight'
+        ),
+        'setting' => 'font_weight_archive_meta',
+        'section' => 'fonts_archive',
+        'transport' => 'postMessage',
+    ),
+    'font_lineheight_archive_meta' => array(
+        'control' => array(
+            'class' => 'WP_Customize_Control',
+            'label' => __('Meta font line height', 'blkcanvas'),
+            'type' => 'number',
+            'input_attrs' => array(
+                'step' => 0.1,
+                'min' => 0,
+                'max' => 1.5
+            ),
+        ),
+        'default' => 1.1,
+        'selectors' => array(
+            'body' => '--archive-meta-font-lineheight'
+        ),
+        'setting' => 'font_lineheight_archive_meta',
+        'section' => 'fonts_archive',
+        'transport' => 'postMessage',
+    ),
+    'font_text_transform_archive_meta' => array(
+        'control' => array(
+            'class' => 'WP_Customize_Control',
+            'label' => __('Meta font text transform', 'blkcanvas'),
+            'type' => 'radio',
+            'choices' => array(
+                'capitalize' => 'Capitalize',
+                'uppercase' => 'Uppercase',
+                'lowercase' => 'Lowercase'
+            ),
+        ),
+        'default' => 'capitalize',
+        'selectors' => array(
+            'body' => '--archive-meta-font-text-transform'
+        ),
+        'setting' => 'font_text_transform_archive_meta',
         'section' => 'fonts_archive',
         'transport' => 'postMessage',
     ),
