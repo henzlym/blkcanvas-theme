@@ -1,0 +1,23 @@
+.wp-block-post-title,
+.wp-block-post-featured-image,
+.wp-block-post-terms,
+.wp-block-post-date {
+  margin-bottom: 10px;
+}
+
+.wp-block-post-terms {
+  font-size: var(--archive-categories-font-size);
+  font-weight: var(--archive-categories-font-weight);
+  line-height: var(--archive-categories-font-lineheight);
+  text-transform: var(--archive-categories-font-text-transform);
+}
+
+.wp-block-post-date,
+.wp-block-post-author {
+  font-size: var(--archive-meta-font-size);
+  font-weight: var(--archive-meta-font-weight);
+  line-height: var(--archive-meta-font-lineheight);
+  text-transform: var(--archive-meta-font-text-transform);
+}
+
+/*# sourceMappingURL=query.css.map */

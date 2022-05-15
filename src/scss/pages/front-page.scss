@@ -1,5 +1,5 @@
 @import '../components/entry.scss';
-
+@import '../components/wp-blocks/query.scss';
 .home:not(.page-template){
     .archive-header{
         padding-top: var(--global-padding-y);

@@ -50,7 +50,8 @@
         ),
         'default' => '16px',
         'selectors' => array(
-            'body' => '--global-padding-x'
+            'body' => '--global-padding-x',
+            'body' => '--wp--style--block-gap'
         ),
         'setting' => 'container_padding_x',
         'section' => 'templates_global',

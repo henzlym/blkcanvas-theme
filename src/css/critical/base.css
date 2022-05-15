@@ -151,6 +151,10 @@ a, button {
   --archive-meta-font-weight:var(--font-weight);
   --archive-meta-font-lineheight:1.3;
   --archive-meta-text-transform:captilize;
+  --archive-categories-font-size:var(--small-font-size);
+  --archive-categories-font-weight:var(--font-weight);
+  --archive-categories-font-lineheight:1.3;
+  --archive-categories-text-transform:captilize;
 }
 
 :root {
@@ -197,7 +201,7 @@ body {
   line-height: var(--font-line-height);
 }
 
-h1, h2, h3, h4, h5 {
+h1, h2, h3, h4, h5, h6 {
   margin: 0 0 var(--heading-margin-bottom);
   font-weight: var(--font-weight);
   line-height: var(--heading-weight);
@@ -237,6 +241,7 @@ small, .text_small {
   font-size: 0.833rem;
 }
 
+/* WORDPRESS */
 .site-title {
   font-family: var(--site-title-font-family);
   font-size: var(--h4-font-size);
@@ -271,13 +276,17 @@ small, .text_small {
   line-height: var(--archive-title-font-lineheight);
   text-transform: var(--archive-title-font-text-transform);
 }
-.archive .entry-meta,
-.archive .entry-categories, .home .entry-meta,
-.home .entry-categories {
+.archive .entry-meta, .home .entry-meta {
   font-size: var(--archive-meta-font-size);
   font-weight: var(--archive-meta-font-weight);
   line-height: var(--archive-meta-font-lineheight);
   text-transform: var(--archive-meta-font-text-transform);
+}
+.archive .entry-categories, .home .entry-categories {
+  font-size: var(--archive-categories-font-size);
+  font-weight: var(--archive-categories-font-weight);
+  line-height: var(--archive-categories-font-lineheight);
+  text-transform: var(--archive-categories-font-text-transform);
 }
 
 .site-navigation {
