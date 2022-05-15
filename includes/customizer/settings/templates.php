@@ -80,6 +80,17 @@
         'section' => 'templates_header',
         'transport' => 'refresh',
     ),
+    'header_enable_search' => array(
+        'control' => array(
+            'class' => 'WP_Customize_Control',
+            'label' => __('Enable search in header', 'blkcanvas'),
+            'type' => 'checkbox',
+        ),
+        'default' => true,
+        'setting' => 'header_enable_search',
+        'section' => 'templates_header',
+        'transport' => 'refresh',
+    ),
     // NAVIGATION
     'navigation_alignment' => array(
         'control' => array(
