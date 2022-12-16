@@ -22,6 +22,6 @@ add_filter( 'block_editor_settings_all', 'bca_editor_settings_all', 10, 2 );
  */
 function bca_enqueue_editor_scripts() {
 	$asset = include( get_template_directory() . '/build/variations.asset.php' );
-	wp_enqueue_script('bca-block-variations', get_template_directory_uri() . '/build/variations.js', array(), $asset['version'], true );
+	wp_enqueue_script('blkcanvas-block-variations', get_template_directory_uri() . '/build/variations.js', array(), $asset['version'], true );
 }
 add_action( 'admin_enqueue_scripts', 'bca_enqueue_editor_scripts' );

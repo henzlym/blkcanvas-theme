@@ -171,7 +171,7 @@ function blkcanvas_theme_setup() {
 
 add_action( 'after_setup_theme', 'blkcanvas_theme_setup' );
 
-function tpd_override_media_settings() {
+function bca_override_media_settings() {
 
 	$image_sizes = bca_theme_image_sizes();
 	$image_options = array( 'thumbnail', 'medium', 'large' );
@@ -186,7 +186,7 @@ function tpd_override_media_settings() {
 
 }
 
-add_action( 'after_switch_theme', 'tpd_override_media_settings' ); 
+add_action( 'after_switch_theme', 'bca_override_media_settings' ); 
 /**
  * Register widget area.
  *

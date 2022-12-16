@@ -43,7 +43,7 @@ if (class_exists('WP_Customize_Control')) {
             if (!is_wp_error($response) && ($response['response']['code'] == 200 || $response['response']['code'] == 201)) {
                 $response = wp_remote_retrieve_body($response);
             } else {
-                $error = new WP_Error( 'error', __( $response, "tpd" ) );
+                $error = new WP_Error( 'error', __( $response, "blkcanvas" ) );
                 return $error;
             }            
 

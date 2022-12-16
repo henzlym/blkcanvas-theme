@@ -8,15 +8,19 @@ function blkcanvas_wp_head_analytics()
 
 function blkcanvas_head_scripts()
 {
+    $site_tracking_id = get_theme_mod( 'site_tracking_id' );
+    
+    if ( !$site_tracking_id ) return;
+    
 	?>
         <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo get_theme_mod( 'site_tracking_id' ); ?>"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo esc_attr( $site_tracking_id ); ?>"></script>
         <script>
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
 
-            gtag('config', '<?php echo get_theme_mod( 'site_tracking_id' ); ?>');
+            gtag('config', '<?php echo esc_attr( $site_tracking_id ); ?>');
         </script>
 	<?php
 }

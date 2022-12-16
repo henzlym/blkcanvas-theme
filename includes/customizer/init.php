@@ -48,6 +48,7 @@ function blkcanvas_customize_register($wp_customize)
             $wp_customize->add_setting($setting['setting'], array(
                 'default'   => $setting['default'],
                 'transport' => $setting['transport'],
+                'sanitize_callback' => isset( $setting['sanitize_callback'] ) ? $setting['sanitize_callback'] : ''
             ));
     
             if (isset($setting['control']) && !empty($setting['control'])) {
