@@ -37,29 +37,35 @@ function blkcanvas_get_theme_settings()
 
     $theme_settings = array(
         'panels' => array(
-            'colors' => array(
-                'id' => 'colors',
-                'title' => 'Colors',
-            ),
-            'fonts' => array(
-                'id' => 'fonts',
-                'title' => 'Fonts',
-            ),
-            'performance' => array(
-                'id' => 'performance',
-                'title' => 'Performance',
-            ),
-            'templates' => array(
-                'id' => 'templates',
-                'title' => 'Templates',
+            'ads' => array(
+                'id' => 'ads',
+                'title' => 'Ads',
+                'priority' => 160
             ),
             'analytics' => array(
                 'id' => 'analytics',
                 'title' => 'Analytics',
+                'priority' => 160
             ),
-            'ads' => array(
-                'id' => 'ads',
-                'title' => 'Ads',
+            'colors' => array(
+                'id' => 'colors',
+                'title' => 'Colors',
+                'priority' => 160
+            ),
+            'fonts' => array(
+                'id' => 'fonts',
+                'title' => 'Fonts',
+                'priority' => 160
+            ),
+            'performance' => array(
+                'id' => 'performance',
+                'title' => 'Performance',
+                'priority' => 160
+            ),
+            'templates' => array(
+                'id' => 'templates',
+                'title' => 'Templates',
+                'priority' => 160
             ),
         ),
         'sections' => $sections,
