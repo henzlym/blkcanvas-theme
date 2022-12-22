@@ -1,0 +1,165 @@
+{
+    "version": 2,
+    "settings": {
+        "color": {
+            "link": true,
+            "palette": [
+                {
+                    "slug": "red",
+                    "color": "#fd1a35",
+                    "name": "Red"
+                },
+                {
+                    "slug": "white",
+                    "color": "#ffffff",
+                    "name": "White"
+                },
+                {
+                    "slug": "gray",
+                    "color": "#eeeeee",
+                    "name": "Gray"
+                },
+                {
+                    "slug": "jet-black",
+                    "color": "#3F3F3F",
+                    "name": "Jet Black"
+                }
+            ]
+        },
+        "typography": {
+			"fontSizes": [
+				{
+					"slug": "small",
+					"size": "1rem",
+					"name": "Small"
+				},
+				{
+					"slug": "medium",
+					"size": "calc( var(--wp--preset--font-size--small) * 1.75  )",
+					"name": "Medium"
+				},
+                {
+					"slug": "large",
+					"size": "calc( var(--wp--preset--font-size--small) * 2  )",
+					"name": "Large"
+				},
+                {
+					"slug": "extra-large",
+					"size": "calc( var(--wp--preset--font-size--small) * 2.5  )",
+					"name": "Extra Large"
+				}
+			]
+		},
+        "spacing": {
+			"blockGap": true,
+            "margin": true,
+            "padding":true
+		},
+        "blocks": {
+            "core/paragraph": {
+                "color": {
+                    "background":"var(--wp--preset--color--white)",
+                    "text":"var(--wp--preset--color--black)",
+                    "link":"var(--wp--preset--color--red)",
+                    "palette": [
+                        {
+                            "slug": "red",
+                            "color": "#fd1a35",
+                            "name": "Red"
+                        },
+                        {
+                            "slug": "white",
+                            "color": "#ffffff",
+                            "name": "White"
+                        },
+                        {
+                            "slug": "gray",
+                            "color": "#eeeeee",
+                            "name": "Gray"
+                        },
+                        {
+                            "slug": "jet-black",
+                            "color": "#3F3F3F",
+                            "name": "Jet Black"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "styles": {
+        "color":{
+            "background":"var(--wp--preset--color--white)",
+            "text":"var(--wp--preset--color--black)",
+            "link":"var(--wp--preset--color--red)"
+        },
+        "spacing": {
+			"blockGap": "5px"
+		},
+        "blocks": {
+			"core/heading": {
+				"elements": {
+					"link": {
+						"color": {
+							"text": "var(--wp--preset--color--black)"
+						},
+                        ":hover": {
+                            "color": {
+                                "text": "var(--wp--preset--color--red)"
+                            }
+                        }
+					}
+				}
+			}
+		},
+        "elements": {
+            "text": {
+				"color": {
+                    "text":"var(--wp--preset--color--black)"
+				}
+			},
+			"link": {
+				"color": {
+                    "text":"var(--wp--preset--color--red)"
+				},
+                ":hover": {
+                    "color": {
+                        "text": "var(--wp--preset--color--red)"
+                    }
+                }
+			},
+            "h1": {
+				"typography": {
+					"fontSize": "calc( var(--wp--preset--font-size--small) * 2.5  )"
+				}
+			},
+            "h2": {
+				"typography": {
+					"fontSize": "calc( var(--wp--preset--font-size--small) * 2  )"
+				}
+			},
+            "h3": {
+				"typography": {
+					"fontSize": "calc( var(--wp--preset--font-size--small) * 1.75  )"
+				}
+			},
+            "h4": {
+				"typography": {
+					"fontSize": "calc( var(--wp--preset--font-size--small) * 1.5  )"
+				}
+			},
+            "h5": {
+				"typography": {
+					"fontSize": "calc( var(--wp--preset--font-size--small) * 1.25  )"
+				}
+			},
+            "h6": {
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--small)"
+				}
+			}
+		}
+    },
+    "customTemplates": {},
+    "templateParts": {}
+}
