@@ -35,14 +35,16 @@
 }
 #banner-ad_header{
     height: 90px;
-    width: 728px;
+    width: 100%;
+    max-width: 728px;
     .ad-container & {
         margin-top: 1rem;
     }
 }
 #banner-ad_footer{
     height: 90px;
-    width: 728px;
+    width: 100%;
+    max-width: 728px;
 }
 [id^="box-ad"]{
     height: 250px;

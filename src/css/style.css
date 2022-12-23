@@ -438,7 +438,8 @@ body.page-template-blank .alignfull.is-position-top-left .wp-block-cover__inner-
 
 #banner-ad_header {
   height: 90px;
-  width: 728px;
+  width: 100%;
+  max-width: 728px;
 }
 .ad-container #banner-ad_header {
   margin-top: 1rem;
@@ -446,7 +447,8 @@ body.page-template-blank .alignfull.is-position-top-left .wp-block-cover__inner-
 
 #banner-ad_footer {
   height: 90px;
-  width: 728px;
+  width: 100%;
+  max-width: 728px;
 }
 
 [id^=box-ad] {

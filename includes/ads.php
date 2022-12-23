@@ -125,10 +125,10 @@ function blkcanvas_init_ads()
 {
 	if (!get_theme_mod( 'enable_ads' )) return;
 	
-	add_action( 'wp_head', 'blkcanvas_init_ad_scripts');
+	add_action( 'wp_footer', 'blkcanvas_init_ad_scripts');
 	add_filter( 'blkcanvas_critical_css', 'blkcanvas_critical_css_add_ads_css', 10 );
 	add_action( 'wp_body_open', 'blkcanvas_render_header_ad');
-	add_action('the_content', 'blkcanvas_render_box_ad', 1, 1);
+	add_action( 'the_content', 'blkcanvas_render_box_ad', 1, 1);
 	add_action( 'get_footer', 'blkcanvas_ad_scripts' );
 	add_action( 'wp_footer', 'blkcanvas_render_footer_ad');
 }

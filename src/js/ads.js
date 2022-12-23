@@ -44,18 +44,29 @@ import '../scss/components/ads.scss';
                     .defineSlot(
                         slot.path, 
                         slot.size, 
-                        slot.div)
+                        slot.div
+                    )
+                    .setTargeting('test', 'lazyload')
                     .addService(googletag.pubads());
             });
 
+            googletag.pubads().enableLazyLoad({
+                // Fetch slots within 5 viewports.
+                fetchMarginPercent: 0,
+                // Render slots within 2 viewports.
+                renderMarginPercent: 0,
+                // Double the above values on mobile, where viewports are smaller
+                // and users tend to scroll faster.
+                mobileScaling: 1.0
+            });
+              
             googletag.pubads().enableSingleRequest();
             googletag.enableServices();
+            
+            googletag.display(slots[0].div);
+
         });
-        slots.forEach( slot => {
-            googletag.cmd.push(function() {
-                googletag.display(slot.div);
-            });
-        });
+        
 
     });
 
