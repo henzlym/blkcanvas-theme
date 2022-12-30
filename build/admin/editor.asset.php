@@ -1,1 +1,1 @@
-<?php return array('dependencies' => array('lodash', 'wp-blocks', 'wp-hooks'), 'version' => '54999c4bc6b1ae185a1e0cfb651dafd4');
+<?php return array('dependencies' => array('lodash', 'wp-blocks', 'wp-hooks'), 'version' => '2e16ed6e76c18f789d7b');
