@@ -1,7 +1,7 @@
 <?php
-if ( ! defined( '_S_VERSION' ) ) {
+if ( ! defined( 'BCA_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
-	define( '_S_VERSION', '1.0.0' );
+	define( 'BCA_VERSION', '1.0.0' );
 }
 
 require_once get_template_directory() . '/includes/init.php';
@@ -9,10 +9,9 @@ require_once get_template_directory() . '/includes/init.php';
  * Enqueue scripts and styles.
  */
 function blkcanvas_scripts() {
-	$asset = include_once get_template_directory() . '/build/index.asset.php';
 	// wp_enqueue_style( 'blkcanvas-style', get_stylesheet_directory_uri() . '/dist/style.min.css', $asset['dependencies'], $asset['version'] );
 	wp_style_add_data( 'blkcanvas-style', 'rtl', 'replace' );
-	wp_enqueue_script( 'blkcanvas-navigation', get_template_directory_uri() . '/build/index.js', $asset['dependencies'], $asset['version'], true );
+	wp_enqueue_script( 'blkcanvas-navigation', get_template_directory_uri() . '/build/js/scripts.min.js', [], BCA_VERSION, true );
 	wp_localize_script( 'blkcanvas-navigation', 'blkcanvasTheme', array(
 		'isAdminBarShowing' => is_admin_bar_showing()
 	));
@@ -48,7 +47,7 @@ add_action( 'wp_head', 'blkcanvas_critical_css', 20 );
 
 function blkcanvas_get_critical_css( $template )
 {
-	$file = get_template_directory() . '/dist/critical/'.$template.'.min.css';	
+	$file = get_template_directory() . '/build/css/critical/'.$template.'.min.css';	
 	
 	if( file_exists( $file ) ):
 		

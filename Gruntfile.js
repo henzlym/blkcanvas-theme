@@ -1,15 +1,14 @@
-const Fiber = require('fibers');
-const sass = require('node-sass');
+const Fiber = require( 'fibers' );
+const sass = require( 'node-sass' );
 /**
  * Youtube Tutorial: GRUNT TUTORIAL - Grunt makes your web development better!
- * @see https://www.youtube.com/watch?v=TMKj0BxzVgw 
+ * @see https://www.youtube.com/watch?v=TMKj0BxzVgw
  */
-module.exports = function (grunt) {
+module.exports = function ( grunt ) {
+	require( 'load-grunt-tasks' )( grunt );
 
-	require('load-grunt-tasks')(grunt);	
-
-	grunt.initConfig({
-		pkg: grunt.file.readJSON('package.json'),
+	grunt.initConfig( {
+		pkg: grunt.file.readJSON( 'package.json' ),
 
 		/**
 		 * Configuration / task definitions
@@ -17,27 +16,25 @@ module.exports = function (grunt) {
 
 		autoprefixer: {
 			options: {
-				browsers: ['last 3 versions', 'ie >= 8']
+				browsers: [ 'last 3 versions', 'ie >= 8' ],
 			},
 			dist: {
 				files: {
-					'dist/style.min.css': 'style.min.css'
-				}
-			}
+					'dist/style.min.css': 'style.min.css',
+				},
+			},
 		},
 		concat: {
 			css: {
-				src: [
-					'src/scss/**/*',
-				],
+				src: [ 'src/scss/**/*' ],
 				dest: 'dist/style.css',
-			}
+			},
 		},
 		sass: {
 			options: {
 				implementation: sass,
-				fiber:Fiber,
-				sourceMap: true
+				fiber: Fiber,
+				sourceMap: true,
 			},
 			dist: {
 				files: [
@@ -47,20 +44,19 @@ module.exports = function (grunt) {
 					{
 						expand: true,
 						cwd: 'src/scss',
-						src: ['**/*.scss'],
+						src: [ '**/*.scss' ],
 						dest: 'src/css',
-						ext: '.css'
+						ext: '.css',
 					},
 					{
 						expand: true,
 						cwd: 'src/scss/critical',
-						src: ['*.scss'],
+						src: [ '*.scss' ],
 						dest: 'src/css/critical',
-						ext: '.css'
-					}
-					
-				]
-			}
+						ext: '.css',
+					},
+				],
+			},
 		},
 		uglify: {
 			production: {
@@ -68,14 +64,12 @@ module.exports = function (grunt) {
 					ie8: true,
 					beautify: false,
 					preserveComments: false,
-					mangle: false
+					mangle: false,
 				},
 				files: {
-					'dist/scripts.min.js': [
-						'src/js/scripts.js'
-					]
-				}
-			}
+					'dist/scripts.min.js': [ 'src/js/scripts.js' ],
+				},
+			},
 		},
 		cssmin: {
 			target: {
@@ -89,12 +83,12 @@ module.exports = function (grunt) {
 							all: false, // sets all values to `false`
 							removeEmpty: true, // controls removing empty rules and nested blocks; defaults to `true`
 							removeDuplicateRules: true, // controls duplicate rules removing; defaults to true
-						}
-					}
+						},
+					},
 				},
 				files: {
-					'dist/style.min.css': ['src/css/style.css']
-				}
+					'dist/style.min.css': [ 'src/css/style.css' ],
+				},
 			},
 			critical: {
 				options: {
@@ -107,46 +101,42 @@ module.exports = function (grunt) {
 							all: false, // sets all values to `false`
 							removeEmpty: true, // controls removing empty rules and nested blocks; defaults to `true`
 							removeDuplicateRules: true, // controls duplicate rules removing; defaults to true
-						}
-					}
+						},
+					},
 				},
-				files: [{
-					expand: true,
-					cwd: 'src/css/critical',
-					src: ['*.css', '!*.min.css'],
-					dest: 'dist/critical',
-					ext: '.min.css'
-				}]
-			}
+				files: [
+					{
+						expand: true,
+						cwd: 'src/css/critical',
+						src: [ '*.css', '!*.min.css' ],
+						dest: 'dist/critical',
+						ext: '.min.css',
+					},
+				],
+			},
 		},
 
 		watch: {
 			options: {
-				livereload: true
+				livereload: true,
 			},
 			scripts: {
-				files: [
-					'src/js/**/*'
-				],
-				tasks: ['uglify']
+				files: [ 'src/js/**/*' ],
+				tasks: [ 'uglify' ],
 			},
 			styles: {
-				files: [
-					'src/scss/**/*',
-				],
-				tasks: ['sass', 'cssmin']
-			}
+				files: [ 'src/scss/**/*' ],
+				tasks: [ 'sass', 'cssmin' ],
+			},
 		},
-
-	});
+	} );
 
 	/**
 	 * CLI commands - run with "grunt ${command}" from root
-	*/
+	 */
 
-	grunt.registerTask('css', ['sass', 'cssmin']);
-	grunt.registerTask('js', ['uglify']);
-	grunt.registerTask('build', ['sass', 'cssmin', 'uglify']);
-	grunt.registerTask('default', ['sass', 'cssmin', 'uglify']);
+	grunt.registerTask( 'css', [ 'sass', 'cssmin' ] );
+	grunt.registerTask( 'js', [ 'uglify' ] );
+	grunt.registerTask( 'build', [ 'sass', 'cssmin', 'uglify' ] );
+	grunt.registerTask( 'default', [ 'sass', 'cssmin', 'uglify' ] );
 };
-

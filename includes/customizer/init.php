@@ -213,7 +213,7 @@ function blkcanvas_customizer_live_preview()
 {
     wp_enqueue_script(
         'blkcanvas-themecustomizer',            //Give the script an ID
-        get_template_directory_uri() . '/includes/customizer/theme-customizer.js', //Point to file
+        get_template_directory_uri() . '/build/admin/customizer.js', //Point to file
         array('jquery', 'customize-preview'),    //Define dependencies
         '',                        //Define a version (optional) 
         true                        //Put script in footer?

@@ -441,7 +441,15 @@ body.page-template-blank .alignfull.is-position-top-left .wp-block-cover__inner-
   width: 728px;
 }
 .ad-container #banner-ad_header {
-  margin-top: 1rem;
+  margin-top: 0;
+}
+@media screen and (min-width: 768px) {
+  .ad-container #banner-ad_header {
+    margin-top: 1rem;
+  }
+}
+#banner-ad_header iframe {
+  width: 100%;
 }
 
 #banner-ad_footer {
@@ -456,13 +464,18 @@ body.page-template-blank .alignfull.is-position-top-left .wp-block-cover__inner-
 
 a.custom-logo-link img.custom-logo {
   display: block;
-  width: auto;
+  width: 100%;
   max-width: var(--site-logo-max-width-mobile);
   min-width: 30px;
 }
 @media screen and (min-width: 768px) {
   a.custom-logo-link img.custom-logo {
     max-width: var(--site-logo-max-width);
+  }
+}
+@media screen and (max-width: 768px) {
+  a.custom-logo-link img.custom-logo {
+    max-height: 55px;
   }
 }
 
@@ -505,7 +518,7 @@ body:not(.page-template-blank) .site {
 .archive-header,
 .sidebar,
 .blkcanvas-container,
-.site-navigation.active,
+.site-navigation.active ul li a,
 .pagination {
   padding-left: var(--global-padding-x);
   padding-right: var(--global-padding-x);
@@ -529,6 +542,9 @@ body:not(.page-template-blank) .site {
   border-top: 1px solid #f6f6f6;
   z-index: 10;
 }
+.site-navigation.active ul {
+  margin-top: 16px;
+}
 .site-navigation ul {
   display: flex;
   flex-direction: column;
@@ -542,23 +558,21 @@ body:not(.page-template-blank) .site {
     margin-bottom: 0;
   }
 }
-.site-navigation li {
-  margin-right: 0;
+.site-navigation ul li {
+  margin-right: 16px;
 }
 @media screen and (min-width: 768px) {
-  .site-navigation li {
+  .site-navigation ul li {
     margin-bottom: 0;
   }
-  .site-navigation li:last-child {
+  .site-navigation ul li:last-child {
     margin-right: 0;
   }
 }
-.site-navigation li a {
+.site-navigation ul li a {
   display: block;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
+  padding-top: 16px;
+  padding-bottom: 16px;
   text-decoration: none;
 }
 
@@ -655,13 +669,18 @@ form.search svg {
 
 a.custom-logo-link img.custom-logo {
   display: block;
-  width: auto;
+  width: 100%;
   max-width: var(--site-logo-max-width-mobile);
   min-width: 30px;
 }
 @media screen and (min-width: 768px) {
   a.custom-logo-link img.custom-logo {
     max-width: var(--site-logo-max-width);
+  }
+}
+@media screen and (max-width: 768px) {
+  a.custom-logo-link img.custom-logo {
+    max-height: 55px;
   }
 }
 

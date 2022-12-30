@@ -16,6 +16,9 @@
   border-top: 1px solid #f6f6f6;
   z-index: 10;
 }
+.site-navigation.active ul {
+  margin-top: 16px;
+}
 .site-navigation ul {
   display: flex;
   flex-direction: column;
@@ -29,23 +32,21 @@
     margin-bottom: 0;
   }
 }
-.site-navigation li {
-  margin-right: 0;
+.site-navigation ul li {
+  margin-right: 16px;
 }
 @media screen and (min-width: 768px) {
-  .site-navigation li {
+  .site-navigation ul li {
     margin-bottom: 0;
   }
-  .site-navigation li:last-child {
+  .site-navigation ul li:last-child {
     margin-right: 0;
   }
 }
-.site-navigation li a {
+.site-navigation ul li a {
   display: block;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
+  padding-top: 16px;
+  padding-bottom: 16px;
   text-decoration: none;
 }
 

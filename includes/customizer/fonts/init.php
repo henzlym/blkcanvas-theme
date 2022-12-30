@@ -73,14 +73,22 @@ if (class_exists('WP_Customize_Control')) {
         public function enqueue()
         {
             // Enqueue our scripts here...
-            $asset = include( get_template_directory() . '/build/search-select.asset.php' );
+            $asset = include( get_template_directory() . '/build/customizer.asset.php' );
             // <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
             // <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
             wp_enqueue_style('select2', 'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css', array(), '4.1.0-rc.0' );
             wp_enqueue_script('select2', 'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js', array(), '4.1.0-rc.0', true );
-            wp_enqueue_script('fonts-search-select-customizer', get_template_directory_uri() . '/build/search-select.js', array('select2'), $asset['version'], true );
-            wp_enqueue_style('fonts-search-select-customizer', get_template_directory_uri() . '/build/search-select.css', array(), $asset['version'] );
-
+            wp_enqueue_style('fonts-search-select-customizer', get_template_directory_uri() . '/build/css/admin/font-select.min.css', $asset['dependencies'], $asset['version'] );
+            
+            $theme_settings = blkcanvas_get_theme_settings();
+            
+            wp_add_inline_script( 
+                'select2', 
+                'jQuery( document ).ready( function ( $ ) {
+                    $( \'.customize-control-select2\' ).select2();
+                } );', 
+                'after' 
+            );
         }
 
         /**

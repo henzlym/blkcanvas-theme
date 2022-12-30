@@ -37,7 +37,13 @@
     height: 90px;
     width: 728px;
     .ad-container & {
-        margin-top: 1rem;
+        margin-top: 0;
+        @media screen and (min-width:768px) {
+            margin-top: 1rem;
+        }
+    }
+    iframe{
+        width: 100%;
     }
 }
 #banner-ad_footer{

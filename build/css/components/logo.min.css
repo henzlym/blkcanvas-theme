@@ -1,0 +1,1 @@
+a.custom-logo-link img.custom-logo{display:block;width:100%;max-width:var(--site-logo-max-width-mobile);min-width:30px}@media screen and (min-width: 768px){a.custom-logo-link img.custom-logo{max-width:var(--site-logo-max-width)}}@media screen and (max-width: 768px){a.custom-logo-link img.custom-logo{max-height:55px}}
