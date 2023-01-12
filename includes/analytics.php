@@ -22,6 +22,7 @@ function blkcanvas_head_scripts()
 
             gtag('config', '<?php echo esc_attr( $site_tracking_id ); ?>');
         </script>
+        <!-- / Global site tag (gtag.js) - Google Analytics -->
 	<?php
 }
 

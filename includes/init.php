@@ -10,3 +10,4 @@ require_once get_template_directory() . '/includes/headers/init.php';
 require_once get_template_directory() . '/includes/seo/init.php';
 require_once get_template_directory() . '/includes/ads.php';
 require_once get_template_directory() . '/includes/analytics.php';
+require_once get_template_directory() . '/includes/header-footer/init.php';
