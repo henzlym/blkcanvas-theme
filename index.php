@@ -26,9 +26,9 @@ get_header();
                 get_template_part( 'template-parts/cards/card', '', 
 					array( 
 						'card_class' => 'entry horizontal' , 
-						'show_byline' => get_theme_mod('archive_byline'), 
+						'show_byline' => get_theme_mod('archive_byline', true ), 
 						'show_author' => get_theme_mod('archive_author'), 
-						'show_date' => get_theme_mod('archive_date'), 
+						'show_date' => get_theme_mod('archive_date', true ), 
 						'show_read_more' => get_theme_mod('archive_read_more'),
 						'show_thumbnail' => get_theme_mod('archive_thumbnail', true),
 						'thumbnail_size' => get_theme_mod('archive_thumbnail_size', 'thumbnail'),

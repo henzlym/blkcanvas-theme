@@ -25,7 +25,7 @@
 			the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
 		endif;?>
 		
-		<?php if ( 'post' === get_post_type() && $show_byline ) :?>
+		<?php if ( 'post' === get_post_type( get_the_ID() ) && $show_byline ) :?>
 		<div class="entry-meta">
 			<?php
 			if ($show_author) {

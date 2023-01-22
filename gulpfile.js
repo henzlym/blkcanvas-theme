@@ -23,22 +23,15 @@ function compileWatchCss( cb ) {
 	del( 'build/css/**/*.css' );
 	src( [ 'src/scss/**/*.scss' ] )
 		.pipe( sass().on( 'error', sass.logError ) )
-		.pipe( rename( { dirname: './', suffix: '.min' } ) )
+		.pipe( rename( { suffix: '.min' } ) )
 		.pipe( dest( 'build/css' ) );
 	cb();
 }
 function compileCss( cb ) {
 	del( 'build/css/**/*.css' );
 	src( [ 'src/scss/**/*.scss' ] )
-		.pipe(
-			sass( { outputStyle: 'compressed' } ).on( 'error', sass.logError )
-		)
-		.pipe(
-			rename( {
-				// dirname: "./",
-				suffix: '.min',
-			} )
-		)
+		.pipe( sass( { outputStyle: 'compressed' } ).on( 'error', sass.logError ) )
+		.pipe( rename( { suffix: '.min' } ) )
 		.pipe( dest( 'build/css' ) );
 	cb();
 }

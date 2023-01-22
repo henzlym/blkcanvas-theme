@@ -73,7 +73,7 @@ if (class_exists('WP_Customize_Control')) {
         public function enqueue()
         {
             // Enqueue our scripts here...
-            $asset = include( get_template_directory() . '/build/customizer.asset.php' );
+            $asset = include( get_template_directory() . '/build/admin/customizer.asset.php' );
             // <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
             // <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
             wp_enqueue_style('select2', 'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css', array(), '4.1.0-rc.0' );
