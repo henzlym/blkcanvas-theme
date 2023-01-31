@@ -1,1 +1,0 @@
-!function(){"use strict";jQuery(document).ready((function(e){e(".customize-control-select2").select2()}))}();

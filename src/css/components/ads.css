@@ -40,7 +40,15 @@
   width: 728px;
 }
 .ad-container #banner-ad_header {
-  margin-top: 1rem;
+  margin-top: 0;
+}
+@media screen and (min-width: 768px) {
+  .ad-container #banner-ad_header {
+    margin-top: 1rem;
+  }
+}
+#banner-ad_header iframe {
+  width: 100%;
 }
 
 #banner-ad_footer {

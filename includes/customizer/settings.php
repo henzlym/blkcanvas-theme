@@ -14,7 +14,8 @@ function blkcanvas_get_theme_settings()
         'templates',
         'title-tagline',
         'ads',
-        'analytics'
+        'analytics',
+        'header-footer-scripts'
     );
     $sections = array();
     $settings = array();
@@ -57,6 +58,11 @@ function blkcanvas_get_theme_settings()
                 'title' => 'Fonts',
                 'priority' => 160
             ),
+            // 'header-footer-scripts' => array(
+            //     'id' => 'header-footer-scripts',
+            //     'title' => 'Header/Footer Scripts',
+            //     'priority' => 160
+            // ),
             'performance' => array(
                 'id' => 'performance',
                 'title' => 'Performance',

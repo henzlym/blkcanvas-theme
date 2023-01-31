@@ -23,9 +23,8 @@ if (class_exists('WP_Customize_Control')) {
         public function enqueue()
         {
             // Enqueue our scripts here...
-            $asset = include( get_template_directory() . '/build/alignment.asset.php' );
-            wp_enqueue_script('alignment-customizer', get_template_directory_uri() . '/build/alignment.js', array(), $asset['version'], true );
-            wp_enqueue_style('alignment-customizer', get_template_directory_uri() . '/build/style-alignment.css', array(), $asset['version'] );
+            $asset = include get_template_directory() . '/build/admin/customizer.asset.php';
+            wp_enqueue_style('alignment-customizer', get_template_directory_uri() . '/build/css/admin/alignment.min.css', array(), $asset['version'] );
 
         }
 

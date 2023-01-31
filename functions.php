@@ -1,7 +1,7 @@
 <?php
-if ( ! defined( '_S_VERSION' ) ) {
+if ( ! defined( 'BCA_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
-	define( '_S_VERSION', '1.0.0' );
+	define( 'BCA_VERSION', '1.0.0' );
 }
 
 require_once get_template_directory() . '/includes/init.php';
@@ -9,10 +9,9 @@ require_once get_template_directory() . '/includes/init.php';
  * Enqueue scripts and styles.
  */
 function blkcanvas_scripts() {
-	$asset = include_once get_template_directory() . '/build/index.asset.php';
 	// wp_enqueue_style( 'blkcanvas-style', get_stylesheet_directory_uri() . '/dist/style.min.css', $asset['dependencies'], $asset['version'] );
 	wp_style_add_data( 'blkcanvas-style', 'rtl', 'replace' );
-	wp_enqueue_script( 'blkcanvas-navigation', get_template_directory_uri() . '/build/index.js', $asset['dependencies'], $asset['version'], true );
+	wp_enqueue_script( 'blkcanvas-navigation', get_template_directory_uri() . '/build/js/scripts.min.js', [], BCA_VERSION, true );
 	wp_localize_script( 'blkcanvas-navigation', 'blkcanvasTheme', array(
 		'isAdminBarShowing' => is_admin_bar_showing()
 	));
@@ -24,20 +23,20 @@ function blkcanvas_critical_css()
 	?>
 	<!-- BLKCANVAS CRITICAL CSS -->
 	<?php
-	blkcanvas_get_critical_css( 'base' );
+	blkcanvas_get_css( 'critical', 'base' );
 
-	if(is_front_page()){
-		blkcanvas_get_critical_css( 'front-page' );
+    if(is_front_page() && get_page_template_slug() == ''){
+		blkcanvas_get_css( 'critical', 'archive' );
 	}
 
 	if(is_singular() && !is_front_page()){
 		if( is_single() || is_page() && get_page_template_slug() == '' ){
-			blkcanvas_get_critical_css( 'single' );
+			blkcanvas_get_css( 'critical', 'single' );
 		}
 	}
 	
 	if(is_archive() || is_search()){
-		blkcanvas_get_critical_css( 'archive' );
+		blkcanvas_get_css( 'critical', 'archive' );
 	}
 
 	?>
@@ -46,21 +45,40 @@ function blkcanvas_critical_css()
 }
 add_action( 'wp_head', 'blkcanvas_critical_css', 20 );
 
-function blkcanvas_get_critical_css( $template )
+function blkcanvas_get_css( $path, $template )
 {
-	$file = get_template_directory() . '/dist/critical/'.$template.'.min.css';	
+    if (!$path) {
+        return;
+    }
+    
+	$file = get_template_directory() . '/build/css/'.$path.'/'.$template.'.min.css';	
 	
 	if( file_exists( $file ) ):
 		
 		$template_css = file_get_contents( $file );
-		$template_css = apply_filters( 'blkcanvas_critical_css', $template_css, $template );
+		$template_css = apply_filters( 'blkcanvas_'.$path.'_css', $template_css, $template );
 
 		?>
-		<style id="blkcanvas-critical-<?php echo $template; ?>-css"><?php echo $template_css; ?></style>
+		<style id="blkcanvas-<?php echo $path; ?>-<?php echo $template; ?>-css"><?php echo $template_css; ?></style>
 		<?php
 	endif;
 	
 }
+
+function blkcanvas_below_the_fold_css()
+{
+    blkcanvas_get_css( 'layout', 'footer' );
+}
+add_action( 'wp_footer', 'blkcanvas_below_the_fold_css', 20 );
+
+function bca_body_class( $classes ) {
+	if ( get_theme_mod( 'archive_template', 'list' ) == 'list' ) {
+        $classes[] = 'list';
+    }
+	return $classes;
+}
+add_filter( 'body_class', 'bca_body_class' );
+
 /**
  * Sets up theme defaults and registers support for various WordPress features.
  *
@@ -186,7 +204,7 @@ function bca_override_media_settings() {
 
 }
 
-add_action( 'after_switch_theme', 'bca_override_media_settings' ); 
+add_action( 'after_switch_theme', 'bca_override_media_settings' );   
 /**
  * Register widget area.
  *
@@ -307,6 +325,16 @@ function blkcanvs_post_thumbnail_html( $html )
 	return $html;
 }
 add_filter( 'post_thumbnail_html', 'blkcanvs_post_thumbnail_html' );
+
+function blkcanvas_get_attachment_image_attributes( $attr, $attachment, $size )
+{
+    if (is_singular('post') && $attachment->ID === get_post_thumbnail_id()) {
+        $attr['loading'] = 'egar';
+    }
+    return $attr;
+}
+add_filter( 'wp_get_attachment_image_attributes', 'blkcanvas_get_attachment_image_attributes', 10, 3 );
+
 function blkcanvas_has_post_thumbnail__false( $has_thumbnail )
 {
 	return false;
@@ -503,15 +531,48 @@ function blkcanvas_logo()
 }
 function blkcanvas_site_navigation()
 {
-	wp_nav_menu(
-		array(
-			'theme_location' => 'main-menu',
-			'menu_id'        => 'main-menu',
-			'container' => 'nav',
-			'container_class' => 'site-navigation',
-			'fallback_cb' => false
-		)
-	);
+    $args = array(
+        'theme_location' => 'main-menu',
+        'menu_id'        => 'main-menu',
+        'container' => 'nav',
+        'container_class' => 'site-navigation',
+        'fallback_cb' => false
+    );
+    
+    if ( has_nav_menu( 'main-menu' ) ) {
+        wp_nav_menu( $args );
+    } else {
+        // Get the most used categories
+        $most_used_categories = get_terms(array(
+            'taxonomy' => 'category',
+            'orderby' => 'count',
+            'order' => 'DESC',
+            'number' => 5
+        ));
+
+        // Create an array to hold the menu items
+        $menu_items = array();
+
+        // Loop through the categories and add them as menu items
+        foreach ($most_used_categories as $category) {
+            $menu_items[] = array(
+                'title' => $category->name,
+                'url' => get_category_link($category->term_id),
+                'menu_item_parent' => 0,
+                'ID' => 'category-'.$category->term_id
+            );
+        }
+        $default_args = $args;
+        $args = array(
+            'theme_location' => 'main-menu',
+            'items_wrap' => '<ul id="%1$s" class="%2$s">%3$s</ul>',
+            'items' => $menu_items
+        );
+        $args = wp_parse_args( $args, $default_args );
+        
+        // Output the navigation menu
+        wp_nav_menu( $args );
+    }
 }
 function blkcanvas_footer_menu()
 {

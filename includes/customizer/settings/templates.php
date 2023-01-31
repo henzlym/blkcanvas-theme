@@ -159,13 +159,31 @@
         'transport' => 'refresh',
     ),
     // ARCHIVE
+    'archive_template' => array(
+        'control' => array(
+            'class' => 'WP_Customize_Control',
+            'label' => __('Template', 'blkcanvas'),
+            'type' => 'radio',
+            'choices' => array(
+                'list' => 'List',
+                'columns' => 'Columns'
+            )
+        ),
+        'default' => 'list',
+        'setting' => 'archive_template',
+        'section' => 'templates_archive',
+        'selectors' => array(
+            'body' => '--archive-template-columns'
+        ),
+        'transport' => 'refresh',
+    ),
     'archive_columns' => array(
         'control' => array(
             'class' => 'WP_Customize_Control',
             'label' => __('Number of columns', 'blkcanvas'),
-            'type' => 'number',
+            'type' => 'number'
         ),
-        'default' => 3,
+        'default' => ( get_theme_mod( 'archive_template', 'list' ) == 'list') ? 1 : 3,
         'setting' => 'archive_columns',
         'section' => 'templates_archive',
         'selectors' => array(
@@ -239,7 +257,7 @@
             'class' => 'WP_Customize_Control',
             'label' => __('Show author', 'blkcanvas'),
             'type' => 'checkbox',
-            'active_callback' => function () { return get_theme_mod( 'archive_byline' ); },
+            'active_callback' => function () { return get_theme_mod( 'archive_byline', true ); },
         ),
         'default' => false,
         'setting' => 'archive_author',
@@ -251,7 +269,7 @@
             'class' => 'WP_Customize_Control',
             'label' => __('Show published date', 'blkcanvas'),
             'type' => 'checkbox',
-            'active_callback' => function () { return get_theme_mod( 'archive_byline' ); },
+            'active_callback' => function () { return get_theme_mod( 'archive_byline', true ); },
         ),
         'default' => true,
         'setting' => 'archive_date',

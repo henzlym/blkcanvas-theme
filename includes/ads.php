@@ -67,8 +67,7 @@ function blkcanvas_render_box_ad( $content )
  */
 function blkcanvas_ad_scripts() {
 	
-	$asset = include_once get_template_directory() . '/build/ads.asset.php';
-	wp_enqueue_script( 'blkcanvas-ads', get_template_directory_uri() . '/build/ads.js', $asset['dependencies'], $asset['version'], true );
+	wp_enqueue_script( 'blkcanvas-ads', get_template_directory_uri() . '/build/js/ads.min.js', [], BCA_VERSION, true );
 
 }
 
@@ -98,9 +97,13 @@ function blkcanvas_init_ad_scripts()
 
 
 
-function blkcanvas_critical_css_add_ads_css( $template_css )
+function blkcanvas_critical_css_add_ads_css( $template_css, $template )
 {
-	$file = get_template_directory() . '/build/style-index.css';
+    if ($template !== 'base') {
+        return $template_css;
+    }
+    
+	$file = get_template_directory() . '/build/css/components/ads.min.css';
 	$template_css = $template_css . file_get_contents( $file );
 
 	return $template_css;
@@ -125,8 +128,8 @@ function blkcanvas_init_ads()
 {
 	if (!get_theme_mod( 'enable_ads' )) return;
 	
-	add_action( 'wp_head', 'blkcanvas_init_ad_scripts');
-	add_filter( 'blkcanvas_critical_css', 'blkcanvas_critical_css_add_ads_css', 10 );
+	add_action( 'wp_footer', 'blkcanvas_init_ad_scripts');
+	add_filter( 'blkcanvas_critical_css', 'blkcanvas_critical_css_add_ads_css', 10, 2 );
 	add_action( 'wp_body_open', 'blkcanvas_render_header_ad');
 	add_action('the_content', 'blkcanvas_render_box_ad', 1, 1);
 	add_action( 'get_footer', 'blkcanvas_ad_scripts' );

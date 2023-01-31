@@ -1,5 +1,9 @@
 /* ===== WIDGETS ===== */
 .widget {
+    margin-bottom: 15px;
+    &:last-child{
+        margin-bottom: 0;
+    }
     h2{
         font-size: 20px;
     }

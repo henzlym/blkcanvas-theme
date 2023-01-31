@@ -94,6 +94,25 @@
         'section' => 'fonts_global',
         'transport' => 'refresh',
     ),
+    'font_weight_headers' => array(
+        'control' => array(
+            'class' => 'WP_Customize_Control',
+            'label' => __('Headers font weight', 'blkcanvas'),
+            'type' => 'number',
+            'input_attrs' => array(
+                'step' => 100,
+                'min' => 100,
+                'max' => 900
+            ),
+        ),
+        'default' => 400,
+        'selectors' => array(
+            'h1,h2,h3,h4' => '--heading-weight'
+        ),
+        'setting' => 'font_weight_headers',
+        'section' => 'fonts_global',
+        'transport' => 'postMessage',
+    ),
     'font_size_single_title' => array(
         'control' => array(
             'class' => 'WP_Customize_Control',
@@ -119,9 +138,9 @@
                 'max' => 900
             ),
         ),
-        'default' => 400,
+        'default' => get_theme_mod( 'font_weight_headers', 400 ),
         'selectors' => array(
-            'body' => '--single-title-font-weight'
+            '.single .entry-title' => '--heading-weight'
         ),
         'setting' => 'font_weight_single_title',
         'section' => 'fonts_single',

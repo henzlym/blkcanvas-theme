@@ -42,13 +42,15 @@
 	<?php endif; ?>
 
 	<?php 
-	the_post_navigation(
-		array(
-			'class' => 'entry-pagination',
-			'prev_text' => '<span class="nav-subtitle">' . esc_html__( 'Previous:', 'blkcanvas' ) . '</span> <span class="nav-title">%title</span>',
-			'next_text' => '<span class="nav-subtitle">' . esc_html__( 'Next:', 'blkcanvas' ) . '</span> <span class="nav-title">%title</span>',
-		)
-	);
+	if (is_singular('post')) {
+        the_post_navigation(
+            array(
+                'class' => 'entry-pagination',
+                'prev_text' => '<span class="nav-subtitle">' . esc_html__( 'Previous:', 'blkcanvas' ) . '</span> <span class="nav-title">%title</span>',
+                'next_text' => '<span class="nav-subtitle">' . esc_html__( 'Next:', 'blkcanvas' ) . '</span> <span class="nav-title">%title</span>',
+            )
+        );
+    }
 	?>
 
 </article><!-- #post-<?php the_ID(); ?> -->

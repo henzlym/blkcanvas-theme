@@ -1,1 +1,0 @@
-<?php return array('dependencies' => array('lodash', 'wp-hooks'), 'version' => '4e1df3f848d4e0949dbe4efe4dfb68ba');
