@@ -19,7 +19,7 @@
             'class' => 'WP_Customize_Color_Control',
             'label' => __('Text', 'blkcanvas'),
         ),
-        'default' => '',
+        'default' => '#000',
         'selectors' => array(
             'body' => '--site-text-color'
         ),
@@ -33,7 +33,7 @@
             'class' => 'WP_Customize_Color_Control',
             'label' => __('Links', 'blkcanvas'),
         ),
-        'default' => '',
+        'default' => '#1e73be',
         'selectors' => array(
             'body' => '--site-links-color'
         ),
@@ -47,7 +47,7 @@
             'class' => 'WP_Customize_Color_Control',
             'label' => __('Background', 'blkcanvas'),
         ),
-        'default' => '',
+        'default' => '#fff',
         'selectors' => array(
             'header.header' => '--header-background-color',
             'nav.site-navigation' => '--navigation-background-color'
@@ -62,7 +62,7 @@
             'class' => 'WP_Customize_Color_Control',
             'label' => __('Text', 'blkcanvas'),
         ),
-        'default' => '',
+        'default' => '#000',
         'selectors' => array(
             'header.header' => '--header-text-color'
         ),
@@ -90,7 +90,7 @@
             'class' => 'WP_Customize_Color_Control',
             'label' => __('Links', 'blkcanvas'),
         ),
-        'default' => '',
+        'default' => '#000',
         'selectors' => array(
             'header.header' => '--header-links-color'
         ),
@@ -104,7 +104,7 @@
             'class' => 'WP_Customize_Color_Control',
             'label' => __('Links hover', 'blkcanvas'),
         ),
-        'default' => '',
+        'default' => '#000',
         'selectors' => array(
             'header.header a' => '--header-links-hover-color'
         ),

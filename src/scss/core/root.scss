@@ -19,12 +19,13 @@
     --h4-font-size: calc( var(--font-size-base) * 1.5 );
     --h5-font-size: calc( var(--font-size-base) * 1.25 );
     --h6-font-size: var(--font-size-base);
-    --heading-weight:1.3;
+    --heading-line-height:1.3;
+    --heading-weight:var( --font-weight );
     --small-font-size: 0.833rem;
     --site-title-font-family:var(--font-family);
     --site-title-font-weight:var(--font-weight);
     --single-title-font-size:var(--h1-font-size);
-    --single-title-font-weight:var(--font-weight);
+    --single-title-font-weight:var(--heading-weight);
     --single-title-font-lineheight:1.3;
     --single-title-text-transform:captilize;
     --archive-title-font-size:var(--font-size-base);
