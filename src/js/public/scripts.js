@@ -6,18 +6,18 @@
 	let navigation = document.querySelector( '.site-navigation' );
 	let searchIcon = document.querySelector( 'header .search-trigger' );
 	let searchForm = document.querySelector( 'header form.search' );
-
+    let searchFormClose = document.querySelector( 'header form.search .search-close' );
+    
 	function toggleMenu() {
 		document.body.classList.toggle( 'mobile-nav-open' );
 		navigation.classList.toggle( 'active' );
+        hamburger.classList.toggle( 'active' );
 		if ( navigation.classList.contains( 'active' ) ) {
 			let header = document.querySelector( 'header.header' );
 			let width = header.offsetWidth;
 			let height = header.offsetHeight;
-			console.log( header, header[ 0 ] );
 			if (
-				blkcanvasTheme.isAdminBarShowing &&
-				header.classList.includes( 'sticky' )
+				blkcanvasTheme.isAdminBarShowing
 			) {
 				let adminBar = document.querySelector( '#wpadminbar' );
 				height = height + adminBar.offsetHeight;
@@ -31,9 +31,11 @@
 	function toggleSearch( e ) {
 		e.preventDefault();
 		searchForm.classList.toggle( 'open' );
-		if ( document.body.contains( 'mobile-nav-open' ) ) {
+		if ( document.body.classList.contains( 'mobile-nav-open' ) ) {
 		}
 	}
 	hamburger.addEventListener( 'click', toggleMenu );
 	searchIcon.addEventListener( 'click', toggleSearch );
+    searchFormClose.addEventListener( 'click', toggleSearch );
+    
 } )( window, document );

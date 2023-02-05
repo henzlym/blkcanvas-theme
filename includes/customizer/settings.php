@@ -15,7 +15,8 @@ function blkcanvas_get_theme_settings()
         'title-tagline',
         'ads',
         'analytics',
-        'header-footer-scripts'
+        'header-footer-scripts',
+        'utilities'
     );
     $sections = array();
     $settings = array();

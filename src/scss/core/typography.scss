@@ -60,7 +60,7 @@ small, .text_small {font-size: 0.833rem;}
     }
   }
 }
-.archive,.home{
+.archive,.home,.search{
   .entry-title{
     font-size: var(--archive-title-font-size);
     font-weight: var(--archive-title-font-weight);
@@ -79,4 +79,9 @@ small, .text_small {font-size: 0.833rem;}
     line-height: var(--archive-categories-font-lineheight);
     text-transform: var(--archive-categories-font-text-transform);
   }
+}
+.site-navigation{
+    font-weight: var(--navigation-font-weight);
+    line-height: var(--navigation-font-lineheight);
+    text-transform: var(--navigation-font-text-transform);
 }

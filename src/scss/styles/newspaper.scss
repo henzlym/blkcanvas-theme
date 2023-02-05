@@ -1,0 +1,98 @@
+body.is-style-newspaper{
+    a{
+        text-decoration: none;
+    }
+    .site-navigation{
+        width: 100%;
+        margin-top: 15px;
+        border-top: 1px solid var( --site-links-color );
+        border-bottom: 1px solid var( --site-links-color );
+    }
+    button,
+    input[type="text"],
+    input[type="email"],
+    input[type="search"],
+    input[type="submit"]{
+        color: var( --site-links-color );
+        background-color: #fff;
+        border: 1px solid #b8b8b845;
+        border-radius: 2px;
+        text-transform: uppercase;
+    }
+    .widget{
+        h2{
+            display: flex;
+            align-items: center;
+            font-size: var(--h3-font-size);
+            &::before{
+                display: inline-block;
+                content: "";
+                height: 10px;
+                width: 10px;
+                margin-right: 5px;
+                border-radius: 100px;
+                background-color: var( --site-links-color );
+                opacity: 0.5;
+            }
+        }
+    }
+    &.single{
+        .entry-header{
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #b8b8b845;
+        }
+        .entry-categories{
+            display: flex;
+        }
+        .entry-categories a{
+            display: flex;
+            align-items: center;
+            color: var(--site-text-color);
+            &:hover{
+                color: var(--site-links-color);
+            }
+            &::before{
+                display: inline-block;
+                content: "";
+                height: 10px;
+                width: 10px;
+                margin-right: 5px;
+                border-radius: 100px;
+                background-color: var( --site-links-color );
+            }
+        }  
+        .entry-meta{
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: flex-end;
+            color: #b8b8b8;
+            font-weight: 300;
+            .author{
+                text-transform: uppercase;
+                font-weight: 500;
+            }
+            .posted-on{
+                display: flex;
+                align-items: center;
+                position: relative;
+                margin-right: 5px;
+                time{
+                    margin-right: 5px;
+                    &:last-child{
+                        margin-right: 0;
+                    }
+                }
+                &::after{
+                    display: inline-block;
+                    content: "";
+                    height: 5px;
+                    width: 5px;
+                    margin-left: 5px;
+                    border-radius: 100px;
+                    background-color: #b8b8b8;
+                }
+            }
+        }
+    }
+}

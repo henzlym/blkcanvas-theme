@@ -8,7 +8,7 @@
         ),
         'default' => '1em',
         'selectors' => array(
-            'body' => '--font-size-base'
+            ':root' => '--font-size-base'
         ),
         'setting' => 'font_size_body',
         'section' => 'fonts_global',
@@ -27,7 +27,7 @@
         ),
         'default' => 1.5,
         'selectors' => array(
-            'body' => '--font-line-height'
+            ':root' => '--font-line-height'
         ),
         'setting' => 'font_line_height',
         'section' => 'fonts_global',
@@ -74,7 +74,7 @@
         ),
         'default' => '',
         'selectors' => array(
-            'body' => '--font-family'
+            ':root' => '--font-family'
         ),
         'setting' => 'font_select_body',
         'section' => 'fonts_global',
@@ -121,7 +121,7 @@
         ),
         'default' => '',
         'selectors' => array(
-            'body' => '--single-title-font-size'
+            ':root' => '--single-title-font-size'
         ),
         'setting' => 'font_size_single_title',
         'section' => 'fonts_single',
@@ -159,7 +159,7 @@
         ),
         'default' => 1.1,
         'selectors' => array(
-            'body' => '--single-title-font-lineheight'
+            ':root' => '--single-title-font-lineheight'
         ),
         'setting' => 'font_lineheight_single_title',
         'section' => 'fonts_single',
@@ -178,7 +178,7 @@
         ),
         'default' => 'capitalize',
         'selectors' => array(
-            'body' => '--single-title-font-text-transform'
+            ':root' => '--single-title-font-text-transform'
         ),
         'setting' => 'font_text_transform_single_title',
         'section' => 'fonts_single',
@@ -190,9 +190,9 @@
             'label' => __('Title font size', 'blkcanvas'),
             'type' => 'text',
         ),
-        'default' => '1rem',
+        'default' => '',
         'selectors' => array(
-            'body' => '--archive-title-font-size'
+            ':root' => '--archive-title-font-size'
         ),
         'setting' => 'font_size_archive_title',
         'section' => 'fonts_archive',
@@ -211,7 +211,7 @@
         ),
         'default' => 600,
         'selectors' => array(
-            'body' => '--archive-title-font-weight'
+            ':root' => '--archive-title-font-weight'
         ),
         'setting' => 'font_weight_archive_title',
         'section' => 'fonts_archive',
@@ -395,6 +395,77 @@
         ),
         'setting' => 'font_text_transform_archive_categories',
         'section' => 'fonts_archive',
+        'transport' => 'postMessage',
+    ),
+    'font_size_navigation' => array(
+        'control' => array(
+            'class' => 'WP_Customize_Control',
+            'label' => __('Title font size', 'blkcanvas'),
+            'type' => 'text',
+        ),
+        'default' => '',
+        'selectors' => array(
+            'body' => '--navigation-font-size'
+        ),
+        'setting' => 'font_size_navigation',
+        'section' => 'fonts_navigation',
+        'transport' => 'postMessage',
+    ),
+    'font_weight_navigation' => array(
+        'control' => array(
+            'class' => 'WP_Customize_Control',
+            'label' => __('Navigation font weight', 'blkcanvas'),
+            'type' => 'number',
+            'input_attrs' => array(
+                'step' => 100,
+                'min' => 100,
+                'max' => 900
+            ),
+        ),
+        'default' => get_theme_mod( 'font_weight_headers', 400 ),
+        'selectors' => array(
+            ':root' => '--navigation-font-weight'
+        ),
+        'setting' => 'font_weight_navigation',
+        'section' => 'fonts_navigation',
+        'transport' => 'postMessage',
+    ),
+    'font_lineheight_navigation' => array(
+        'control' => array(
+            'class' => 'WP_Customize_Control',
+            'label' => __('Navigation font line height', 'blkcanvas'),
+            'type' => 'number',
+            'input_attrs' => array(
+                'step' => 0.1,
+                'min' => 0,
+                'max' => 1.5
+            ),
+        ),
+        'default' => 1.1,
+        'selectors' => array(
+            ':root' => '--navigation-font-lineheight'
+        ),
+        'setting' => 'font_lineheight_navigation',
+        'section' => 'fonts_navigation',
+        'transport' => 'postMessage',
+    ),
+    'font_text_transform_navigation' => array(
+        'control' => array(
+            'class' => 'WP_Customize_Control',
+            'label' => __('Title font text transform', 'blkcanvas'),
+            'type' => 'radio',
+            'choices' => array(
+                'capitalize' => 'Capitalize',
+                'uppercase' => 'Uppercase',
+                'lowercase' => 'Lowercase'
+            ),
+        ),
+        'default' => 'capitalize',
+        'selectors' => array(
+            ':root' => '--navigation-font-text-transform'
+        ),
+        'setting' => 'font_text_transform_navigation',
+        'section' => 'fonts_navigation',
         'transport' => 'postMessage',
     ),
 );

@@ -6,6 +6,13 @@
         'panel' => 'fonts',
         'priority' => 160,
     ),
+    'fonts_navigation' => array(
+        'capability' => 'edit_theme_options',
+        'id' => 'fonts_navigation',
+        'title' => 'Navigation',
+        'panel' => 'fonts',
+        'priority' => 160,
+    ),
     'fonts_single' => array(
         'capability' => 'edit_theme_options',
         'id' => 'fonts_single',

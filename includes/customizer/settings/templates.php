@@ -91,6 +91,21 @@
         'section' => 'templates_header',
         'transport' => 'refresh',
     ),
+    'header_layout' => array(
+        'control' => array(
+            'class' => 'WP_Customize_Control',
+            'label' => __('Layout', 'blkcanvas'),
+            'type' => 'radio',
+            'choices' => array(
+                '' => 'Default',
+                'stacked' => 'Stacked'
+            )
+        ),
+        'default' => '',
+        'setting' => 'header_layout',
+        'section' => 'templates_header',
+        'transport' => 'refresh',
+    ),
     // NAVIGATION
     'navigation_alignment' => array(
         'control' => array(

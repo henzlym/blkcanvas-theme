@@ -8,6 +8,28 @@ header.header {
     padding-top: 10px;
     padding-bottom: 10px;
     z-index: 10;
+    &.stacked{
+        @media screen and (min-width:980px){
+            .blkcanvas-container{
+                position: relative;
+                flex-direction: column;
+            }
+            .site-logo-container{
+                margin-right: 0;
+            }
+            form.search{
+                position: absolute;
+                top: var( --global-padding-y );
+                right: var( --global-padding-x );
+            }
+            .site-navigation ul li {
+                margin-right: calc( var( --global-padding-x ) * 2 );
+                &:last-child{
+                    margin-right: 0;
+                }
+            }
+        }
+    }
     .blkcanvas-container {
         display: flex;
         align-items: center;

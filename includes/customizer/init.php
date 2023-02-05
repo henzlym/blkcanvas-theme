@@ -202,7 +202,7 @@ function blkcanvas_customize_css()
     </style>
 <?php
 }
-add_action('wp_head', 'blkcanvas_customize_css');
+add_action('wp_head', 'blkcanvas_customize_css', 30);
 
 /**
  * Used by hook: 'customize_preview_init'
@@ -229,3 +229,19 @@ function blkcanvas_customizer_live_preview()
 
 }
 add_action('customize_preview_init', 'blkcanvas_customizer_live_preview');
+
+function bca_export_theme_mods() {
+    $theme_mods = get_theme_mods();
+    return json_encode($theme_mods);
+}
+function bca_import_theme_mods_sanitize( $input ) {
+    $input = trim( $input );
+    $mods = json_decode( $input, true );
+
+    if ( json_last_error() === JSON_ERROR_NONE ) {
+        $theme = get_option( 'stylesheet' );
+        update_option( "theme_mods_$theme", $mods );
+    }
+
+    return '';
+}

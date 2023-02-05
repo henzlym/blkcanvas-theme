@@ -22,7 +22,7 @@ function blkcanvas_critical_css()
 {
 	?>
 	<!-- BLKCANVAS CRITICAL CSS -->
-	<?php
+	<?php    
 	blkcanvas_get_css( 'critical', 'base' );
 
     if(is_front_page() && get_page_template_slug() == ''){
@@ -39,6 +39,11 @@ function blkcanvas_critical_css()
 		blkcanvas_get_css( 'critical', 'archive' );
 	}
 
+    $site_style = get_theme_mod( 'site_tyle', '' );
+
+    if ($site_style) {
+        blkcanvas_get_css( 'styles', 'newspaper' );
+    }
 	?>
 	<!-- / BLKCANVAS CRITICAL CSS -->
 	<?php
@@ -72,9 +77,15 @@ function blkcanvas_below_the_fold_css()
 add_action( 'wp_footer', 'blkcanvas_below_the_fold_css', 20 );
 
 function bca_body_class( $classes ) {
+    $site_style = get_theme_mod( 'site_tyle', '' );
+    
+    if ($site_style) {
+        $classes[] = 'is-style-' . $site_style;
+    }
 	if ( get_theme_mod( 'archive_template', 'list' ) == 'list' ) {
         $classes[] = 'list';
     }
+
 	return $classes;
 }
 add_filter( 'body_class', 'bca_body_class' );
@@ -666,7 +677,8 @@ function blkcanvas_get_header_class( $class = false )
 	$classes = array();
 	$classes[] = ( get_theme_mod('header_is_sticky', '') ) ? 'sticky' : '';
 	$classes[] = ( get_theme_mod('header_boxshadow', '') ) ? 'boxshadow' : '';
-
+    $classes[] = get_theme_mod('header_layout', '');
+    
 	if ( $class ) {
 		$classes[] = $class;
 	}

@@ -8,7 +8,7 @@
         ),
         'default' => '150px',
         'selectors' => array(
-            'body' => '--site-logo-max-width'
+            ':root' => '--site-logo-max-width'
         ),
         'setting' => 'site_logo_max_width',
         'section' => 'title_tagline',
@@ -25,4 +25,19 @@
         'section' => 'title_tagline',
         'transport' => 'refresh',
     ),
+    'site_tyle' => array(
+        'control' => array(
+            'class' => 'WP_Customize_Control',
+            'label' => __('Site Style', 'blkcanvas'),
+            'type' => 'radio',
+            'choices' => array(
+                '' => 'Default',
+                'newspaper' => 'Newspaper'
+            )
+        ),
+        'default' => '',
+        'setting' => 'site_tyle',
+        'section' => 'title_tagline',
+        'transport' => 'refresh',
+    )
 );
